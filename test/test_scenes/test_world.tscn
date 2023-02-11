@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://test/test_scenes/test_player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://global/global_scenes/platform_normal_global.tscn" type="PackedScene" id=2]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 110, 35, 2 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="KinematicBody" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.02864, 0 )
+
+[node name="platform_normal_global" parent="." instance=ExtResource( 2 )]
+
+[node name="platform_normal_global2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, 0 )
+
+[node name="platform_normal_global3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.3258 )
+mesh = SubResource( 1 )
