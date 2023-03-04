@@ -51,12 +51,12 @@ jump={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":32,"unicode":0,"echo":false,"script":null)
  ]
 }
-Go_Left={
+Go_Right={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":68,"unicode":0,"echo":false,"script":null)
  ]
 }
-Go_Right={
+Go_Left={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":65,"unicode":0,"echo":false,"script":null)
  ]
@@ -64,6 +64,11 @@ Go_Right={
 Fire={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+reset_camera={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":82,"unicode":0,"echo":false,"script":null)
  ]
 }
 
