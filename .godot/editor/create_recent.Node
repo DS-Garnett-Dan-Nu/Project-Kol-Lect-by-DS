@@ -1,0 +1,9 @@
+Camera3D
+Node3D
+Label
+OmniLight3D
+CollisionShape3D
+Area3D
+WorldEnvironment
+DirectionalLight3D
+CharacterBody3D

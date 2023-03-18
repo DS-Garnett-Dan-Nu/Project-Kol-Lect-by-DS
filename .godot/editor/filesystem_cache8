@@ -1,0 +1,63 @@
+2a60927148abd1d33b818b535e306557
+::res://::1679155529
+default_env.tres::Environment::-1::1678626750::0::1::::<><>::
+icon.png::CompressedTexture2D::2721039976926847582::1676179678::1678630477::1::::<><>::
+README.md::TextFile::-1::1677948117::0::1::::<><>::
+VERSION.md::TextFile::-1::1676179678::0::1::::<><>::
+::res://global/::1678633223
+::res://global/global_gdscripts/::1679154513
+AutoLoad.gd::GDScript::-1::1679034457::0::1::::<>Node<>::
+fcc_hud.gd::GDScript::-1::1678983457::0::1::::<>Control<>::
+platform_normal_global.gd::GDScript::-1::1679034457::0::1::::<>Node3D<>::
+player_camera.gd::GDScript::-1::1678630670::0::1::::<>SpringArm3D<>::
+player_movement.gd::GDScript::-1::1679154407::0::1::::<>CharacterBody3D<>::
+projectile.gd::GDScript::-1::1678980681::0::1::::<>Area3D<>::
+world_generation_ai.gd::GDScript::-1::1679154513::0::1::::<>Node3D<>::
+::res://global/global_scenes/::1679155279
+platform_normal_global.tscn::PackedScene::8545298156827098664::1679154514::0::1::::<><>::res://global/global_gdscripts/platform_normal_global.gd
+platform_wide_global.tscn::PackedScene::8568161369241174967::1679155279::0::1::::<><>::res://global/global_gdscripts/platform_normal_global.gd
+player_movement.tscn::PackedScene::2060035172815095494::1679154514::0::1::::<><>::res://global/global_gdscripts/player_movement.gd<>uid://pruhyasmyp04<>res://global/global_gdscripts/player_camera.gd
+projectile.tscn::PackedScene::6282456769122734088::1678983458::0::1::::<><>::res://global/global_gdscripts/projectile.gd
+world_generation_ai.tscn::PackedScene::575174172175894397::1679154514::0::1::::<><>::res://global/global_gdscripts/world_generation_ai.gd
+::res://test/::1677218977
+::res://test/test_assets/::1678633238
+50cm.gltf::PackedScene::4461136833394772618::1676179678::1678630480::1::::<><>::
+aninobake.gltf::PackedScene::3580686775119028558::1676441192::1678630480::1::::<><>::
+aniyesbake.gltf::PackedScene::461683533969598588::1676441212::1678630480::1::::<><>::
+No_Sign.png::CompressedTexture2D::2964325567859195887::1677940868::1678630477::1::::<><>::
+smth.gltf::PackedScene::8323662623258143052::1676179678::1678630481::1::::<><>::
+::res://test/test_assets/fcc/::1678633675
+Armor 2.material::StandardMaterial3D::2978171423467312966::1678632624::0::1::::<><>::
+Armor 3.material::StandardMaterial3D::-1::1677218720::0::1::::<><>::
+Armor  1.material::StandardMaterial3D::-1::1677218945::0::1::::<><>::
+Camera.material::StandardMaterial3D::-1::1677218720::0::1::::<><>::
+Engion_Shield.material::StandardMaterial3D::-1::1677218720::0::1::::<><>::
+fcc1.gltf::PackedScene::7719850762352753087::1677218707::1678632537::1::::<><>::
+FCC Ani.gltf::PackedScene::6379545041659337825::1677936628::1678632544::1::::<><>::
+FCC.gltf::PackedScene::5598323997595401098::1677775424::1678632548::1::::<><>::
+Light.material::StandardMaterial3D::-1::1677218720::0::1::::<><>::
+Mat.material::StandardMaterial3D::-1::1677218720::0::1::::<><>::
+::res://test/test_gdscripts/::1678808850
+FCC.gd::GDScript::-1::1678635732::0::1::::<>Node3D<>::
+test_camera.gd::GDScript::-1::1678630670::0::1::::<>SpringArm3D<>::
+test_player.gd::GDScript::-1::1678632434::0::1::::<>CharacterBody3D<>::
+::res://test/test_scenes/::1679154513
+3d size test.tscn::PackedScene::-1::1677390016::0::1::::<><>::res://test/test_assets/50cm.gltf<>res://test/test_assets/smth.gltf<>res://test/test_assets/aninobake.gltf<>res://test/test_assets/aniyesbake.gltf
+FCC Ani.tscn::PackedScene::-1::1677947224::0::1::::<><>::res://test/test_assets/fcc/Mat.material<>res://test/test_assets/fcc/Engion_Shield.material<>res://test/test_assets/fcc/Armor 3.material<>res://test/test_assets/fcc/Armor  1.material<>res://test/test_assets/fcc/Light.material<>res://test/test_assets/fcc/Camera.material<>res://test/test_assets/fcc/Armor 2.material
+FCC Ani_2.tscn::PackedScene::6436546435794874196::1678811152::0::1::::<><>::
+FCC.tscn::PackedScene::1089155178197404139::1678809692::0::1::::<><>::res://test/test_gdscripts/FCC.gd<>uid://cxx58kgt7iqhg
+test_player.tscn::PackedScene::2060035172815095494::1678809691::0::1::::<><>::uid://dqubripa506se<>res://test/test_gdscripts/test_player.gd<>res://test/test_gdscripts/test_camera.gd<>uid://b4tajijoaibf3<>uid://pruhyasmyp04
+test_world.tscn::PackedScene::8379841594493693520::1679154513::0::1::::<><>::uid://4l5qi67b06fi<>uid://igvbf8g27yor<>uid://du3trgfhxw5kt
+::res://units/::1678808638
+::res://units/fcc/::1678808674
+::res://units/fcc/fcc_assets/::1678809516
+fcc.gltf::PackedScene::5167696021050616519::1677936628::1678809516::1::::<><>::
+::res://units/fcc/fcc_gdscript/::1678983002
+autocannon_bullet.gd::GDScript::-1::1678981731::0::1::::<>Area3D<>::
+fcc_gdscript.gd::GDScript::-1::1678982957::0::1::::<>Node3D<>::
+flak_bullet.gd::GDScript::-1::1678983002::0::1::::<>Area3D<>::
+::res://units/fcc/fcc_scenes/::1679154514
+autocannon_bullet.tscn::PackedScene::3420815675559679294::1679152585::0::1::::<><>::res://units/fcc/fcc_gdscript/autocannon_bullet.gd
+fcc_hud.tscn::PackedScene::8622025805526376991::1679154514::0::1::::<><>::res://global/global_gdscripts/fcc_hud.gd
+fcc_scene.tscn::PackedScene::1089155178197404139::1679154514::0::1::::<><>::res://units/fcc/fcc_gdscript/fcc_gdscript.gd
+flak_bullet.tscn::PackedScene::1261334367562995031::1679152585::0::1::::<><>::res://units/fcc/fcc_gdscript/flak_bullet.gd

@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://ducqmpan5y6o6"]
+
+[ext_resource type="Script" path="res://global/global_gdscripts/platform_normal_global.gd" id="1_dil3g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c7r3v"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="2"]
+material = SubResource("StandardMaterial3D_c7r3v")
+size = Vector3(128, 2, 32)
+
+[sub_resource type="BoxShape3D" id="1"]
+size = Vector3(128, 2, 32)
+
+[node name="platform_wide_global" type="Node3D"]
+script = ExtResource("1_dil3g")
+
+[node name="s" type="CharacterBody3D" parent="."]
+collision_layer = 2
+collision_mask = 3
+
+[node name="a" type="MeshInstance3D" parent="s"]
+mesh = SubResource("2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="s"]
+shape = SubResource("1")

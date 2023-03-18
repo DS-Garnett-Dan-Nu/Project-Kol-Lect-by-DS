@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvrje60mokwyq"]
+
+[ext_resource type="Script" path="res://global/global_gdscripts/projectile.gd" id="1_jqo7s"]
+
+[sub_resource type="CapsuleShape3D" id="3"]
+radius = 0.107235
+height = 3.00562
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uppoa"]
+albedo_color = Color(1, 0.584314, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="1"]
+material = SubResource("StandardMaterial3D_uppoa")
+radius = 0.1
+height = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ivhdq"]
+albedo_color = Color(1, 0.584314, 0, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_8e3w4"]
+material = SubResource("StandardMaterial3D_ivhdq")
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="Projectile" type="Area3D"]
+script = ExtResource("1_jqo7s")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("3")
+
+[node name="MeshInstance" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("1")
+
+[node name="head" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.37114e-08, 1, -1.50996e-07, 1, -4.37114e-08, 0, -6.60024e-15, -1.50996e-07, -1, 1.38841, 0, 0)
+mesh = SubResource("PrismMesh_8e3w4")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_Projectile_body_entered"]

@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://bo0clms3d7dlm"]
+
+[ext_resource type="Script" path="res://units/fcc/fcc_gdscript/autocannon_bullet.gd" id="1_bim6y"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kurte"]
+radius = 0.107235
+height = 3.00562
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2737u"]
+albedo_color = Color(1, 1, 0.341176, 1)
+emission_enabled = true
+emission = Color(1, 1, 0.333333, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_bbgg7"]
+material = SubResource("StandardMaterial3D_2737u")
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="4"]
+albedo_color = Color(1, 0.584314, 0, 1)
+emission_enabled = true
+emission = Color(0.917647, 0.639216, 0.129412, 1)
+emission_energy_multiplier = 3.0
+ao_enabled = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_imt0n"]
+material = SubResource("4")
+radius = 0.1
+height = 3.0
+
+[node name="autocannon_bullet" type="Area3D"]
+script = ExtResource("1_bim6y")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_kurte")
+
+[node name="body" type="Node3D" parent="."]
+
+[node name="head" type="MeshInstance3D" parent="body"]
+transform = Transform3D(4.37114e-08, 1, -1.50996e-07, 1, -4.37114e-08, 0, -6.60024e-15, -1.50996e-07, -1, 1.38841, 0, 0)
+mesh = SubResource("PrismMesh_bbgg7")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance" type="MeshInstance3D" parent="body"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_imt0n")
+skeleton = NodePath("../..")

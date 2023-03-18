@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://igvbf8g27yor"]
+
+[ext_resource type="Script" path="res://global/global_gdscripts/world_generation_ai.gd" id="1_rvdxf"]
+
+[node name="WorldGenerationAI" type="Node3D"]
+script = ExtResource("1_rvdxf")
+
+[node name="Placer" type="Node3D" parent="."]
