@@ -1,11 +1,7 @@
-res://global/global_scenes/world_generation_ai.tscn
-res://global/global_gdscripts/world_generation_ai.gd
 res://test/test_scenes/test_world.tscn
 res://units/fcc/fcc_scenes/fcc_scene.tscn
-res://units/fcc/fcc_scenes/autocannon_bullet.tscn
-res://units/fcc/fcc_scenes/flak_bullet.tscn
 res://units/fcc/fcc_scenes/fcc_hud.tscn
+res://global/global_scenes/world_generation_ai.tscn
 res://global/global_scenes/platform_normal_global.tscn
 res://global/global_scenes/platform_wide_global.tscn
 res://global/global_scenes/player_movement.tscn
-res://global/global_gdscripts/player_movement.gd
