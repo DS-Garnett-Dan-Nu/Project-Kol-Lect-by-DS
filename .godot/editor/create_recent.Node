@@ -1,9 +1,13 @@
-Camera3D
 Node3D
-Label
-OmniLight3D
 CollisionShape3D
 Area3D
+Marker3D
+MeshInstance3D
+Timer
+AnimationPlayer
+OmniLight3D
+Camera3D
+CharacterBody3D
+Label
 WorldEnvironment
 DirectionalLight3D
-CharacterBody3D

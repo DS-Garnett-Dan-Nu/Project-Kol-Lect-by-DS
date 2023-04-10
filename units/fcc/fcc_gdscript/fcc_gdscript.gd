@@ -1,4 +1,5 @@
 extends Node3D
+class_name fcc
 
 
 #Node Variables
@@ -12,6 +13,7 @@ extends Node3D
 #Projectile
 @onready var bullet = preload("res://units/fcc/fcc_scenes/autocannon_bullet.tscn")
 @onready var flak_bullet = preload("res://units/fcc/fcc_scenes/flak_bullet.tscn")
+############
 
 #Gun
 #Auto-cannon
@@ -24,13 +26,31 @@ extends Node3D
 #Autocannon staggering shot
 var one_side_of_the_gun = true
 
+#Flakcannon control
+var flak_ammo = 2
+@onready var flak_reload = $flak_reload
+############
+
+#Stats
+var health = AutoLoad.fcc_health
+
+
 #No use for now, butt too lazy to write again, so imma keep this :3
 func _ready():
+	flak_reload.start()
 	pass # Replace with function body.
 
 
 #Physics Processes eh?
 func _physics_process(delta):
+	
+	#Die!
+	if health <= 0:
+		hide()
+	
+	#Flak Ammo
+	if flak_ammo <= 0 and flak_reload.is_stopped():
+		flak_reload.start()
 	
 	#Gun Elevations
 	if Input.is_action_pressed("GE_Up") and gun_control.rotation_degrees.z < 210 and gun_control.rotation_degrees.z > -30:
@@ -44,53 +64,6 @@ func _physics_process(delta):
 	if Input.is_action_pressed("GE_Down") and gun_control.rotation_degrees.z < -28:
 		gun_control.rotation_degrees.z = -29
 
-	#Gun Fire Control, i.e. both feet are need to be on the floor to Fire.
-	if Input.is_action_just_pressed("Fire"):
-		if left_feet.position.y < - 1.0 and right_feet.position.y < - 1.0:
-			
-			#To notify the player
-			AutoLoad.fcc_can_fire = true
-			
-			#Autocannon staggering shot
-			if one_side_of_the_gun == true:
-				
-				if AutoLoad.primary_weapon:
-					#fire the autocannon!  
-					var left_bullet = bullet.instantiate()
-					left_bullet.rotation_degrees = Auto_muzzle_Left.global_transform.basis.get_euler()
-					Auto_muzzle_Left.add_child(left_bullet)
-				
-				if AutoLoad.secondary_weapon:
-					#fire the flakcannon!  
-					var left_bullet1 = flak_bullet.instantiate()
-					left_bullet1.rotation_degrees = Flak_muzzle_Left.global_transform.basis.get_euler()
-					Flak_muzzle_Left.add_child(left_bullet1)
-				
-				#change side!
-				one_side_of_the_gun = false
-				
-			else:
-				
-				if AutoLoad.primary_weapon:
-					#fire the autocannon!
-					var right_bullet = bullet.instantiate()
-					Auto_muzzle_Right.rotation_degrees = Auto_muzzle_Right.global_transform.basis.get_euler()
-					Auto_muzzle_Right.add_child(right_bullet)
-				
-				if AutoLoad.secondary_weapon:
-					#fire the flakcannon!
-					var right_bullet1 = flak_bullet.instantiate()
-					Auto_muzzle_Right.rotation_degrees = Flak_muzzle_Right.global_transform.basis.get_euler()
-					Auto_muzzle_Right.add_child(right_bullet1)
-				
-				#change side!
-				one_side_of_the_gun = true
-			
-		else:
-			
-			#To notify the player
-			AutoLoad.fcc_can_fire = false
-			print("WARNING! Both Feet are needed to be on the ground to Fire.")
 
 
 	#For Movement Animations
@@ -111,4 +84,95 @@ func _physics_process(delta):
 			
 			
 			
+#Firing Logic
+func _on_auto_cannon_shot_interval_timeout():
+	
+	#Gun Fire Control, i.e. both feet are need to be on the floor to Fire.
+	if Input.is_action_pressed("Fire"):
+			
 
+		#Autocannon staggering shot
+		if one_side_of_the_gun == true:
+			
+			if AutoLoad.primary_weapon:
+				#fire the autocannon!  
+				var left_bullet = bullet.instantiate()
+				left_bullet.rotation_degrees = Auto_muzzle_Left.global_transform.basis.get_euler()
+				Auto_muzzle_Left.add_child(left_bullet)
+			
+			elif AutoLoad.secondary_weapon and flak_ammo > 0 and left_feet.position.y < - 1.0 and right_feet.position.y < - 1.0:
+				
+				#To notify the player
+				AutoLoad.fcc_can_fire = true
+				
+				#fire the flakcannon!  
+				var left_bullet1 = flak_bullet.instantiate()
+				left_bullet1.rotation_degrees = Flak_muzzle_Left.global_transform.basis.get_euler()
+				Flak_muzzle_Left.add_child(left_bullet1)
+				
+				#Flak Ammo
+				flak_ammo -= 1
+				
+			elif flak_ammo <= 0:
+				print("Flak is Reloading!")
+				
+			else:
+				#To notify the player
+				AutoLoad.fcc_can_fire = false
+			
+			#change side!
+			one_side_of_the_gun = false
+			
+			#Rest!
+			
+		elif one_side_of_the_gun == false:
+			
+			if AutoLoad.primary_weapon:
+				
+				#fire the autocannon!
+				var right_bullet = bullet.instantiate()
+				right_bullet.rotation_degrees = Auto_muzzle_Right.global_transform.basis.get_euler()
+				Auto_muzzle_Right.add_child(right_bullet)
+			
+			elif AutoLoad.secondary_weapon and flak_ammo > 0 and left_feet.position.y < - 1.0 and right_feet.position.y < - 1.0:
+				
+				#To notify the player
+				AutoLoad.fcc_can_fire = true
+				
+				#fire the flakcannon!
+				var right_bullet1 = flak_bullet.instantiate()
+				right_bullet1.rotation_degrees = Flak_muzzle_Right.global_transform.basis.get_euler()
+				Flak_muzzle_Right.add_child(right_bullet1)
+				
+				#Flak Ammo
+				flak_ammo -= 1
+			
+			elif flak_ammo <= 0:
+				print("Flak is Reloading!")
+				
+			else:
+				#To notify the player
+				AutoLoad.fcc_can_fire = false
+			
+			#change side!
+			one_side_of_the_gun = true
+				
+	
+
+#Flak Timer
+func _on_flak_reload_timeout():
+	flak_ammo = 2
+	print('Flak Ready!')
+	
+
+
+
+func _on_health_area_entered(area):
+	
+	if area is ehd:
+		health -= AutoLoad.ehd_dps
+	
+	if area is spwnr_t1:
+		health -= AutoLoad.spwnt1_dps
+		
+	

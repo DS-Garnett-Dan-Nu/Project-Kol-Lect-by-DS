@@ -1,12 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://dt0n2u4dwgo3i"]
+[gd_scene load_steps=6 format=3 uid="uid://dt0n2u4dwgo3i"]
 
 [ext_resource type="Script" path="res://global/global_gdscripts/platform_normal_global.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://cjf3xr42335io" path="res://stations/service_station/ss_scenes/service_station.tscn" id="2_7p5cf"]
 
 [sub_resource type="BoxMesh" id="2"]
 size = Vector3(64, 2, 32)
 
 [sub_resource type="BoxShape3D" id="1"]
 size = Vector3(64, 2, 32)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o8amk"]
+size = Vector3(1, 2.12493, 40.9843)
 
 [node name="platform_normal_global" type="Node3D"]
 script = ExtResource("1")
@@ -21,3 +25,20 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="s"]
 shape = SubResource("1")
+
+[node name="EnemyJumper" type="Area3D" parent="s"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14.9637)
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="s/EnemyJumper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.4525, 2.07771, -15.2523)
+shape = SubResource("BoxShape3D_o8amk")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="s/EnemyJumper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.516, 2.07771, -15.2523)
+shape = SubResource("BoxShape3D_o8amk")
+
+[node name="events" type="Node3D" parent="s"]
+
+[node name="service_station" parent="s/events" instance=ExtResource("2_7p5cf")]

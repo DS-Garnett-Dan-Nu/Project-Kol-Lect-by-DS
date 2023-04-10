@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ducqmpan5y6o6"]
+[gd_scene load_steps=7 format=3 uid="uid://ducqmpan5y6o6"]
 
 [ext_resource type="Script" path="res://global/global_gdscripts/platform_normal_global.gd" id="1_dil3g"]
+[ext_resource type="PackedScene" uid="uid://ffak18f8hi20" path="res://mobs/spawners/spawnert1/spawnert1.tscn" id="2_ynga8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c7r3v"]
 albedo_color = Color(1, 0, 0, 1)
@@ -12,6 +13,9 @@ size = Vector3(128, 2, 32)
 [sub_resource type="BoxShape3D" id="1"]
 size = Vector3(128, 2, 32)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ub1y5"]
+size = Vector3(1, 2.12493, 40.9843)
+
 [node name="platform_wide_global" type="Node3D"]
 script = ExtResource("1_dil3g")
 
@@ -19,9 +23,24 @@ script = ExtResource("1_dil3g")
 collision_layer = 2
 collision_mask = 3
 
+[node name="spawnert1" parent="s" instance=ExtResource("2_ynga8")]
+
 [node name="a" type="MeshInstance3D" parent="s"]
 mesh = SubResource("2")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="s"]
 shape = SubResource("1")
+
+[node name="EnemyJumper" type="Area3D" parent="s"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14.9637)
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="s/EnemyJumper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.4525, 2.07771, -15.2523)
+shape = SubResource("BoxShape3D_ub1y5")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="s/EnemyJumper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -63.516, 2.07771, -15.2523)
+shape = SubResource("BoxShape3D_ub1y5")

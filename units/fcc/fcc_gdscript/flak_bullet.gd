@@ -1,4 +1,5 @@
 extends Area3D
+class_name flak_cannon
 
 var dir = Vector3()
 var speed = 175
@@ -14,5 +15,8 @@ func _process(delta):
 
 
 
-func _on_Projectile_body_entered(body):
+
+
+func _on_area_entered(area):
 	queue_free()
+

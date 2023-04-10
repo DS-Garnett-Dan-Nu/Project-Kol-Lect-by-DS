@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://cjf3xr42335io"]
+
+[ext_resource type="PackedScene" uid="uid://deka8nfdh0ywf" path="res://stations/service_station/ss_assets/temp_crane/crane.fbx" id="1_t58c7"]
+[ext_resource type="Script" path="res://stations/service_station/ss_gdscripts/service_station.gd" id="1_xoq8u"]
+
+[sub_resource type="BoxMesh" id="2"]
+size = Vector3(64, 2, 32)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tagxc"]
+size = Vector3(64.2231, 27.6563, 31.9196)
+
+[node name="service_station" type="Node3D"]
+script = ExtResource("1_xoq8u")
+
+[node name="a" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("2")
+skeleton = NodePath("../..")
+
+[node name="crane" parent="." instance=ExtResource("1_t58c7")]
+transform = Transform3D(-2.18557e-06, 0, -50, 0, 50, 0, 50, 0, -2.18557e-06, 20.0185, 1, -5.59168)
+
+[node name="crane2" parent="." instance=ExtResource("1_t58c7")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -26.1366, 1, 10.5557)
+
+[node name="player_detection" type="Area3D" parent="."]
+collision_layer = 64
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player_detection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.3683, 0)
+shape = SubResource("BoxShape3D_tagxc")
+
+[connection signal="area_entered" from="player_detection" to="." method="_on_player_detection_area_entered"]

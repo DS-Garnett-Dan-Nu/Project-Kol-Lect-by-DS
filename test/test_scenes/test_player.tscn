@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://test/test_gdscripts/test_player.gd" id="2"]
 [ext_resource type="Script" path="res://test/test_gdscripts/test_camera.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://b4tajijoaibf3" path="res://test/test_assets/50cm.gltf" id="4"]
-[ext_resource type="PackedScene" uid="uid://pruhyasmyp04" path="res://test/test_scenes/FCC.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://pruhyasmyp04" path="res://units/fcc/fcc_scenes/fcc_scene.tscn" id="6"]
 
 [sub_resource type="BoxShape3D" id="1"]
 size = Vector3(4.10468, 4.05242, 0.366778)

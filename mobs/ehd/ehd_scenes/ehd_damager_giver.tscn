@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://f85ylb1qf07b"]
+
+[ext_resource type="Script" path="res://mobs/ehd/ehd_gdscripts/ehd_damagergiver.gd" id="1_xjj76"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2cx6m"]
+radius = 1.11954
+
+[node name="DamagerGiver" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.78263, 0.82847, 0)
+collision_layer = 16
+script = ExtResource("1_xjj76")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_2cx6m")
+
+[node name="dps_timer2" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="dps_timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="dps_timer2" to="." method="_on_dps_timer_2_timeout"]
+[connection signal="timeout" from="dps_timer" to="." method="_on_dps_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://r7880vciekeh"]
+[gd_scene load_steps=6 format=3 uid="uid://r7880vciekeh"]
 
 [ext_resource type="Script" path="res://units/fcc/fcc_gdscript/flak_bullet.gd" id="1_o3r0x"]
 
@@ -10,27 +10,37 @@ height = 3.00562
 albedo_color = Color(1, 0.584314, 0, 1)
 emission_enabled = true
 emission = Color(0.917647, 0.639216, 0.129412, 1)
-emission_energy_multiplier = 3.0
+emission_energy_multiplier = 16.0
+rim_enabled = true
 ao_enabled = true
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_imt0n"]
 material = SubResource("4")
+radius = 0.2
 height = 3.0
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_5btal"]
+size = Vector3(0.27884, 0.495443, 0.492213)
+
 [node name="flak_bullet" type="Area3D"]
+collision_layer = 8
+collision_mask = 4
 script = ExtResource("1_o3r0x")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_kurte")
 
-[node name="MeshInstance" type="MeshInstance3D" parent="."]
+[node name="flak_main" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_imt0n")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.36951, 0, 0)
-light_color = Color(1, 1, 0.364706, 1)
-light_energy = 5.0
-light_size = 1.0
-shadow_enabled = true
+[node name="fragger" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fragger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35595, 0, 0)
+shape = SubResource("BoxShape3D_5btal")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

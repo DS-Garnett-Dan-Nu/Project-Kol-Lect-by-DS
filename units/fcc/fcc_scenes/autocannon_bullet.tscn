@@ -9,17 +9,18 @@ height = 3.00562
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2737u"]
 albedo_color = Color(1, 1, 0.341176, 1)
 emission_enabled = true
-emission = Color(1, 1, 0.333333, 1)
+emission = Color(1, 0.466667, 0.333333, 1)
+emission_energy_multiplier = 16.0
 
 [sub_resource type="PrismMesh" id="PrismMesh_bbgg7"]
 material = SubResource("StandardMaterial3D_2737u")
-size = Vector3(0.5, 0.5, 0.5)
+size = Vector3(0.3, 0.3, 0.3)
 
 [sub_resource type="StandardMaterial3D" id="4"]
 albedo_color = Color(1, 0.584314, 0, 1)
 emission_enabled = true
 emission = Color(0.917647, 0.639216, 0.129412, 1)
-emission_energy_multiplier = 3.0
+emission_energy_multiplier = 16.0
 ao_enabled = true
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_imt0n"]
@@ -28,9 +29,11 @@ radius = 0.1
 height = 3.0
 
 [node name="autocannon_bullet" type="Area3D"]
+collision_layer = 8
+collision_mask = 12
 script = ExtResource("1_bim6y")
 
-[node name="CollisionShape" type="CollisionShape3D" parent="."]
+[node name="CollisionShape" type="CollisionShape3D" parent="." groups=["fcc_auto_cannon"]]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_kurte")
 
@@ -45,3 +48,5 @@ skeleton = NodePath("../..")
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_imt0n")
 skeleton = NodePath("../..")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

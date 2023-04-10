@@ -1,4 +1,4 @@
-[gd_scene load_steps=247 format=3 uid="uid://pruhyasmyp04"]
+[gd_scene load_steps=249 format=3 uid="uid://pruhyasmyp04"]
 
 [ext_resource type="Script" path="res://units/fcc/fcc_gdscript/fcc_gdscript.gd" id="1_m5iow"]
 
@@ -3711,6 +3711,12 @@ _data = {
 "walking": SubResource("Animation_nxnye")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_tm4b3"]
+size = Vector3(4.70176, 4.38454, 4.05485)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5b620"]
+size = Vector3(4.31129, 6.39755, 5.01999)
+
 [node name="fcc" type="Node3D"]
 script = ExtResource("1_m5iow")
 
@@ -3918,16 +3924,16 @@ mesh = SubResource("ArrayMesh_dxch8")
 skeleton = NodePath("")
 
 [node name="AimLeft" type="Node3D" parent="fcc/Upper Base/Gun"]
-transform = Transform3D(1, 0, -7.41154e-22, 0, 1, 0, 7.41154e-22, 0, 1, 3.91364, -0.0240254, -3.10002)
+transform = Transform3D(1, 0, -7.41154e-22, 0, 1, 0, 7.41154e-22, 0, 1, 4.31239, -0.0240254, -3.10002)
 
 [node name="AimRight" type="Node3D" parent="fcc/Upper Base/Gun"]
-transform = Transform3D(1, 0, -7.41154e-22, 0, 1, 0, 7.41154e-22, 0, 1, 3.91364, -0.0240254, 0.422421)
+transform = Transform3D(1, 0, -7.41154e-22, 0, 1, 0, 7.41154e-22, 0, 1, 4.31239, -0.0240254, 0.422421)
 
 [node name="AimLeftF" type="Node3D" parent="fcc/Upper Base/Gun"]
-transform = Transform3D(1, 0, -7.41154e-22, 0, 1, 0, 7.41154e-22, 0, 1, 4.39632, 0.149578, -2.7448)
+transform = Transform3D(1, 0, -7.41154e-22, 0, 1, 0, 7.41154e-22, 0, 1, 7.43251, 0.149578, -2.7448)
 
 [node name="AimRightF" type="Node3D" parent="fcc/Upper Base/Gun"]
-transform = Transform3D(1, 0, -7.41154e-22, 0, 1, 0, 7.41154e-22, 0, 1, 4.396, 0.15, 0.0708582)
+transform = Transform3D(1, 0, -7.41154e-22, 0, 1, 0, 7.41154e-22, 0, 1, 7.43219, 0.15, 0.0708582)
 
 [node name="Jetpack" type="Node3D" parent="fcc/Upper Base"]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -0.000511285, -0.0765736, 1.8156)
@@ -4290,7 +4296,7 @@ mesh = SubResource("ArrayMesh_3c4j2")
 skeleton = NodePath("")
 
 [node name="Joint" type="Node3D" parent="fcc/Upper Base/Lower Base/Left Waist/Butt -85cm Z is rest/Leg Root"]
-transform = Transform3D(1, -1.19981e-17, 3.41867e-17, 0, 0.943576, 0.331156, -3.6231e-17, -0.331156, 0.943576, 0, 0, 3)
+transform = Transform3D(1, -1.19981e-17, 3.41866e-17, 7.03104e-24, 0.943576, 0.331156, -3.62309e-17, -0.331156, 0.943576, 0, 0, 3)
 
 [node name="knee" type="MeshInstance3D" parent="fcc/Upper Base/Lower Base/Left Waist/Butt -85cm Z is rest/Leg Root/Joint"]
 transform = Transform3D(1, -1.22465e-16, 1.22465e-16, -1.22465e-16, -1, -1.22465e-16, 1.22465e-16, 1.22465e-16, -1, 0, 0, -2.27374e-15)
@@ -4328,7 +4334,7 @@ mesh = SubResource("ArrayMesh_otvdx")
 skeleton = NodePath("")
 
 [node name="Leg Root2" type="Node3D" parent="fcc/Upper Base/Lower Base/Right Waist/Butt -85cm Z is rest2"]
-transform = Transform3D(1, 0, 0, 0, 0.973573, 0.228377, 0, -0.228377, 0.973573, 0, -0.376712, -0.00112446)
+transform = Transform3D(1, 0, 0, 0, 0.973573, 0.228378, 0, -0.228378, 0.973573, 0, -0.376712, -0.00112446)
 
 [node name="hip2" type="MeshInstance3D" parent="fcc/Upper Base/Lower Base/Right Waist/Butt -85cm Z is rest2/Leg Root2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.32907e-17)
@@ -4356,7 +4362,7 @@ mesh = SubResource("ArrayMesh_k0odd")
 skeleton = NodePath("")
 
 [node name="Joint3" type="Node3D" parent="fcc/Upper Base/Lower Base/Right Waist/Butt -85cm Z is rest2/Leg Root2"]
-transform = Transform3D(1, -8.43323e-18, 2.82718e-17, 0, 0.958276, 0.285845, -2.95028e-17, -0.285845, 0.958276, 0, 0, 3)
+transform = Transform3D(1, -8.43322e-18, 2.82718e-17, 8.6854e-24, 0.958276, 0.285845, -2.95028e-17, -0.285845, 0.958276, 0, 0, 3)
 
 [node name="knee2" type="MeshInstance3D" parent="fcc/Upper Base/Lower Base/Right Waist/Butt -85cm Z is rest2/Leg Root2/Joint3"]
 transform = Transform3D(1, -1.22465e-16, 1.22465e-16, -1.22465e-16, -1, -1.22465e-16, 1.22465e-16, 1.22465e-16, -1, 0, 0, -2.27374e-15)
@@ -4471,3 +4477,32 @@ skeleton = NodePath("")
 libraries = {
 "": SubResource("AnimationLibrary_vg5xh")
 }
+
+[node name="auto_cannon_shot_interval" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="flak_reload" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="trigger" type="Area3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2.73615, 0)
+collision_layer = 32
+collision_mask = 64
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="trigger"]
+shape = SubResource("BoxShape3D_tm4b3")
+
+[node name="health" type="Area3D" parent="." groups=["player_hit"]]
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="health"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.24823, 0)
+shape = SubResource("BoxShape3D_5b620")
+
+[connection signal="timeout" from="auto_cannon_shot_interval" to="." method="_on_auto_cannon_shot_interval_timeout"]
+[connection signal="timeout" from="flak_reload" to="." method="_on_flak_reload_timeout"]
+[connection signal="area_entered" from="health" to="." method="_on_health_area_entered"]

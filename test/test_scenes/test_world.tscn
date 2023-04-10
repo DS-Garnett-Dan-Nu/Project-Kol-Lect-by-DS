@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://drni1cmne1tvk"]
 
-[ext_resource type="PackedScene" uid="uid://4l5qi67b06fi" path="res://test/test_scenes/test_player.tscn" id="1_5sovx"]
+[ext_resource type="PackedScene" uid="uid://di06lm1uwmcuh" path="res://global/global_scenes/player_global.tscn" id="3_4ipn7"]
 [ext_resource type="PackedScene" uid="uid://igvbf8g27yor" path="res://global/global_scenes/world_generation_ai.tscn" id="3_7lsaw"]
 [ext_resource type="PackedScene" uid="uid://du3trgfhxw5kt" path="res://units/fcc/fcc_scenes/fcc_hud.tscn" id="3_lxrgg"]
 
@@ -21,9 +21,6 @@ ssil_enabled = true
 
 [node name="Control" parent="." instance=ExtResource("3_lxrgg")]
 
-[node name="player_movement" parent="." instance=ExtResource("1_5sovx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
-
 [node name="MeshInstance" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.3258)
 mesh = SubResource("1")
@@ -32,3 +29,6 @@ mesh = SubResource("1")
 environment = SubResource("Environment_ppc0f")
 
 [node name="WorldGenerationAI" parent="." instance=ExtResource("3_7lsaw")]
+
+[node name="Player_Global" parent="." instance=ExtResource("3_4ipn7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22.0859, 0)

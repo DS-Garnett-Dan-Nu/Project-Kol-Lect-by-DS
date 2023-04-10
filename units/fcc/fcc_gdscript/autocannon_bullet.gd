@@ -1,19 +1,25 @@
 extends Area3D
+class_name autocannon
 
-var dir = Vector3()
+#Stats
 var speed = 100
+var dir = Vector3()
 
+#Node Variables
 @onready var body = $body
 
 func _ready():
 	set_as_top_level(true)
 	
 func _process(delta): 
+	
+	#To make the bullet go to it's direction
 	position += transform.basis.x * speed * delta
-	body.rotation_degrees.x += 100
+	body.rotation_degrees.x += 180
 	
 
 
 
-func _on_Projectile_body_entered(body):
+
+func _on_area_entered(area):
 	queue_free()

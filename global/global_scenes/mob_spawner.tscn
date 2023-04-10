@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://behhhpmd2seoa"]
+
+[ext_resource type="Script" path="res://global/global_gdscripts/mob_spawner.gd" id="1_6xkt5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_kelk4"]
+
+[node name="Enemy Spawner" type="Node3D"]
+script = ExtResource("1_6xkt5")
+
+[node name="SpawnPoint" type="Marker3D" parent="."]
+gizmo_extents = 1.01
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_kelk4")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

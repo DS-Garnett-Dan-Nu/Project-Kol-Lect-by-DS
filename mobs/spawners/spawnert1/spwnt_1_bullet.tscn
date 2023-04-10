@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://c76rhngpi5c8r"]
+
+[ext_resource type="Script" path="res://mobs/spawners/spawnert1/spwnt_1_bullet.gd" id="1_7xx1l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n4y7d"]
+size = Vector3(1, 1, 5)
+
+[sub_resource type="Gradient" id="Gradient_3fiyf"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 0.5, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3yxr0"]
+frequency = 0.044
+metadata/_preview_in_3d_space_ = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_m4tre"]
+color_ramp = SubResource("Gradient_3fiyf")
+noise = SubResource("FastNoiseLite_3yxr0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jy58q"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_texture = SubResource("NoiseTexture2D_m4tre")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_c5i1t"]
+material = SubResource("StandardMaterial3D_jy58q")
+
+[node name="spwnt1_bullet" type="Area3D"]
+collision_layer = 16
+collision_mask = 9
+script = ExtResource("1_7xx1l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_n4y7d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_c5i1t")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

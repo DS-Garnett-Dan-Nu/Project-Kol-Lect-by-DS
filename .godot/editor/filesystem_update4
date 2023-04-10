@@ -1,7 +1,3 @@
-res://test/test_scenes/test_world.tscn
-res://units/fcc/fcc_scenes/fcc_scene.tscn
-res://units/fcc/fcc_scenes/fcc_hud.tscn
-res://global/global_scenes/world_generation_ai.tscn
+res://stations/service_station/ss_scenes/service_station.tscn
 res://global/global_scenes/platform_normal_global.tscn
-res://global/global_scenes/platform_wide_global.tscn
-res://global/global_scenes/player_movement.tscn
+res://stations/service_station/ss_gdscripts/service_station.gd
