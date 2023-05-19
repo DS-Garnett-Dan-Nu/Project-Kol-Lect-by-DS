@@ -15,7 +15,7 @@ var global_interval = 0
 var platform_type_old = 0 # 0 = platform)normal // 1 = platform_wide
 var platform_type_new 
 var platform_length = 0
-var max_platform_length = 10
+var max_platform_length = 11
 @onready var placer = $Placer
 
 # Called when the node enters the scene tree for the first time.
@@ -30,17 +30,29 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
+	#For service station event
+	if AutoLoad.service_station_appear == AutoLoad.service_station_spawn_pt_1:
+		AutoLoad.platform_normal = true
+		AutoLoad.platform_wide = false
+		
 	
 		
 	#Control the Amount of platform to spawn
 	if platform_length <= max_platform_length:
 		
+		
+		
+		
+		
+		
+		
 		#To spawn the platform normal
 		if AutoLoad.platform_normal:
 			time_to_create_platform(platform_normal, 0)
+			print(AutoLoad.service_station_appear)
 			
 		#To spawn the platform wide
-		if AutoLoad.platform_wide:
+		elif AutoLoad.platform_wide:
 			time_to_create_platform(platform_wide, 1)
 		
 
@@ -64,6 +76,9 @@ func time_to_create_platform(platform_type, platform_type_no):
 	
 	#Increment the numer of platform
 	platform_length += 1
+	
+	#For service station event
+	AutoLoad.service_station_appear += 1
 	
 	#Randomize the platform to be spawned: Current 2:1
 	var r = round(randf_range(0,2))

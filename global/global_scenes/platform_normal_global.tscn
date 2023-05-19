@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dt0n2u4dwgo3i"]
+[gd_scene load_steps=5 format=3 uid="uid://dt0n2u4dwgo3i"]
 
 [ext_resource type="Script" path="res://global/global_gdscripts/platform_normal_global.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://cjf3xr42335io" path="res://stations/service_station/ss_scenes/service_station.tscn" id="2_7p5cf"]
 
 [sub_resource type="BoxMesh" id="2"]
 size = Vector3(64, 2, 32)
@@ -40,5 +39,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.516, 2.07771, -15.2523)
 shape = SubResource("BoxShape3D_o8amk")
 
 [node name="events" type="Node3D" parent="s"]
-
-[node name="service_station" parent="s/events" instance=ExtResource("2_7p5cf")]

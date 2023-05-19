@@ -1,12 +1,13 @@
+res://test/test_scenes
+res://resources/engion
+res://global/global_gdscripts
 res://stations/service_station/ss_gdscripts
 res://stations/service_station/ss_scenes
 res://mobs/spawners/spawnert1
 res://mobs/ehd/ehd_scenes
 res://mobs/ehd/ehd_gdscripts
 res://units/fcc/fcc_gdscript
-res://global/global_gdscripts
 res://global/global_scenes
 res://units/fcc/fcc_scenes
 res://test/test_assets/fcc
-res://test/test_scenes
 C:/Personal/LAP 4 - 1st Sem/Internship Mini Project (Kol Lect)/Project Kol Lect

@@ -390,89 +390,95 @@ size = Vector3(0.198498, 0.49789, 3.6068)
 [sub_resource type="BoxShape3D" id="BoxShape3D_1irob"]
 size = Vector3(6, 3, 5)
 
-[node name="ehd" type="CharacterBody3D"]
+[node name="ehd" type="Node3D"]
+
+[node name="spawnpt" type="Marker3D" parent="."]
+
+[node name="node" type="Node" parent="."]
+
+[node name="ehd" type="CharacterBody3D" parent="."]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_f67p5")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ehd"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.710118, -0.431906, -0.173986)
 shape = SubResource("BoxShape3D_0s2dt")
 
-[node name="EHD_V1" type="Node3D" parent="."]
+[node name="EHD_V1" type="Node3D" parent="ehd"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.32423, 0)
 
-[node name="EHD_V1-BodyMain" type="MeshInstance3D" parent="EHD_V1"]
+[node name="EHD_V1-BodyMain" type="MeshInstance3D" parent="ehd/EHD_V1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.01468)
 mesh = SubResource("ArrayMesh_flxwn")
 skeleton = NodePath("")
 
-[node name="EHD_V1-Boosters" type="MeshInstance3D" parent="EHD_V1"]
+[node name="EHD_V1-Boosters" type="MeshInstance3D" parent="ehd/EHD_V1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.01468)
 mesh = SubResource("ArrayMesh_0sikh")
 skeleton = NodePath("")
 
-[node name="EHD_V1-BodyMain3" type="MeshInstance3D" parent="EHD_V1"]
+[node name="EHD_V1-BodyMain3" type="MeshInstance3D" parent="ehd/EHD_V1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.01468)
 mesh = SubResource("ArrayMesh_lhm37")
 skeleton = NodePath("")
 
-[node name="EHD_V1-Light" type="MeshInstance3D" parent="EHD_V1"]
+[node name="EHD_V1-Light" type="MeshInstance3D" parent="ehd/EHD_V1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.01468)
 mesh = SubResource("ArrayMesh_p24id")
 skeleton = NodePath("")
 
-[node name="EHD_V1-BodyMain2" type="MeshInstance3D" parent="EHD_V1"]
+[node name="EHD_V1-BodyMain2" type="MeshInstance3D" parent="ehd/EHD_V1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.01468)
 mesh = SubResource("ArrayMesh_2wugt")
 skeleton = NodePath("")
 
-[node name="EHD_V1-Camera" type="MeshInstance3D" parent="EHD_V1"]
+[node name="EHD_V1-Camera" type="MeshInstance3D" parent="ehd/EHD_V1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.01468)
 mesh = SubResource("ArrayMesh_0clo6")
 skeleton = NodePath("")
 
-[node name="EHD_V1-BodyMain32" type="MeshInstance3D" parent="EHD_V1"]
+[node name="EHD_V1-BodyMain32" type="MeshInstance3D" parent="ehd/EHD_V1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.01468)
 mesh = SubResource("ArrayMesh_hxi43")
 skeleton = NodePath("")
 
-[node name="EHD_V1-BodyMain22" type="MeshInstance3D" parent="EHD_V1"]
+[node name="EHD_V1-BodyMain22" type="MeshInstance3D" parent="ehd/EHD_V1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.01468)
 mesh = SubResource("ArrayMesh_a2exy")
 skeleton = NodePath("")
 
-[node name="Spikes1" type="MeshInstance3D" parent="EHD_V1"]
+[node name="Spikes1" type="MeshInstance3D" parent="ehd/EHD_V1"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.01013, -0.711271, -1.08412)
 mesh = SubResource("ArrayMesh_2gccd")
 skeleton = NodePath("")
 
-[node name="DrillHead" type="Node3D" parent="EHD_V1"]
+[node name="DrillHead" type="Node3D" parent="ehd/EHD_V1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.224088, -1.66374, -0.00484216)
 
-[node name="Drill" type="MeshInstance3D" parent="EHD_V1/DrillHead"]
+[node name="Drill" type="MeshInstance3D" parent="ehd/EHD_V1/DrillHead"]
 transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 4.55207, 1.15833, 0.898351)
 mesh = SubResource("ArrayMesh_eb628")
 skeleton = NodePath("")
 
-[node name="JumpDectector" type="Area3D" parent="."]
+[node name="JumpDectector" type="Area3D" parent="ehd"]
 collision_layer = 4
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="JumpDectector"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ehd/JumpDectector"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85217, -0.281337, -0.0310895)
 shape = SubResource("BoxShape3D_c1ru4")
 
-[node name="DamageDectector" type="Area3D" parent="."]
+[node name="DamageDectector" type="Area3D" parent="ehd"]
 collision_layer = 4
 collision_mask = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageDectector"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ehd/DamageDectector"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.265, 1.005, 0)
 shape = SubResource("BoxShape3D_1irob")
 
-[node name="DamagerGiver" parent="." instance=ExtResource("2_1g88l")]
+[node name="DamagerGiver" parent="ehd" instance=ExtResource("2_1g88l")]
 
-[connection signal="area_entered" from="JumpDectector" to="." method="_on_jump_dectector_area_entered"]
-[connection signal="area_entered" from="DamageDectector" to="." method="_on_damage_dectector_area_entered"]
-[connection signal="body_entered" from="DamageDectector" to="." method="_on_damage_dectector_body_entered"]
+[connection signal="area_entered" from="ehd/JumpDectector" to="ehd" method="_on_jump_dectector_area_entered"]
+[connection signal="area_entered" from="ehd/DamageDectector" to="ehd" method="_on_damage_dectector_area_entered"]
+[connection signal="body_entered" from="ehd/DamageDectector" to="ehd" method="_on_damage_dectector_body_entered"]

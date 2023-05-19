@@ -1,11 +1,70 @@
-[gd_scene load_steps=5 format=3 uid="uid://di06lm1uwmcuh"]
+[gd_scene load_steps=7 format=3 uid="uid://di06lm1uwmcuh"]
 
 [ext_resource type="Script" path="res://global/global_gdscripts/player_global.gd" id="1_nd21n"]
-[ext_resource type="Script" path="res://global/global_gdscripts/player_camera.gd" id="2_10a06"]
 [ext_resource type="PackedScene" uid="uid://pruhyasmyp04" path="res://units/fcc/fcc_scenes/fcc_scene.tscn" id="3_2p3vw"]
 
+[sub_resource type="Animation" id="Animation_q58x0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player_movement/CameraPers:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 8.824, 18.572)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player_movement/CameraPers:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.149575, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2awyw"]
+resource_name = "service_time"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player_movement/CameraPers:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(8, 8.824, 18.572), Vector3(5.59445, 3.07089, 3.91811)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player_movement/CameraPers:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.150098, -0.10472, 0), Vector3(-0.825541, 0.44855, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5doh5"]
+_data = {
+"RESET": SubResource("Animation_q58x0"),
+"service_time": SubResource("Animation_2awyw")
+}
+
 [sub_resource type="BoxShape3D" id="1"]
-size = Vector3(0.001, 4.05242, 1.00141)
+size = Vector3(8.77385, 5.96834, 1.50808)
 
 [node name="Player_Global" type="Node3D"]
 
@@ -14,18 +73,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.8552, 0)
 collision_mask = 2
 script = ExtResource("1_nd21n")
 
+[node name="Ani" type="AnimationPlayer" parent="player_movement"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_5doh5")
+}
+
 [node name="CollisionShape" type="CollisionShape3D" parent="player_movement"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.0925274, -3.3538, 0)
 shape = SubResource("1")
 
-[node name="SpringArm" type="SpringArm3D" parent="player_movement"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 36.1448, 0)
-spring_length = 70.0
-script = ExtResource("2_10a06")
-
-[node name="Camera" type="Camera3D" parent="player_movement/SpringArm"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -1.49012e-08, 1, 0, 0, 0)
+[node name="CameraOrta" type="Camera3D" parent="player_movement"]
+transform = Transform3D(0.819152, 0.0897271, -0.566515, 0, 0.987688, 0.156434, 0.573576, -0.128144, 0.809067, -0.193945, 8.4076, 20.2102)
+projection = 1
 current = true
+size = 26.6047
+far = 3000.0
+
+[node name="CameraPers" type="Camera3D" parent="player_movement"]
+transform = Transform3D(1, 0, 0, 0, 0.988834, 0.149018, 0, -0.149018, 0.988835, 0, 8.824, 18.572)
 far = 3000.0
 
 [node name="fcc" parent="player_movement" instance=ExtResource("3_2p3vw")]

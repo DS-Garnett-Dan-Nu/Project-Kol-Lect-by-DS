@@ -12,4 +12,12 @@ func _process(delta):
 
 
 func _on_player_detection_area_entered(area):
-	print("Service Time!")
+	AutoLoad.global_service_time = true
+	AutoLoad.global_service_ing = true
+	print(AutoLoad.global_service_time)
+
+
+func _on_player_detection_area_exited(area):
+	AutoLoad.global_service_end = true
+	AutoLoad.global_service_ing = false
+	print(AutoLoad.global_service_time)

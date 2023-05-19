@@ -32,3 +32,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.3683, 0)
 shape = SubResource("BoxShape3D_tagxc")
 
 [connection signal="area_entered" from="player_detection" to="." method="_on_player_detection_area_entered"]
+[connection signal="area_exited" from="player_detection" to="." method="_on_player_detection_area_exited"]

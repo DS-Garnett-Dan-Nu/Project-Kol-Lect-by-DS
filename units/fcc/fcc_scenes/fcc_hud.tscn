@@ -34,9 +34,56 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
-offset_top = -56.0
+offset_top = -112.0
 offset_right = 753.0
-offset_bottom = -18.0
+offset_bottom = -74.0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 25
-text = "WARNING! Both Feet are needed to be on the ground to Fire."
+text = "WARNING! You must Deploy First to Use Flak. Press \"V\" to Deploy."
+
+[node name="Engion" type="Label" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 146.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 25
+text = "Engion: %s"
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+modulate = Color(0.168627, 1, 0, 1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -40.0
+offset_right = 336.0
+offset_bottom = -13.0
+grow_vertical = 0
+value = 50.0
+
+[node name="Health" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -84.0
+offset_right = 97.0
+offset_bottom = -46.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 25
+text = "Health"
+
+[node name="DepolyIndicater" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = -47.0
+offset_right = 330.0
+offset_bottom = -43.0
+grow_vertical = 0
+color = Color(0, 0.94902, 1, 1)

@@ -13,46 +13,61 @@ var primary_weapon = true
 var secondary_weapon = false
 
 #Global Player Stats #For Global Upgrades
-var global_player_health = 0
-var global_player_speed = 0
-var global_player_jump_velocity = 0
+var global_player_health = 0.0
+var global_player_speed = 0.0
+var global_player_jump_velocity = 0.0
 
 #Global Mob Stats #For Global Difficulty
-var global_mob_health = 0
-var global_mob_speed = 0
-var global_mob_dps = 0
+var global_mob_health = 0.0
+var global_mob_speed = 0.0
+var global_mob_dps = 0.0
 
 #Global Mob Spawner Stats #For Global Difficulty
-var global_mob_spawner_health = 0
-var global_mob_spawner_dps = 0
+var global_mob_spawner_health = 0.0
+var global_mob_spawner_dps = 0.0
+
+#Global Service Time!
+var global_service_time = false
+var global_service_end = false
+var global_service_ing = false
+
+#Global Resources in Storage
+var global_engion = 0.0
 ###########
 
 #FCC - First Controlable Character #For Character Specific Upgrades
 #FCC Stats
-var fcc_health = global_player_health + 150
-var fcc_base_speed = global_player_speed + 50
-var fcc_jump_velocity = global_player_jump_velocity + 30
+var fcc_health = global_player_health + 150.0
+var fcc_base_speed = global_player_speed + 50.0
+var fcc_jump_velocity = global_player_jump_velocity + 17.0
+var fcc_healthbar
 
 #FCC gun control
-var fcc_auto_damage = 10
-var fcc_flak_damage = 30
+var fcc_auto_damage = 15.0
+var fcc_flak_damage = 50.0
 var fcc_can_fire = true
+var fcc_deploy = false
 ############
 
 #Mobs aka Enemies
 #EHD Stats #For Enemy Specific Difficulty
-var ehd_dps = global_mob_dps + 1
-var ehd_health = global_mob_health + 100
-var ehd_speed = global_mob_speed + 10
+var ehd_dps = global_mob_dps + 1.0
+var ehd_health = global_mob_health + 100.0
+var ehd_speed = global_mob_speed + 10.0
 
 #Mobs aka Enemy Spawners
 #Spawner T1
-var spwnt1_health = global_mob_spawner_health + 500
-var spwnt1_dps = global_mob_spawner_dps + 15
+var spwnt1_health = global_mob_spawner_health + 500.0
+var spwnt1_dps = global_mob_spawner_dps + 15.0
 
 #Mob Controls
 var player_location = Vector3()
 ############
+
+#Stations
+#service station
+var service_station_spawn_pt_1 = 10
+var service_station_appear = 0
 
 #Local Misc
 #Print Control

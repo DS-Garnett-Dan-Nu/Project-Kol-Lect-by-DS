@@ -10,8 +10,9 @@ var detector = true
 @onready var spwn_intrvl = $spawn_interval
 @onready var door_timer = $door_timer
 
-#Spawn Point
+#Spawn Points
 @onready var spn_pt = $body
+@onready var node = get_node("../node")
 
 #Animation
 @onready var ani = $AniT1
@@ -20,7 +21,8 @@ var detector = true
 var health = AutoLoad.spwnt1_health
 var dps = AutoLoad.spwnt1_dps
 
-#Defence
+#Defence and its controls
+var inrange = false
 @onready var gun = $gun
 @onready var muzzle = $gun/muzzle
 var bullet = preload("res://mobs/spawners/spawnert1/spwnt_1_bullet.tscn")
@@ -37,6 +39,7 @@ func _process(delta):
 	if health <= 0:
 		queue_free()
 	
+	#Gun Look at player
 	gun.look_at(AutoLoad.player_location)
 	muzzle.look_at(AutoLoad.player_location)
 
@@ -45,7 +48,7 @@ func _process(delta):
 func _on_player_detecter_area_entered(area):
 	#Triggers when player enters the detect zone
 	if detector:
-		
+		inrange = true #Short range fire mechanism activate!
 		detector = false #Disable the dectector to prevent repeated triggers
 		spwn_intrvl.start() #Time to spawn mobs! 
 		#print("area")
@@ -55,10 +58,7 @@ func _on_spawn_interval_timeout():
 	ani.play("open_door") #play the open door animation
 	#print("spn tm out")
 	
-	#Fire Control
-	var b = bullet.instantiate()
-	muzzle.global_transform.basis.get_euler()
-	muzzle.add_child(b)
+	
 	
 	
 func _on_open_door_animation_finished(open_door): #This specifying animation doesn't work, so I had to add an external control
@@ -67,6 +67,7 @@ func _on_open_door_animation_finished(open_door): #This specifying animation doe
 		var e = ehd_v1.instantiate()
 		spn_pt.global_transform.basis.get_euler()
 		spn_pt.add_child(e)
+		e.reparent(node)
 		door_timer.start()
 		#print("open_door tm out")
 
@@ -96,3 +97,24 @@ func _on_hurt_box_area_entered(area):
 		health -= AutoLoad.fcc_auto_damage
 	if area is flak_cannon:
 		health -= AutoLoad.fcc_flak_damage
+
+
+func _on_fire_timer_timeout():
+	
+	#Randomize to shoot or not
+	var shootorNo = round(randi_range(0,1))
+	
+	#Short Range Fire Control
+	if inrange:
+		var b = bullet.instantiate()
+		muzzle.global_transform.basis.get_euler()
+		muzzle.add_child(b)
+		b.reparent(node)
+	
+	#Long Range Fire Control
+	elif shootorNo < 1:
+		print("shoot!")
+		var b = bullet.instantiate()
+		muzzle.global_transform.basis.get_euler()
+		muzzle.add_child(b)
+		b.reparent(node)

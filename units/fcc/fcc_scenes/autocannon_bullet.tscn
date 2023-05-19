@@ -30,7 +30,7 @@ height = 3.0
 
 [node name="autocannon_bullet" type="Area3D"]
 collision_layer = 8
-collision_mask = 12
+collision_mask = 28
 script = ExtResource("1_bim6y")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="." groups=["fcc_auto_cannon"]]
@@ -48,5 +48,25 @@ skeleton = NodePath("../..")
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_imt0n")
 skeleton = NodePath("../..")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3295, 0, 0)
+light_color = Color(1, 0.784314, 0, 1)
+shadow_enabled = true
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.58693, 0, 0)
+light_color = Color(1, 0.784314, 0, 1)
+shadow_enabled = true
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00223863, 0, 0)
+light_color = Color(1, 0.784314, 0, 1)
+shadow_enabled = true
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38049, 0, 0)
+light_color = Color(1, 0.784314, 0, 1)
+shadow_enabled = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

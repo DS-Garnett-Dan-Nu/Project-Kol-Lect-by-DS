@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://1shx04eesc8t"]
+
+[ext_resource type="Script" path="res://resources/engion/engion_gdscript.gd" id="1_ve6wg"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_n04k3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qlb2p"]
+albedo_color = Color(0, 0.94902, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.94902, 1, 1)
+emission_energy_multiplier = 6.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_di3k2"]
+material = SubResource("StandardMaterial3D_qlb2p")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5ndjj"]
+
+[node name="Engion" type="CharacterBody3D"]
+collision_layer = 128
+collision_mask = 34
+script = ExtResource("1_ve6wg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_n04k3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_di3k2")
+
+[node name="collected" type="Area3D" parent="."]
+collision_layer = 128
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collected"]
+shape = SubResource("SphereShape3D_5ndjj")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.0470588, 1, 1, 1)
+shadow_enabled = true
+omni_range = 3.0
+
+[connection signal="area_entered" from="collected" to="." method="_on_collected_area_entered"]
+[connection signal="area_exited" from="collected" to="." method="_on_collected_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

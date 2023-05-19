@@ -1,5 +1,10 @@
 extends Node3D
 
+#Events
+var service_station = preload("res://stations/service_station/ss_scenes/service_station.tscn")
+
+#Event Control
+@onready var event_pos = $s/events
 
 # Declare member variables here. Examples:
 var x = true
@@ -10,6 +15,12 @@ var platform_movement
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	#Add the service station
+	if AutoLoad.service_station_appear == AutoLoad.service_station_spawn_pt_1:
+		var b = service_station.instantiate()
+		event_pos.add_child(b)
+	
 	platform_movement = round(randf_range(0,1))
 	pass
 

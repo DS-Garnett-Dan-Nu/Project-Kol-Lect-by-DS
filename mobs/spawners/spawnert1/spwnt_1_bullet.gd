@@ -2,15 +2,19 @@ extends Area3D
 class_name spwnr_t1
 
 var dir = Vector3()
-var speed = 40
+var speed = 10
 var health = 30
 
+#Nodes
+@onready var ani = $ani
 
 func _ready():
 	set_as_top_level(true)
+	ani.play("flames")
 	
 func _process(delta):
 	position += transform.basis.z * -speed * delta
+	
 	
 	#Die!
 	if health <= 0:
