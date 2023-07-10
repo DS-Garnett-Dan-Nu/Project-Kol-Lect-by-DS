@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddlic5rq51qwp"]
+
+[ext_resource type="PackedScene" uid="uid://cv45h0rhcw0s" path="res://platforms/platform_normal/plspw/plspw.fbx" id="1_07ri8"]
+[ext_resource type="Script" path="res://platforms/platform_normal/plspw/plspw.gd" id="1_k2djr"]
+[ext_resource type="PackedScene" uid="uid://i7f33cl8oxse" path="res://misc/VFXs/basic_fire.tscn" id="3_gj76l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t7adv"]
+size = Vector3(5, 37.5379, 92.8091)
+
+[node name="plspw" type="Node3D"]
+script = ExtResource("1_k2djr")
+
+[node name="player_spawn_point" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.4151, 0)
+
+[node name="plspw" parent="." instance=ExtResource("1_07ri8")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="l1" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.269895, 0.96289, 0, -0.96289, -0.269895, -15.5491, 65.8066, -16.0168)
+light_energy = 5.0
+shadow_enabled = true
+spot_range = 97.1155
+spot_angle = 40.6795
+
+[node name="l2" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.241549, 0.970389, 0, -0.970389, 0.241549, -15.5491, 65.8066, 14.217)
+light_energy = 5.0
+shadow_enabled = true
+spot_range = 98.8792
+spot_angle = 41.8223
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.7604, 15.2847, 0)
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_t7adv")
+
+[node name="BasicFire" parent="." instance=ExtResource("3_gj76l")]
+transform = Transform3D(0.690201, 0.723618, -2.70835e-08, -0.723618, 0.690201, -6.32607e-08, -2.70835e-08, 6.32607e-08, 1, 1.629, 13.303, -14.906)
+
+[node name="BasicFire2" parent="." instance=ExtResource("3_gj76l")]
+transform = Transform3D(0.965926, -0.258819, 0, 0.25, 0.933013, -0.258819, 0.0669873, 0.25, 0.965926, -18.816, 4.91, -11.872)
+
+[node name="BasicFire3" parent="." instance=ExtResource("3_gj76l")]
+transform = Transform3D(0.901737, -0.321716, -0.288739, 0.25, 0.933013, -0.258819, 0.352663, 0.161202, 0.921761, -1.99663, 4.49265, 16.124)
+
+[node name="BasicFire4" parent="." instance=ExtResource("3_gj76l")]
+transform = Transform3D(0.5, -0.612373, 0.612372, 0.866026, 0.353553, -0.353553, -1.81059e-08, 0.707107, 0.707107, -18.1126, 4.77523, 14.1731)
+
+[node name="BasicFire5" parent="." instance=ExtResource("3_gj76l")]
+transform = Transform3D(0.5, -0.612373, 0.612372, 0.866026, 0.353553, -0.353553, -1.81059e-08, 0.707107, 0.707107, -26.0867, 1.85785, 22.5968)

@@ -1,0 +1,93 @@
+[gd_scene load_steps=15 format=3 uid="uid://i7f33cl8oxse"]
+
+[sub_resource type="Gradient" id="Gradient_ucrj7"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sr6ib"]
+gradient = SubResource("Gradient_ucrj7")
+
+[sub_resource type="Curve" id="Curve_mmsxv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0xtbx"]
+curve = SubResource("Curve_mmsxv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6a0q6"]
+emission_shape = 1
+emission_sphere_radius = 0.2
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 15, 0)
+initial_velocity_max = 5.0
+scale_curve = SubResource("CurveTexture_0xtbx")
+color_ramp = SubResource("GradientTexture1D_sr6ib")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eyptk"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_glfdl"]
+material = SubResource("StandardMaterial3D_eyptk")
+radius = 0.2
+height = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6woyg"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.384314, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.466667, 0, 1)
+emission_energy_multiplier = 1.92
+
+[sub_resource type="Gradient" id="Gradient_vg5th"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5q6bk"]
+gradient = SubResource("Gradient_vg5th")
+
+[sub_resource type="Curve" id="Curve_2jo8y"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_n6vrw"]
+curve = SubResource("Curve_2jo8y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bds7b"]
+emission_shape = 1
+emission_sphere_radius = 0.1
+direction = Vector3(0, 0, 0)
+spread = 25.0
+gravity = Vector3(0, 25, 0)
+initial_velocity_max = 5.0
+scale_curve = SubResource("CurveTexture_n6vrw")
+color_ramp = SubResource("GradientTexture1D_5q6bk")
+
+[sub_resource type="SphereMesh" id="SphereMesh_pp833"]
+radius = 0.2
+height = 0.4
+
+[node name="BasicFire" type="Node3D"]
+
+[node name="red" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+amount = 25
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_6a0q6")
+draw_pass_1 = SubResource("SphereMesh_glfdl")
+
+[node name="orange" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_6woyg")
+amount = 25
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_bds7b")
+draw_pass_1 = SubResource("SphereMesh_pp833")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0132217, 0.182663, 0.0992699)
+light_color = Color(1, 0, 0, 1)
+omni_range = 10.0

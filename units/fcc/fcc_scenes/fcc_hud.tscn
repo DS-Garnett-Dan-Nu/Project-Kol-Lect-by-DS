@@ -1,17 +1,84 @@
-[gd_scene load_steps=2 format=3 uid="uid://du3trgfhxw5kt"]
+[gd_scene load_steps=11 format=3 uid="uid://du3trgfhxw5kt"]
 
-[ext_resource type="Script" path="res://global/global_gdscripts/fcc_hud.gd" id="1_50tm3"]
+[ext_resource type="Script" path="res://units/fcc/fcc_gdscript/fcc_hud.gd" id="1_ed0jc"]
+[ext_resource type="Script" path="res://units/fcc/fcc_gdscript/ss_hud_fcc.gd" id="2_1h20n"]
+[ext_resource type="AudioStream" uid="uid://beod6tgelp2d7" path="res://units/fcc/fcc_assets/fccSFXs/fcc_upgrade.mp3" id="3_lgyc5"]
+[ext_resource type="Texture2D" uid="uid://bvb2mg3vh1xbn" path="res://units/fcc/fcc_assets/fcc_icons.png" id="4_agkx5"]
+[ext_resource type="Theme" uid="uid://6qrfrr3nx70f" path="res://units/fcc/fcc_assets/fcc_buttons.tres" id="5_b3u6h"]
 
-[node name="Control" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2p11r"]
+bg_color = Color(0.6, 0.6, 0.6, 0.188235)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pq31u"]
+bg_color = Color(0.6, 0.6, 0.6, 0.584314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ktht7"]
+bg_color = Color(0.933333, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x07vx"]
+bg_color = Color(0.239216, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q4g3s"]
+bg_color = Color(0.631373, 0, 0, 1)
+
+[node name="fcc_hud" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_50tm3")
+script = ExtResource("1_ed0jc")
+
+[node name="statbg2" type="ColorRect" parent="."]
+layout_mode = 0
+offset_top = 528.0
+offset_right = 368.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0.619608)
+
+[node name="Noti" type="Label" parent="."]
+modulate = Color(0.878431, 0.745098, 0.0431373, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -216.0
+offset_top = 148.0
+offset_right = 216.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 15
+text = "WARNING: You must Deploy First to Use The Flak-cannon."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="warningicon" type="Sprite2D" parent="Noti"]
+position = Vector2(-16, 16)
+scale = Vector2(0.48, 0.479999)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(0, 900, 100, 100)
+
+[node name="warningicon2" type="Sprite2D" parent="Noti"]
+position = Vector2(448, 16.0001)
+scale = Vector2(0.479999, 0.48)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(0, 900, 100, 100)
+
+[node name="healthinfo" type="Sprite2D" parent="."]
+position = Vector2(21.5, 613.5)
+scale = Vector2(0.27, 0.27)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(400, 0, 100, 100)
 
 [node name="SelectedWeapon" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -28,27 +95,64 @@ theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Noti" type="Label" parent="."]
+[node name="ammo_noti" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = -112.0
-offset_right = 753.0
-offset_bottom = -74.0
-grow_vertical = 0
-theme_override_font_sizes/font_size = 25
-text = "WARNING! You must Deploy First to Use Flak. Press \"V\" to Deploy."
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -304.0
+offset_top = 16.0
+offset_right = -184.0
+offset_bottom = 47.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 20
+vertical_alignment = 1
 
 [node name="Engion" type="Label" parent="."]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 146.0
-offset_bottom = 54.0
-theme_override_font_sizes/font_size = 25
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.988
+anchor_bottom = 0.988
+offset_left = 72.0
+offset_top = -624.224
+offset_right = 264.0
+offset_bottom = -593.224
+theme_override_font_sizes/font_size = 20
 text = "Engion: %s"
+vertical_alignment = 1
+
+[node name="score" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.988
+anchor_bottom = 0.988
+offset_left = 848.0
+offset_top = -49.224
+offset_right = 1088.0
+offset_bottom = -24.224
+theme_override_font_sizes/font_size = 15
+text = "Score: %s"
+vertical_alignment = 1
+
+[node name="engion" type="Sprite2D" parent="score"]
+position = Vector2(-816, -559)
+scale = Vector2(0.24, 0.24)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(100, 800, 200, 200)
+
+[node name="hi_score" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.988
+anchor_bottom = 0.988
+offset_left = 848.0
+offset_top = -25.224
+offset_right = 1088.0
+offset_bottom = -0.223999
+theme_override_font_sizes/font_size = 15
+text = "High Score: %s"
+vertical_alignment = 1
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 modulate = Color(0.168627, 1, 0, 1)
@@ -56,34 +160,605 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = -40.0
-offset_right = 336.0
-offset_bottom = -13.0
+offset_left = 8.0
+offset_top = -48.0
+offset_right = 360.0
+offset_bottom = -21.0
 grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_2p11r")
+theme_override_styles/fill = SubResource("StyleBoxFlat_pq31u")
 value = 50.0
-
-[node name="Health" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = -84.0
-offset_right = 97.0
-offset_bottom = -46.0
-grow_vertical = 0
-theme_override_font_sizes/font_size = 25
-text = "Health"
 
 [node name="DepolyIndicater" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 22.0
-offset_top = -47.0
-offset_right = 330.0
-offset_bottom = -43.0
+offset_left = 8.0
+offset_top = -58.0
+offset_right = 360.0
+offset_bottom = -54.0
 grow_vertical = 0
 color = Color(0, 0.94902, 1, 1)
+
+[node name="showstats" type="Button" parent="."]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 600.0
+offset_right = 440.0
+offset_bottom = 640.0
+theme_override_font_sizes/font_size = 10
+toggle_mode = true
+text = "Stats
+[ L. Shft ]"
+
+[node name="Stats" type="Node2D" parent="."]
+position = Vector2(768, 640)
+
+[node name="statbg" type="ColorRect" parent="Stats"]
+offset_left = -320.0
+offset_top = 16.0
+offset_right = 72.0
+offset_bottom = 144.0
+color = Color(0, 0, 0, 0.619608)
+
+[node name="autobullet" type="Sprite2D" parent="Stats"]
+position = Vector2(-296, 40)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(100, 0, 100, 100)
+
+[node name="flakbullet" type="Sprite2D" parent="Stats"]
+position = Vector2(-296, 80)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(0, 0, 100, 100)
+
+[node name="health2" type="Sprite2D" parent="Stats"]
+position = Vector2(-105, 40)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(300, 0, 100, 100)
+
+[node name="speed2" type="Sprite2D" parent="Stats"]
+position = Vector2(-105, 80)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(200, 0, 100, 100)
+
+[node name="kollectorspeed2" type="Sprite2D" parent="Stats"]
+position = Vector2(-296, 120)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(100, 200, 100, 100)
+
+[node name="audam" type="Label" parent="Stats"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -272.0
+offset_top = 21.0
+offset_right = -128.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 10
+text = "Current
+Next"
+vertical_alignment = 1
+
+[node name="fkdam" type="Label" parent="Stats"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -272.0
+offset_top = 61.0
+offset_right = -128.0
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 10
+text = " %s"
+vertical_alignment = 1
+
+[node name="health" type="Label" parent="Stats"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.0
+offset_top = 21.0
+offset_right = 63.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 10
+text = " %s"
+vertical_alignment = 1
+
+[node name="speed" type="Label" parent="Stats"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.0
+offset_top = 61.0
+offset_right = 63.0
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 10
+text = " %s"
+vertical_alignment = 1
+
+[node name="kollectorspeed" type="Label" parent="Stats"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -272.0
+offset_top = 101.0
+offset_right = -127.0
+offset_bottom = 139.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 10
+text = " %s"
+vertical_alignment = 1
+
+[node name="fcc_ss_hud" type="Node2D" parent="."]
+position = Vector2(1344, 0)
+
+[node name="ss_hud_fcc" type="Control" parent="fcc_ss_hud"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+script = ExtResource("2_1h20n")
+
+[node name="btn_sfx" type="AudioStreamPlayer" parent="fcc_ss_hud/ss_hud_fcc"]
+stream = ExtResource("3_lgyc5")
+
+[node name="wdu" type="Label" parent="fcc_ss_hud/ss_hud_fcc"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -122.0
+offset_top = 16.0
+offset_right = -5.0
+offset_bottom = 54.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 25
+text = "Upgrades"
+horizontal_alignment = 2
+
+[node name="pridamage" type="Button" parent="fcc_ss_hud/ss_hud_fcc"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -72.0
+offset_top = 122.0
+offset_right = -22.0
+offset_bottom = 153.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 15
+text = "- %s g"
+
+[node name="pri" type="Sprite2D" parent="fcc_ss_hud/ss_hud_fcc"]
+position = Vector2(-47, 97.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(100, 0, 100, 100)
+
+[node name="secdamage" type="Button" parent="fcc_ss_hud/ss_hud_fcc"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -72.0
+offset_top = 226.5
+offset_right = -22.0
+offset_bottom = 256.5
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 15
+text = "- %s g"
+
+[node name="sec" type="Sprite2D" parent="fcc_ss_hud/ss_hud_fcc"]
+position = Vector2(-47, 201.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(0, 0, 100, 100)
+
+[node name="maxhealth" type="Button" parent="fcc_ss_hud/ss_hud_fcc"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -72.0
+offset_top = 330.5
+offset_right = -22.0
+offset_bottom = 360.5
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 15
+text = "- %s g"
+
+[node name="mh" type="Sprite2D" parent="fcc_ss_hud/ss_hud_fcc"]
+position = Vector2(-47, 305.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(300, 0, 100, 100)
+
+[node name="maxspeed" type="Button" parent="fcc_ss_hud/ss_hud_fcc"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -72.0
+offset_top = 434.5
+offset_right = -22.0
+offset_bottom = 464.5
+grow_horizontal = 0
+theme = ExtResource("5_b3u6h")
+text = "- %s g"
+
+[node name="ms" type="Sprite2D" parent="fcc_ss_hud/ss_hud_fcc"]
+position = Vector2(-47, 409.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(200, 0, 100, 100)
+
+[node name="kollectorspeed" type="Button" parent="fcc_ss_hud/ss_hud_fcc"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -72.0
+offset_top = 538.5
+offset_right = -22.0
+offset_bottom = 568.5
+grow_horizontal = 0
+theme = ExtResource("5_b3u6h")
+text = "- %s g"
+
+[node name="ks2" type="Sprite2D" parent="fcc_ss_hud/ss_hud_fcc"]
+position = Vector2(-47, 513.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(100, 200, 100, 100)
+
+[node name="upgrade emblems" type="Node2D" parent="fcc_ss_hud/ss_hud_fcc"]
+
+[node name="up1" type="Sprite2D" parent="fcc_ss_hud/ss_hud_fcc/upgrade emblems"]
+position = Vector2(-24, 73.5)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(400, 100, 100, 100)
+
+[node name="up2" type="Sprite2D" parent="fcc_ss_hud/ss_hud_fcc/upgrade emblems"]
+position = Vector2(-23, 177.5)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(400, 100, 100, 100)
+
+[node name="up3" type="Sprite2D" parent="fcc_ss_hud/ss_hud_fcc/upgrade emblems"]
+position = Vector2(-23, 281.5)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(400, 100, 100, 100)
+
+[node name="up4" type="Sprite2D" parent="fcc_ss_hud/ss_hud_fcc/upgrade emblems"]
+position = Vector2(-23, 385.5)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(400, 100, 100, 100)
+
+[node name="up5" type="Sprite2D" parent="fcc_ss_hud/ss_hud_fcc/upgrade emblems"]
+position = Vector2(-23, 489.5)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(400, 100, 100, 100)
+
+[node name="infohud" type="Node2D" parent="."]
+position = Vector2(-8, 0)
+
+[node name="ab" type="Sprite2D" parent="infohud"]
+position = Vector2(32, 568)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(100, 0, 100, 100)
+
+[node name="fb" type="Sprite2D" parent="infohud"]
+position = Vector2(72, 568)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(0, 0, 100, 100)
+
+[node name="dp" type="Sprite2D" parent="infohud"]
+position = Vector2(112, 568)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(0, 100, 100, 100)
+
+[node name="bw" type="Sprite2D" parent="infohud"]
+position = Vector2(192, 568)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(100, 100, 100, 100)
+
+[node name="fw" type="Sprite2D" parent="infohud"]
+position = Vector2(232, 568)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(200, 100, 100, 100)
+
+[node name="fr" type="Sprite2D" parent="infohud"]
+position = Vector2(152, 568)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(300, 100, 100, 100)
+
+[node name="grup" type="Sprite2D" parent="infohud"]
+position = Vector2(272, 568)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(200, 200, 100, 100)
+
+[node name="grdw" type="Sprite2D" parent="infohud"]
+position = Vector2(312, 568)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(300, 200, 100, 100)
+
+[node name="fire" type="Sprite2D" parent="infohud"]
+position = Vector2(352, 568)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_agkx5")
+region_enabled = true
+region_rect = Rect2(200, 300, 100, 100)
+
+[node name="noti_timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="keys" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = -115.0
+offset_right = 39.0
+offset_bottom = -95.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "[ 1 ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="keys2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 49.0
+offset_top = -115.0
+offset_right = 79.0
+offset_bottom = -95.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "[ 2 ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="keys3" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 89.0
+offset_top = -115.0
+offset_right = 119.0
+offset_bottom = -95.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "[ V ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="keys4" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 169.0
+offset_top = -115.0
+offset_right = 199.0
+offset_bottom = -95.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "[ A ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="keys5" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 209.0
+offset_top = -115.0
+offset_right = 239.0
+offset_bottom = -95.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "[ D ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="keys6" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 129.0
+offset_top = -115.0
+offset_right = 159.0
+offset_bottom = -95.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "[ R ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="keys7" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 249.0
+offset_top = -115.0
+offset_right = 279.0
+offset_bottom = -95.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 9
+text = "[ LMB ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="keys8" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 289.0
+offset_top = -115.0
+offset_right = 319.0
+offset_bottom = -95.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 8
+text = "[ RMB ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="keys9" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 329.0
+offset_top = -115.0
+offset_right = 359.0
+offset_bottom = -95.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 8
+text = "[ SPCE ]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="flakreload" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 49.0
+offset_top = -65.0
+offset_right = 79.0
+offset_bottom = -61.0
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_ktht7")
+value = 100.0
+show_percentage = false
+
+[node name="diffbar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -16.0
+offset_right = 360.0
+offset_bottom = -12.0
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_x07vx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_q4g3s")
+value = 50.0
+show_percentage = false
+
+[node name="Controls" type="Node2D" parent="."]
+
+[node name="statbg2" type="ColorRect" parent="Controls"]
+offset_left = 600.0
+offset_top = -280.0
+offset_right = 960.0
+color = Color(0, 0, 0, 0.619608)
+
+[node name="controls" type="Label" parent="Controls"]
+anchors_preset = -1
+anchor_top = 0.988
+anchor_bottom = 0.988
+offset_left = 624.0
+offset_top = -264.0
+offset_right = 939.0
+offset_bottom = -16.0
+theme_override_font_sizes/font_size = 20
+text = "[LMB] - Gun Elevation Left Wise
+[RMB] - Gun Elevation Right Wise
+[Space Bar] - Shoot
+[1] - Primary Weapon
+[2] - Secondary Weapon
+[V] - Ability: Deploy
+[R] - Ability: Force Heal
+[Esc] - Pause"
+vertical_alignment = 1
+
+[node name="ctrl" type="Button" parent="Controls"]
+offset_left = 896.0
+offset_right = 960.0
+offset_bottom = 36.0
+theme = ExtResource("5_b3u6h")
+theme_override_font_sizes/font_size = 10
+toggle_mode = true
+text = "Controls
+[ L. Ctrl ]"
+
+[connection signal="toggled" from="showstats" to="." method="_on_showstats_toggled"]
+[connection signal="pressed" from="fcc_ss_hud/ss_hud_fcc/pridamage" to="fcc_ss_hud/ss_hud_fcc" method="_on_pridamage_pressed"]
+[connection signal="pressed" from="fcc_ss_hud/ss_hud_fcc/secdamage" to="fcc_ss_hud/ss_hud_fcc" method="_on_secdamage_pressed"]
+[connection signal="pressed" from="fcc_ss_hud/ss_hud_fcc/maxhealth" to="fcc_ss_hud/ss_hud_fcc" method="_on_maxhealth_pressed"]
+[connection signal="pressed" from="fcc_ss_hud/ss_hud_fcc/maxspeed" to="fcc_ss_hud/ss_hud_fcc" method="_on_maxspeed_pressed"]
+[connection signal="pressed" from="fcc_ss_hud/ss_hud_fcc/kollectorspeed" to="fcc_ss_hud/ss_hud_fcc" method="_on_ks_pressed"]
+[connection signal="timeout" from="noti_timer" to="." method="_on_noti_timer_timeout"]
+[connection signal="toggled" from="Controls/ctrl" to="." method="_on_ctrl_toggled"]

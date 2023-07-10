@@ -1,5 +1,10 @@
 extends Node3D
-class_name spnr
+
+
+#Load da resources
+@onready var engion = preload("res://resources/engion/engion_scene.tscn")
+@onready var resource_spwnpt = $spawnpt
+var max_resource = 100
 
 #Load the t1 mob senes
 var ehd_v1 = preload("res://mobs/ehd/ehd_scenes/ehd_scene.tscn")
@@ -20,12 +25,16 @@ var detector = true
 #Stats
 var health = AutoLoad.spwnt1_health
 var dps = AutoLoad.spwnt1_dps
+var died = true
 
 #Defence and its controls
 var inrange = false
 @onready var gun = $gun
 @onready var muzzle = $gun/muzzle
-var bullet = preload("res://mobs/spawners/spawnert1/spwnt_1_bullet.tscn")
+var bullet = load("res://mobs/spawners/spawnert1/spwnt_1_bullet.tscn")
+
+#Explosion VFXs
+@onready var basic_explosion = load("res://misc/VFXs/basic_explosion/basic_explosion.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,13 +44,27 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
+	
+	
 	#Die!
-	if health <= 0:
+	if health <= 0 and died:
+		
+		died = false
+		
+		#Score Time!
+		AutoLoad.score += round((randi_range(20,30)))
+		
+		#add explosion
+		var ex = basic_explosion.instantiate()
+		$Door.add_child(ex)
+		ex.scale = Vector3(1,1,1)
+		ex.reparent(node)
+		
 		queue_free()
 	
 	#Gun Look at player
-	gun.look_at(AutoLoad.player_location)
-	muzzle.look_at(AutoLoad.player_location)
+	#gun.look_at(AutoLoad.player_location)
+	#muzzle.look_at(AutoLoad.player_location)
 
 
 
@@ -54,6 +77,10 @@ func _on_player_detecter_area_entered(area):
 		#print("area")
 		
 func _on_spawn_interval_timeout():
+	
+	#More and more difficult over time
+	health += AutoLoad.global_difficulty+2
+	
 	door_open = false #<-- "External Control"
 	ani.play("open_door") #play the open door animation
 	#print("spn tm out")
@@ -70,6 +97,7 @@ func _on_open_door_animation_finished(open_door): #This specifying animation doe
 		e.reparent(node)
 		door_timer.start()
 		#print("open_door tm out")
+	pass
 
 func _on_door_timer_timeout():
 	door_open = true #<-- "External Control"
@@ -93,28 +121,54 @@ func _on_close_door_animation_finished(close_door): #This specifying animation d
 
 
 func _on_hurt_box_area_entered(area):
+	
+	#Engion Drop Chance
+	var x = round(randf_range(0,1))
+	
+	
 	if area is autocannon:
 		health -= AutoLoad.fcc_auto_damage
+		
+		#Drop style
+		if x == 0 and max_resource > 0:
+			drop_engion(round(AutoLoad.fcc_auto_damage/2))
+			max_resource -= round(AutoLoad.fcc_auto_damage/2)
+			
+		
 	if area is flak_cannon:
 		health -= AutoLoad.fcc_flak_damage
+		
+		#Drop style Single
+		if x == 0 and max_resource > 0:
+			drop_engion(round(AutoLoad.fcc_flak_damage/5))
+			max_resource -= round(AutoLoad.fcc_flak_damage/5)
+			
+		#Drop style Triple
+		elif x == 1 and max_resource > 0:
+			drop_engion(round(AutoLoad.fcc_flak_damage/4))
+			max_resource -= round(AutoLoad.fcc_flak_damage/4)
+
+func drop_engion(range):
+	for i in range(range):
+		var engionC1 = engion.instantiate()
+		resource_spwnpt.add_child(engionC1)
+		engionC1.reparent(node)#Reparenting makes the child node independent from spawnert1
+		
 
 
 func _on_fire_timer_timeout():
 	
 	#Randomize to shoot or not
-	var shootorNo = round(randi_range(0,1))
+	var shootorNo = round(randi_range(0,5))
 	
-	#Short Range Fire Control
-	if inrange:
-		var b = bullet.instantiate()
-		muzzle.global_transform.basis.get_euler()
-		muzzle.add_child(b)
-		b.reparent(node)
 	
-	#Long Range Fire Control
-	elif shootorNo < 1:
-		print("shoot!")
+	#Fire Control
+	if shootorNo < 2:
 		var b = bullet.instantiate()
-		muzzle.global_transform.basis.get_euler()
+		#muzzle.global_transform.basis.get_euler()
 		muzzle.add_child(b)
+		
+		if inrange:
+			b.player_is_far = 0.3
+		
 		b.reparent(node)

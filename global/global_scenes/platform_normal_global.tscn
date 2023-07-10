@@ -1,28 +1,100 @@
-[gd_scene load_steps=5 format=3 uid="uid://dt0n2u4dwgo3i"]
+[gd_scene load_steps=11 format=3 uid="uid://dt0n2u4dwgo3i"]
 
 [ext_resource type="Script" path="res://global/global_gdscripts/platform_normal_global.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://bcwgqtm2eqjf4" path="res://platforms/platform_normal/plnv1/plnv1.tscn" id="2_8iqk4"]
+[ext_resource type="Script" path="res://global/global_gdscripts/platform_detector.gd" id="3_tx6f6"]
 
-[sub_resource type="BoxMesh" id="2"]
-size = Vector3(64, 2, 32)
+[sub_resource type="Animation" id="Animation_aj2ly"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("enemyspawnpt:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 50, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gltwb"]
+resource_name = "spawtptmovement"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("enemyspawnpt:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 50, 0), Vector3(50, 50, 0), Vector3(100, 50, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xgi4r"]
+_data = {
+"RESET": SubResource("Animation_aj2ly"),
+"spawtptmovement": SubResource("Animation_gltwb")
+}
 
 [sub_resource type="BoxShape3D" id="1"]
-size = Vector3(64, 2, 32)
+size = Vector3(64, 2, 69.8014)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o8amk"]
 size = Vector3(1, 2.12493, 40.9843)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ym5gy"]
+size = Vector3(64.0737, 8.00376, 69.7965)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ssq8n"]
+size = Vector3(58.0031, 36.3979, 50.2838)
+
 [node name="platform_normal_global" type="Node3D"]
 script = ExtResource("1")
+
+[node name="timer" type="Timer" parent="."]
+autostart = true
+
+[node name="node" type="Node" parent="."]
+
+[node name="enemyspawnpt" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
+
+[node name="ani" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xgi4r")
+}
 
 [node name="s" type="CharacterBody3D" parent="."]
 collision_layer = 2
 collision_mask = 3
 
-[node name="a" type="MeshInstance3D" parent="s"]
-mesh = SubResource("2")
-skeleton = NodePath("../..")
+[node name="plnv1" parent="s" instance=ExtResource("2_8iqk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.00046)
+visible = false
+
+[node name="CollisionShape2" type="CollisionShape3D" parent="s"]
+transform = Transform3D(0.926739, -0.375707, 0, 0.375707, 0.926739, 0, 0, 0, 1, -61.2935, -11.947, 0)
+shape = SubResource("1")
+
+[node name="CollisionShape3" type="CollisionShape3D" parent="s"]
+transform = Transform3D(0.90837, 0.418168, 0, -0.418168, 0.90837, 0, 0, 0, 1, 60.5839, -13.2533, -0.0143603)
+shape = SubResource("1")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="s"]
+shape = SubResource("1")
+
+[node name="CollisionShape4" type="CollisionShape3D" parent="s"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 34.9197, 26.0719)
+shape = SubResource("1")
+
+[node name="CollisionShape5" type="CollisionShape3D" parent="s"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 34.9197, -23.7287)
 shape = SubResource("1")
 
 [node name="EnemyJumper" type="Area3D" parent="s"]
@@ -31,11 +103,35 @@ collision_layer = 2
 collision_mask = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="s/EnemyJumper"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.4525, 2.07771, -15.2523)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.3907, 2.07771, -15.2523)
 shape = SubResource("BoxShape3D_o8amk")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="s/EnemyJumper"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.516, 2.07771, -15.2523)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.3737, 2.07771, -15.2523)
 shape = SubResource("BoxShape3D_o8amk")
 
 [node name="events" type="Node3D" parent="s"]
+
+[node name="platform" type="Area3D" parent="s"]
+collision_layer = 2
+collision_mask = 29
+script = ExtResource("3_tx6f6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="s/platform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.05225, 0)
+shape = SubResource("BoxShape3D_ym5gy")
+
+[node name="player_detecter" type="Area3D" parent="s"]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="s/player_detecter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.267, 0)
+shape = SubResource("BoxShape3D_ssq8n")
+
+[node name="plnv1" parent="." instance=ExtResource("2_8iqk4")]
+visible = false
+
+[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="s/player_detecter" to="." method="_on_player_detecter_area_entered"]
+[connection signal="area_exited" from="s/player_detecter" to="." method="_on_player_detecter_area_exited"]

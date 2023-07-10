@@ -1,35 +1,53 @@
-[gd_scene load_steps=7 format=3 uid="uid://ducqmpan5y6o6"]
+[gd_scene load_steps=8 format=3 uid="uid://ducqmpan5y6o6"]
 
-[ext_resource type="Script" path="res://global/global_gdscripts/platform_wide_global.gd" id="1_eus0n"]
-[ext_resource type="PackedScene" uid="uid://ffak18f8hi20" path="res://mobs/spawners/spawnert1/spawnert1.tscn" id="2_ynga8"]
+[ext_resource type="Script" path="res://global/global_gdscripts/platform_wide_global.gd" id="1_qegqr"]
+[ext_resource type="PackedScene" uid="uid://bcwgqtm2eqjf4" path="res://platforms/platform_normal/plnv1/plnv1.tscn" id="2_adod8"]
+[ext_resource type="Script" path="res://global/global_gdscripts/platform_detector.gd" id="4_rysj2"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c7r3v"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="BoxMesh" id="2"]
-material = SubResource("StandardMaterial3D_c7r3v")
-size = Vector3(128, 2, 32)
+[sub_resource type="BoxShape3D" id="BoxShape3D_55orl"]
+size = Vector3(64, 2, 69.8014)
 
 [sub_resource type="BoxShape3D" id="1"]
-size = Vector3(128, 2, 32)
+size = Vector3(128, 2, 68.1944)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ub1y5"]
 size = Vector3(1, 2.12493, 40.9843)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_gw3kk"]
+size = Vector3(127.547, 10, 69.7965)
+
 [node name="platform_wide_global" type="Node3D"]
-script = ExtResource("1_eus0n")
+script = ExtResource("1_qegqr")
 
 [node name="s" type="CharacterBody3D" parent="."]
 collision_layer = 2
 collision_mask = 3
 
-[node name="spawnert1" parent="s" instance=ExtResource("2_ynga8")]
+[node name="CollisionShape2" type="CollisionShape3D" parent="s"]
+transform = Transform3D(0.926739, -0.375707, 0, 0.375707, 0.926739, 0, 0, 0, 1, -93.1715, -11.947, 0)
+shape = SubResource("BoxShape3D_55orl")
 
-[node name="a" type="MeshInstance3D" parent="s"]
-mesh = SubResource("2")
-skeleton = NodePath("../..")
+[node name="CollisionShape3" type="CollisionShape3D" parent="s"]
+transform = Transform3D(0.90837, 0.418168, 0, -0.418168, 0.90837, 0, 0, 0, 1, 92.5024, -13.2533, -0.0143603)
+shape = SubResource("BoxShape3D_55orl")
+
+[node name="placehoderplat" type="Node3D" parent="s"]
+
+[node name="plnv1" parent="s/placehoderplat" instance=ExtResource("2_adod8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.8959, 0, 1.0358)
+
+[node name="plnv2" parent="s/placehoderplat" instance=ExtResource("2_adod8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.0729, 0, 1.0358)
 
 [node name="CollisionShape" type="CollisionShape3D" parent="s"]
+shape = SubResource("1")
+
+[node name="CollisionShape4" type="CollisionShape3D" parent="s"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 32.8332, 27.2086)
+shape = SubResource("1")
+
+[node name="CollisionShape5" type="CollisionShape3D" parent="s"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 32.8332, -25.129)
 shape = SubResource("1")
 
 [node name="EnemyJumper" type="Area3D" parent="s"]
@@ -38,9 +56,18 @@ collision_layer = 2
 collision_mask = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="s/EnemyJumper"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.4525, 2.07771, -15.2523)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.0908, 2.07771, -15.2523)
 shape = SubResource("BoxShape3D_ub1y5")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="s/EnemyJumper"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -63.516, 2.07771, -15.2523)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.3869, 2.07771, -15.2523)
 shape = SubResource("BoxShape3D_ub1y5")
+
+[node name="platform" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 29
+script = ExtResource("4_rysj2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="platform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.05225, 0)
+shape = SubResource("BoxShape3D_gw3kk")

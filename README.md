@@ -26,3 +26,7 @@
 -Pri/Sec Weapons <br>
 -Basic HUD <br>
 -Basic World Generation AI <br>
+
+<b>I kind of messed up the push so all the update logs has lost. Sorry :3 </b>
+
+

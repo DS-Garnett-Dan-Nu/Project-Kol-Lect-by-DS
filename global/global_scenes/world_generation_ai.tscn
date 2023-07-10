@@ -6,3 +6,9 @@
 script = ExtResource("1_rvdxf")
 
 [node name="Placer" type="Node3D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

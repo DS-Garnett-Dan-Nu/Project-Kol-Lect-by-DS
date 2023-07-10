@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnon0ji3gljbj"]
+
+[ext_resource type="Script" path="res://global/global_gdscripts/resetnsave.gd" id="1_gcdjp"]
+
+[node name="Reset_and_Save" type="Node3D"]
+script = ExtResource("1_gcdjp")

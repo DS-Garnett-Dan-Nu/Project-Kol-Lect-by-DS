@@ -1,10 +1,11 @@
-[gd_scene load_steps=34 format=3 uid="uid://c1gtgwm4wsnwu"]
+[gd_scene load_steps=35 format=3 uid="uid://c1gtgwm4wsnwu"]
 
 [ext_resource type="Script" path="res://mobs/ehd/ehd_gdscripts/ehd_gdscript.gd" id="1_f67p5"]
 [ext_resource type="PackedScene" uid="uid://f85ylb1qf07b" path="res://mobs/ehd/ehd_scenes/ehd_damager_giver.tscn" id="2_1g88l"]
+[ext_resource type="PackedScene" uid="uid://i7f33cl8oxse" path="res://misc/VFXs/basic_fire.tscn" id="2_8i52b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0s2dt"]
-size = Vector3(9.00538, 0.2, 5.12983)
+size = Vector3(7.37903, 2.98796, 5.12983)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r4r16"]
 resource_name = "BodyMain"
@@ -398,15 +399,29 @@ size = Vector3(6, 3, 5)
 
 [node name="ehd" type="CharacterBody3D" parent="."]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 7
 script = ExtResource("1_f67p5")
 
+[node name="Timer" type="Timer" parent="ehd"]
+one_shot = true
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ehd"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.710118, -0.431906, -0.173986)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.0929992, 0.966812, -0.791114)
 shape = SubResource("BoxShape3D_0s2dt")
 
 [node name="EHD_V1" type="Node3D" parent="ehd"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.32423, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.32423, 0)
+
+[node name="Fires" type="Node3D" parent="ehd/EHD_V1"]
+
+[node name="Fire1" parent="ehd/EHD_V1/Fires" instance=ExtResource("2_8i52b")]
+transform = Transform3D(0.0225652, -7.47333e-08, -0.999745, -0.854631, 0.518878, -0.0192899, 0.518746, 0.854849, 0.0117085, -1.36654, 0.152891, 2.03544)
+
+[node name="Fire2" parent="ehd/EHD_V1/Fires" instance=ExtResource("2_8i52b")]
+transform = Transform3D(-0.838984, 7.57104e-08, 0.544156, -0.471253, 0.5, -0.726582, -0.272078, -0.866025, -0.419492, -2.79651, 0.00223303, -1.7834)
+
+[node name="Fire3" parent="ehd/EHD_V1/Fires" instance=ExtResource("2_8i52b")]
+transform = Transform3D(-0.838984, 7.57104e-08, 0.544156, -0.471253, 0.5, -0.726582, -0.272078, -0.866025, -0.419492, 1.8646, 0.195645, -1.46647)
 
 [node name="EHD_V1-BodyMain" type="MeshInstance3D" parent="ehd/EHD_V1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.01468)
@@ -466,7 +481,7 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ehd/JumpDectector"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85217, -0.281337, -0.0310895)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0498972, -0.281337, -2.93317)
 shape = SubResource("BoxShape3D_c1ru4")
 
 [node name="DamageDectector" type="Area3D" parent="ehd"]
@@ -474,11 +489,35 @@ collision_layer = 4
 collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ehd/DamageDectector"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.265, 1.005, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0809869, 1.005, 0.184004)
 shape = SubResource("BoxShape3D_1irob")
 
 [node name="DamagerGiver" parent="ehd" instance=ExtResource("2_1g88l")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0470943, 0.82847, -6.49354)
 
+[node name="hovers" type="Node3D" parent="ehd"]
+
+[node name="hover" type="OmniLight3D" parent="ehd/hovers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16023, 0, 1.98471)
+light_color = Color(1, 0.67451, 0, 1)
+shadow_enabled = true
+
+[node name="hover2" type="OmniLight3D" parent="ehd/hovers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.22773, 0, -1.76868)
+light_color = Color(1, 0.67451, 0, 1)
+shadow_enabled = true
+
+[node name="hover3" type="OmniLight3D" parent="ehd/hovers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.22773, 0, 1.99821)
+light_color = Color(1, 0.67451, 0, 1)
+shadow_enabled = true
+
+[node name="hover4" type="OmniLight3D" parent="ehd/hovers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25473, 0, -1.76868)
+light_color = Color(1, 0.67451, 0, 1)
+shadow_enabled = true
+
+[connection signal="timeout" from="ehd/Timer" to="ehd" method="_on_timer_timeout"]
 [connection signal="area_entered" from="ehd/JumpDectector" to="ehd" method="_on_jump_dectector_area_entered"]
 [connection signal="area_entered" from="ehd/DamageDectector" to="ehd" method="_on_damage_dectector_area_entered"]
 [connection signal="body_entered" from="ehd/DamageDectector" to="ehd" method="_on_damage_dectector_body_entered"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bo0clms3d7dlm"]
+[gd_scene load_steps=15 format=3 uid="uid://bo0clms3d7dlm"]
 
 [ext_resource type="Script" path="res://units/fcc/fcc_gdscript/autocannon_bullet.gd" id="1_bim6y"]
+[ext_resource type="AudioStream" uid="uid://e8j1fkmq0gnx" path="res://units/fcc/fcc_assets/fccSFXs/fcc_auto_cannon.mp3" id="2_w4xyy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kurte"]
 radius = 0.107235
@@ -28,12 +29,52 @@ material = SubResource("4")
 radius = 0.1
 height = 3.0
 
+[sub_resource type="Gradient" id="Gradient_yja87"]
+offsets = PackedFloat32Array(0, 0.507937, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.857143, 0.857143, 0.857143, 0.142857, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ba8ih"]
+gradient = SubResource("Gradient_yja87")
+
+[sub_resource type="Curve" id="Curve_rsqjg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_x215e"]
+curve = SubResource("Curve_rsqjg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_walyo"]
+emission_shape = 1
+emission_sphere_radius = 0.1
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 10.0
+scale_curve = SubResource("CurveTexture_x215e")
+color_ramp = SubResource("GradientTexture1D_ba8ih")
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ughow"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.843137, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.282353, 0.105882, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_k7cku"]
+material = SubResource("StandardMaterial3D_ughow")
+radius = 0.15
+height = 0.3
+
 [node name="autocannon_bullet" type="Area3D"]
 collision_layer = 8
-collision_mask = 28
+collision_mask = 30
 script = ExtResource("1_bim6y")
 
-[node name="CollisionShape" type="CollisionShape3D" parent="." groups=["fcc_auto_cannon"]]
+[node name="hitbox" type="CollisionShape3D" parent="." groups=["fcc_auto_cannon"]]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_kurte")
 
@@ -49,24 +90,43 @@ transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 
 mesh = SubResource("CapsuleMesh_imt0n")
 skeleton = NodePath("../..")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="a" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3295, 0, 0)
 light_color = Color(1, 0.784314, 0, 1)
 shadow_enabled = true
 
-[node name="OmniLight3D4" type="OmniLight3D" parent="."]
+[node name="b" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.58693, 0, 0)
 light_color = Color(1, 0.784314, 0, 1)
 shadow_enabled = true
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+[node name="c" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00223863, 0, 0)
 light_color = Color(1, 0.784314, 0, 1)
 shadow_enabled = true
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+[node name="d" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38049, 0, 0)
 light_color = Color(1, 0.784314, 0, 1)
 shadow_enabled = true
 
+[node name="e" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_w4xyy")
+autoplay = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="hit" type="GPUParticles3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -1.25172, 0, 0)
+emitting = false
+amount = 100
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_walyo")
+draw_pass_1 = SubResource("SphereMesh_k7cku")
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,146 @@
+[gd_scene load_steps=17 format=3 uid="uid://jojvugp382bu"]
+
+[sub_resource type="Gradient" id="Gradient_vle4m"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2xeja"]
+gradient = SubResource("Gradient_vle4m")
+
+[sub_resource type="Curve" id="Curve_c3ukf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.236364), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gefrx"]
+curve = SubResource("Curve_c3ukf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ha0vg"]
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_box_extents = Vector3(0.1, 0.1, 0.1)
+direction = Vector3(1, 1.5, 0)
+spread = 12.0
+gravity = Vector3(0, -7, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 12.0
+scale_curve = SubResource("CurveTexture_gefrx")
+color_ramp = SubResource("GradientTexture1D_2xeja")
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_lpnbr"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 5.0
+rim_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_xs8c2"]
+material = SubResource("ORMMaterial3D_lpnbr")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_712da"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.380392, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.415686, 0, 1)
+emission_energy_multiplier = 2.0
+rim_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_ihdu3"]
+material = SubResource("ORMMaterial3D_712da")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_71u5y"]
+albedo_color = Color(1, 1, 0, 1)
+emission_enabled = true
+emission = Color(1, 1, 0, 1)
+rim_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_fitpk"]
+material = SubResource("ORMMaterial3D_71u5y")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_fujxj"]
+albedo_color = Color(0, 1, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.815686, 1, 1)
+emission_energy_multiplier = 5.0
+rim_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_3vqlp"]
+material = SubResource("ORMMaterial3D_fujxj")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="Animation" id="Animation_dpum5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("drill_fire:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pflaf"]
+resource_name = "damage"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("drill_fire:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.594581), Vector3(-1.28538e-08, -0.415528, -0.445936), Vector3(5.88187e-09, 0.436926, -0.297291), Vector3(-0.206901, -0.290204, -0.751196)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mrqt4"]
+_data = {
+"RESET": SubResource("Animation_dpum5"),
+"damage": SubResource("Animation_pflaf")
+}
+
+[node name="drill_damage" type="Node3D"]
+
+[node name="drill_fire" type="Node3D" parent="."]
+
+[node name="red" type="GPUParticles3D" parent="drill_fire"]
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_ha0vg")
+draw_pass_1 = SubResource("SphereMesh_xs8c2")
+
+[node name="orange" type="GPUParticles3D" parent="drill_fire"]
+cast_shadow = 0
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_ha0vg")
+draw_pass_1 = SubResource("SphereMesh_ihdu3")
+
+[node name="yellow" type="GPUParticles3D" parent="drill_fire"]
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_ha0vg")
+draw_pass_1 = SubResource("SphereMesh_fitpk")
+
+[node name="blue" type="GPUParticles3D" parent="drill_fire"]
+amount = 15
+lifetime = 0.25
+process_material = SubResource("ParticleProcessMaterial_ha0vg")
+draw_pass_1 = SubResource("SphereMesh_3vqlp")
+
+[node name="ani" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mrqt4")
+}

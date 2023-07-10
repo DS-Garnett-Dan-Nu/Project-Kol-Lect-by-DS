@@ -8,7 +8,8 @@ class_name ehd
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$drill_damage.hide()
+	$drill_damage/ani.play("damage")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,3 +24,16 @@ func _on_dps_timer_timeout():
 func _on_dps_timer_2_timeout():
 	dps_timer.start()
 	dmg_givr.set_deferred("disabled",false)
+
+
+
+
+
+func _on_vfx_area_entered(area):
+	$drill_damage.show()
+	$drs.play()
+
+
+func _on_vfx_area_exited(area):
+	$drill_damage.hide()
+	$drs.stop()

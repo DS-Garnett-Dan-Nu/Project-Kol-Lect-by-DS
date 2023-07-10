@@ -5,7 +5,7 @@ class_name fcc
 #Node Variables
 @onready var gun_control = $"fcc/Upper Base/Gun" #Gun's Base Elevation Control
 @onready var animations = $"Ani" #Animation Controls
-
+@onready var fcc_kollector = $fcc_kollector
 
 #Projectile
 @onready var bullet = preload("res://units/fcc/fcc_scenes/autocannon_bullet.tscn")
@@ -16,9 +16,11 @@ class_name fcc
 #Auto-cannon
 @onready var Auto_muzzle_Left = $"fcc/Upper Base/Gun/AimLeft"
 @onready var Auto_muzzle_Right = $"fcc/Upper Base/Gun/AimRight"  
+
 #Flak-cannon
 @onready var Flak_muzzle_Left = $"fcc/Upper Base/Gun/AimLeftF"
 @onready var Flak_muzzle_Right = $"fcc/Upper Base/Gun/AimRightF"  
+var reload_time = 0
 
 #Autocannon staggering shot
 var one_side_of_the_gun = true
@@ -36,20 +38,48 @@ var gun_rotation_speed = 0
 #Stats
 var health = AutoLoad.fcc_health
 
+#HUD
+@onready var hud = $fcc_hud
+
 
 #No use for now, butt too lazy to write again, so imma keep this :3
 func _ready():
+	
+	#to hide the hud in mainmenu
+	hud.hide()
 	
 	#Ani
 	animations.play("RESET")
 	
 	#Reload Flak
 	flak_reload.start()
-	pass # Replace with function body.
+
 
 
 #Physics Processes eh?
 func _physics_process(delta):
+	
+	#for reloading hud
+	$fcc_hud/flakreload.value = reload_time
+	
+	#Force Repair
+	if Input.is_action_pressed("force_repair") and health <= AutoLoad.fcc_health:
+		health += 0.5
+		AutoLoad.global_engion -= 1
+		AutoLoad.fcc_force_repair = true
+	elif Input.is_action_just_released("force_repair"):
+		AutoLoad.fcc_force_repair = false
+	
+	#Send FCC Kollector Location to Kollect Resources
+	AutoLoad.kollector_location = fcc_kollector.global_position
+	
+	#For HUD to show
+	if AutoLoad.in_menu == false:
+		hud.show()
+	else:
+		hud.hide()
+		
+		
 	
 	#For Deploy
 	deploy()
@@ -60,11 +90,13 @@ func _physics_process(delta):
 	
 	#Die!
 	if health <= 0:
+		AutoLoad.player_is_dead = true
 		hide()
 	
 	#Flak Ammo
 	if flak_ammo <= 0 and flak_reload.is_stopped():
 		flak_reload.start()
+		reload_time = 0
 	
 	#Gun Elevations
 	gun_elevations()
@@ -77,11 +109,11 @@ func deploy():
 	if Input.is_action_just_pressed("ability") and AutoLoad.fcc_deploy == false:
 		animations.play("deploy")
 		AutoLoad.fcc_deploy = true
-		print("True")
+
 	elif Input.is_action_just_pressed("ability") and AutoLoad.fcc_deploy == true:
 		animations.play("undeploy")
 		AutoLoad.fcc_deploy = false
-		print("False")
+
 	
 
 	
@@ -130,8 +162,7 @@ func gun_elevations():
 
 
 func _on_gun_rotation_acceleration_timeout():
-	print("here!")
-	if gun_rotation_speed <= 1:
+	if gun_rotation_speed <= 5:
 		
 		gun_rotation_speed += 0.1
 			
@@ -139,19 +170,29 @@ func _on_gun_rotation_acceleration_timeout():
 func _on_auto_cannon_shot_interval_timeout():
 	
 	#Gun Fire Control, i.e. both feet are need to be on the floor to Fire.
-	if Input.is_action_pressed("Fire"):
+	if Input.is_action_pressed("Fire") and AutoLoad.global_engion > 0:
+		
+		
 			
 
 		#Autocannon staggering shot
 		if one_side_of_the_gun == true:
 			
 			if AutoLoad.primary_weapon:
+				
+				#Reduce Ammo!
+				reduce_engion(1)
+				
 				#fire the autocannon!  
 				var left_bullet = bullet.instantiate()
 				left_bullet.rotation_degrees = Auto_muzzle_Left.global_transform.basis.get_euler()
 				Auto_muzzle_Left.add_child(left_bullet)
+				
 			
 			elif AutoLoad.secondary_weapon and flak_ammo > 0 and AutoLoad.fcc_deploy == true:
+				
+				#Reduce Ammo!
+				reduce_engion(5)
 				
 				#To notify the player
 				AutoLoad.fcc_can_fire = true
@@ -180,12 +221,18 @@ func _on_auto_cannon_shot_interval_timeout():
 			
 			if AutoLoad.primary_weapon:
 				
+				#Reduce Ammo!
+				reduce_engion(1)
+				
 				#fire the autocannon!
 				var right_bullet = bullet.instantiate()
 				right_bullet.rotation_degrees = Auto_muzzle_Right.global_transform.basis.get_euler()
 				Auto_muzzle_Right.add_child(right_bullet)
 			
 			elif AutoLoad.secondary_weapon and flak_ammo > 0 and AutoLoad.fcc_deploy == true:
+				
+				#Reduce Ammo!
+				reduce_engion(5)
 				
 				#To notify the player
 				AutoLoad.fcc_can_fire = true
@@ -207,15 +254,26 @@ func _on_auto_cannon_shot_interval_timeout():
 			
 			#change side!
 			one_side_of_the_gun = true
+			
+			
 				
-	
+
+		
 
 #Flak Timer
 func _on_flak_reload_timeout():
-	flak_ammo = 2
-	print('Flak Ready!')
+	
+	reload_time += 2.5
+	
+	if reload_time == 100:
+		flak_ammo = 2
+		flak_reload.stop()
+		print('Flak Ready!')
 	
 
+func reduce_engion(amount):
+	if AutoLoad.in_menu == false:
+		AutoLoad.global_engion -= amount
 
 
 func _on_health_area_entered(area):
@@ -225,7 +283,7 @@ func _on_health_area_entered(area):
 	
 	#Check if FCC is deployed
 	if AutoLoad.fcc_deploy:
-		damage_resistance = 2
+		damage_resistance = 2.5
 	else:
 		damage_resistance = 1		
 	
@@ -235,14 +293,19 @@ func _on_health_area_entered(area):
 	
 	if area is spwnr_t1:
 		health -= AutoLoad.spwnt1_dps/damage_resistance
+		
+	if area is dfa:
+		health -= AutoLoad.dfa_damage/damage_resistance
+		
 	
+
+func _on_health_area_exited(area):
+	pass
 	
 
-
-
-
-
-
+func _on_auto_repair_timeout():
+	if health < AutoLoad.fcc_health and AutoLoad.global_engion >= 0:
+		health += 0.05
 
 
 

@@ -1,0 +1,112 @@
+[gd_scene load_steps=6 format=3 uid="uid://ulcxq1cj3ii6"]
+
+[ext_resource type="Script" path="res://misc/thank_you_demo/thank_you.gd" id="1_do0yf"]
+[ext_resource type="AudioStream" uid="uid://cwl15wayd0ewj" path="res://misc/thank_you_demo/Codename- Panzers Phase One Soundtrack (Credits).mp3" id="1_m4m1j"]
+[ext_resource type="Theme" uid="uid://6qrfrr3nx70f" path="res://units/fcc/fcc_assets/fcc_buttons.tres" id="2_1qy8j"]
+[ext_resource type="PackedScene" uid="uid://dnon0ji3gljbj" path="res://global/global_scenes/resetnsave.tscn" id="2_lok4w"]
+[ext_resource type="Texture2D" uid="uid://b005jws4kskws" path="res://misc/thank_you_demo/Thank you demo.png" id="3_xnu0e"]
+
+[node name="thank_you" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_do0yf")
+
+[node name="Reset_and_Save" parent="." instance=ExtResource("2_lok4w")]
+
+[node name="ThankYouDemo" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("3_xnu0e")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.345098)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -357.0
+offset_top = -156.0
+offset_right = 357.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Thank You for playing the demo version of the game!
+You can continue to play more! Beat some highscores Yes?!
+Or See You again on the next release!
+Either way, your progress will be saved!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = 252.0
+offset_right = 177.0
+offset_bottom = 290.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 25
+text = "All of the V.O.I.D Thanks You!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="au" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_m4m1j")
+volume_db = -15.0
+autoplay = true
+
+[node name="continue_playing" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = 100.0
+offset_right = 96.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_1qy8j")
+text = "Contninue Playing"
+
+[node name="quit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = 164.0
+offset_right = 96.0
+offset_bottom = 212.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_1qy8j")
+text = "Quit"
+
+[connection signal="pressed" from="continue_playing" to="." method="_on_continue_playing_pressed"]
+[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]

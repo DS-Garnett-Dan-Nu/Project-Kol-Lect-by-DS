@@ -1,19 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://drni1cmne1tvk"]
+[gd_scene load_steps=8 format=3 uid="uid://drni1cmne1tvk"]
 
 [ext_resource type="PackedScene" uid="uid://hlayehj0tpef" path="res://test/test_scenes/world_environment_test.tscn" id="1_navah"]
-[ext_resource type="PackedScene" uid="uid://di06lm1uwmcuh" path="res://global/global_scenes/player_global.tscn" id="3_4ipn7"]
 [ext_resource type="PackedScene" uid="uid://igvbf8g27yor" path="res://global/global_scenes/world_generation_ai.tscn" id="3_7lsaw"]
-[ext_resource type="PackedScene" uid="uid://du3trgfhxw5kt" path="res://units/fcc/fcc_scenes/fcc_hud.tscn" id="3_lxrgg"]
-[ext_resource type="PackedScene" uid="uid://1shx04eesc8t" path="res://resources/engion/engion_scene.tscn" id="4_ryft8"]
+[ext_resource type="PackedScene" uid="uid://dnon0ji3gljbj" path="res://global/global_scenes/resetnsave.tscn" id="3_dpabx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_oeayw"]
 
-[sub_resource type="Sky" id="Sky_4uyqc"]
+[sub_resource type="Sky" id="Sky_5pw34"]
 sky_material = SubResource("ProceduralSkyMaterial_oeayw")
 
 [sub_resource type="Environment" id="Environment_3eile"]
 background_mode = 2
-sky = SubResource("Sky_4uyqc")
+sky = SubResource("Sky_5pw34")
 ssr_enabled = true
 ssao_enabled = true
 
@@ -27,16 +25,11 @@ size = Vector3(600, 35, 2)
 [node name="WorldEnvironmentNormal" type="WorldEnvironment" parent="WorldEnvironmentTest"]
 environment = SubResource("Environment_3eile")
 
-[node name="Control" parent="." instance=ExtResource("3_lxrgg")]
-
 [node name="MeshInstance" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.3258)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -51.3366)
+visible = false
 mesh = SubResource("1")
 
 [node name="WorldGenerationAI" parent="." instance=ExtResource("3_7lsaw")]
 
-[node name="Player_Global" parent="." instance=ExtResource("3_4ipn7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22.0859, 0)
-
-[node name="Engion" parent="." instance=ExtResource("4_ryft8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.4194, 2.55143, 0)
+[node name="Reset_and_Save" parent="." instance=ExtResource("3_dpabx")]

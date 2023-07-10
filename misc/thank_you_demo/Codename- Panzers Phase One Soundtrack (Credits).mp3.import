@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cwl15wayd0ewj"
+path="res://.godot/imported/Codename- Panzers Phase One Soundtrack (Credits).mp3-9ed7b1781474b798fd2ade4b2abb8b00.mp3str"
+
+[deps]
+
+source_file="res://misc/thank_you_demo/Codename- Panzers Phase One Soundtrack (Credits).mp3"
+dest_files=["res://.godot/imported/Codename- Panzers Phase One Soundtrack (Credits).mp3-9ed7b1781474b798fd2ade4b2abb8b00.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

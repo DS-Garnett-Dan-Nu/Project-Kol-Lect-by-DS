@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://c46afe70dwcii"]
+
+[ext_resource type="PackedScene" uid="uid://cfr6cxhuvbc8r" path="res://mobs/dfa/DFA.dae" id="1_f1msl"]
+[ext_resource type="Script" path="res://mobs/dfa/dfa.gd" id="1_ocppo"]
+[ext_resource type="AudioStream" uid="uid://cdytcd8xwnasi" path="res://mobs/dfa/dfa_SFXs/airplane-aircraft-take-off-121949.mp3" id="2_4rhe1"]
+[ext_resource type="AudioStream" uid="uid://cshikd6mq4dnm" path="res://mobs/dfa/dfa_SFXs/pulse3d-106110.mp3" id="2_tootn"]
+[ext_resource type="AudioStream" uid="uid://4rdqalu83wwe" path="res://mobs/spawners/spawnert1/sfx/missileexplode.mp3" id="3_mv8xs"]
+[ext_resource type="PackedScene" uid="uid://i7f33cl8oxse" path="res://misc/VFXs/basic_fire.tscn" id="4_jcqfa"]
+[ext_resource type="Script" path="res://mobs/dfa/DFADamageGiver.gd" id="5_h72c1"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_std22"]
+height = 5.41345
+radius = 2.06104
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ibaco"]
+size = Vector3(4.29936, 3.71385, 5)
+
+[node name="DFA" type="Node3D"]
+
+[node name="node" type="Node" parent="."]
+
+[node name="dfa" type="Node3D" parent="."]
+script = ExtResource("1_ocppo")
+
+[node name="flying" type="AudioStreamPlayer3D" parent="dfa"]
+stream = ExtResource("2_4rhe1")
+max_db = 2.0
+
+[node name="spawn" type="AudioStreamPlayer3D" parent="dfa"]
+stream = ExtResource("2_tootn")
+volume_db = 10.0
+max_db = 6.0
+
+[node name="spt" type="Marker3D" parent="dfa"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.324516, 1.00097, 4.27565)
+
+[node name="hitbox" type="Area3D" parent="dfa"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.324667, 1, 2.99609)
+collision_layer = 16
+collision_mask = 11
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="dfa/hitbox"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -5.96046e-08, 0, 1.75294)
+shape = SubResource("CylinderShape3D_std22")
+
+[node name="DFA" parent="dfa" instance=ExtResource("1_f1msl")]
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, -0.324667, 1, 2.99609)
+
+[node name="BasicFire3" parent="dfa/DFA" instance=ExtResource("4_jcqfa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.23208, -2.39757, 2.42171)
+
+[node name="BasicFire2" parent="dfa/DFA" instance=ExtResource("4_jcqfa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.73542, -1.90501, 4.90411)
+
+[node name="BasicFire" parent="dfa/DFA" instance=ExtResource("4_jcqfa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.630768, 0.515244, 0.12946)
+
+[node name="explode" type="AudioStreamPlayer3D" parent="dfa"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+stream = ExtResource("3_mv8xs")
+volume_db = -1.0
+max_db = 1.0
+
+[node name="DamageGiver" type="Area3D" parent="dfa"]
+collision_layer = 20
+script = ExtResource("5_h72c1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="dfa/DamageGiver"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.307098, 1.01162, 0)
+shape = SubResource("BoxShape3D_ibaco")
+
+[connection signal="area_entered" from="dfa/hitbox" to="dfa" method="_on_hitbox_area_entered"]
+[connection signal="finished" from="dfa/explode" to="dfa" method="_on_explode_finished"]

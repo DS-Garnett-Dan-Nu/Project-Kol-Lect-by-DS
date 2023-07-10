@@ -1,0 +1,433 @@
+[gd_scene load_steps=16 format=3 uid="uid://bvsi238sowg3f"]
+
+[ext_resource type="Script" path="res://misc/mainmenu/mainmenu.gd" id="1_g35ky"]
+[ext_resource type="PackedScene" uid="uid://ddlic5rq51qwp" path="res://platforms/platform_normal/plspw/plspw.tscn" id="2_eep37"]
+[ext_resource type="PackedScene" uid="uid://hlayehj0tpef" path="res://test/test_scenes/world_environment_test.tscn" id="3_bwsu8"]
+[ext_resource type="PackedScene" uid="uid://pruhyasmyp04" path="res://units/fcc/fcc_scenes/fcc_scene.tscn" id="4_krqgj"]
+[ext_resource type="AudioStream" uid="uid://cq5mrlivad8v5" path="res://misc/SFXs/menumusic.mp3" id="5_85dtl"]
+[ext_resource type="PackedScene" uid="uid://dnon0ji3gljbj" path="res://global/global_scenes/resetnsave.tscn" id="6_sgqku"]
+[ext_resource type="Texture2D" uid="uid://bvb2mg3vh1xbn" path="res://units/fcc/fcc_assets/fcc_icons.png" id="7_6h8il"]
+[ext_resource type="Theme" uid="uid://6qrfrr3nx70f" path="res://units/fcc/fcc_assets/fcc_buttons.tres" id="8_aaf8e"]
+[ext_resource type="Texture2D" uid="uid://ff43ca3hpy23" path="res://misc/mainmenu/lock_icon.png" id="9_7ohkm"]
+[ext_resource type="Script" path="res://global/global_gdscripts/platform_detector.gd" id="9_uwbb8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dq7p"]
+
+[sub_resource type="Sky" id="Sky_4uyqc"]
+sky_material = SubResource("ProceduralSkyMaterial_7dq7p")
+
+[sub_resource type="Environment" id="Environment_m0f2m"]
+background_mode = 2
+sky = SubResource("Sky_4uyqc")
+ssr_enabled = true
+ssao_enabled = true
+
+[sub_resource type="BoxShape3D" id="1"]
+size = Vector3(64, 2, 69.8014)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ym5gy"]
+size = Vector3(64.0737, 8.00376, 69.7965)
+
+[node name="Mainmenu" type="Node3D"]
+script = ExtResource("1_g35ky")
+
+[node name="camcontrol" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="camcontrol"]
+transform = Transform3D(0.00894477, -0.59894, 0.800744, 0.00669008, 0.800794, 0.598902, -0.999938, 9.31381e-10, 0.0111699, 42.3482, 35.8103, 0)
+current = true
+fov = 47.8
+
+[node name="WorldEnvironmentTest" parent="." instance=ExtResource("3_bwsu8")]
+
+[node name="WorldEnvironmentNormal" type="WorldEnvironment" parent="WorldEnvironmentTest"]
+environment = SubResource("Environment_m0f2m")
+
+[node name="plspw" parent="." instance=ExtResource("2_eep37")]
+
+[node name="fcc" parent="." instance=ExtResource("4_krqgj")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11.7968, 1.02352, 0)
+
+[node name="fcc_hud" parent="fcc" index="9"]
+visible = false
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_85dtl")
+volume_db = 10.0
+autoplay = true
+
+[node name="Reset_and_Save" parent="." instance=ExtResource("6_sgqku")]
+
+[node name="menu_hud" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="engion" type="Label" parent="menu_hud"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 9.0
+offset_right = 186.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 20
+text = "Engion: 100g"
+vertical_alignment = 1
+
+[node name="engion2" type="Sprite2D" parent="menu_hud/engion"]
+position = Vector2(-32, 23)
+scale = Vector2(0.24, 0.24)
+texture = ExtResource("7_6h8il")
+region_enabled = true
+region_rect = Rect2(100, 800, 200, 200)
+
+[node name="noti2" type="Label" parent="menu_hud/engion"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 31.0
+offset_right = 251.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 8
+text = "*Engion in storage cannot go below 50 g"
+vertical_alignment = 1
+
+[node name="Global_Upgrades" type="Label" parent="menu_hud"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 104.0
+offset_right = 176.0
+offset_bottom = 135.0
+theme_override_font_sizes/font_size = 20
+text = "Global Upgrades"
+vertical_alignment = 1
+
+[node name="hpa" type="Label" parent="menu_hud/Global_Upgrades"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 64.0
+offset_right = 338.0
+offset_bottom = 89.0
+theme_override_font_sizes/font_size = 15
+text = "Current: %s"
+vertical_alignment = 1
+
+[node name="hpb" type="Label" parent="menu_hud/Global_Upgrades"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 88.0
+offset_right = 338.0
+offset_bottom = 113.0
+theme_override_font_sizes/font_size = 15
+text = "Next: %s"
+vertical_alignment = 1
+
+[node name="health" type="Sprite2D" parent="menu_hud/Global_Upgrades"]
+position = Vector2(44, 90)
+scale = Vector2(0.64, 0.64)
+texture = ExtResource("7_6h8il")
+region_enabled = true
+region_rect = Rect2(300, 0, 100, 100)
+
+[node name="hp" type="Button" parent="menu_hud/Global_Upgrades"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 122.0
+offset_right = 76.0
+offset_bottom = 152.0
+theme = ExtResource("8_aaf8e")
+text = "-100g"
+
+[node name="spa" type="Label" parent="menu_hud/Global_Upgrades"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 192.0
+offset_right = 338.0
+offset_bottom = 217.0
+theme_override_font_sizes/font_size = 15
+text = "Current: %s"
+vertical_alignment = 1
+
+[node name="spb" type="Label" parent="menu_hud/Global_Upgrades"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 216.0
+offset_right = 338.0
+offset_bottom = 241.0
+theme_override_font_sizes/font_size = 15
+text = "Next: %s"
+vertical_alignment = 1
+
+[node name="speed" type="Sprite2D" parent="menu_hud/Global_Upgrades"]
+position = Vector2(44, 216)
+scale = Vector2(0.64, 0.64)
+texture = ExtResource("7_6h8il")
+region_enabled = true
+region_rect = Rect2(200, 0, 100, 100)
+
+[node name="sp" type="Button" parent="menu_hud/Global_Upgrades"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 248.0
+offset_right = 76.0
+offset_bottom = 278.0
+theme = ExtResource("8_aaf8e")
+text = "-100g"
+
+[node name="kspa" type="Label" parent="menu_hud/Global_Upgrades"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 320.0
+offset_right = 338.0
+offset_bottom = 345.0
+theme_override_font_sizes/font_size = 15
+text = "Current: %s"
+vertical_alignment = 1
+
+[node name="kspb" type="Label" parent="menu_hud/Global_Upgrades"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 344.0
+offset_right = 338.0
+offset_bottom = 369.0
+theme_override_font_sizes/font_size = 15
+text = "Next: %s"
+vertical_alignment = 1
+
+[node name="kolspeed" type="Sprite2D" parent="menu_hud/Global_Upgrades"]
+position = Vector2(44, 344)
+scale = Vector2(0.64, 0.64)
+texture = ExtResource("7_6h8il")
+region_enabled = true
+region_rect = Rect2(100, 200, 100, 100)
+
+[node name="ksp" type="Button" parent="menu_hud/Global_Upgrades"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 376.0
+offset_right = 76.0
+offset_bottom = 406.0
+theme = ExtResource("8_aaf8e")
+text = "-100g"
+
+[node name="noti" type="Label" parent="menu_hud/Global_Upgrades"]
+layout_mode = 0
+offset_top = 29.0
+offset_right = 250.0
+offset_bottom = 44.0
+theme_override_font_sizes/font_size = 8
+text = "*these upgrades affect all vehicles"
+vertical_alignment = 1
+
+[node name="Choose_Your_Vehicle" type="Label" parent="menu_hud"]
+layout_mode = 0
+offset_left = 928.0
+offset_top = 104.0
+offset_right = 1125.0
+offset_bottom = 135.0
+theme_override_font_sizes/font_size = 20
+text = "Choose Your Vehicle"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="noti" type="Label" parent="menu_hud/Choose_Your_Vehicle"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 29.0
+offset_right = 195.0
+offset_bottom = 44.0
+theme_override_font_sizes/font_size = 8
+text = "*coming soon!"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="BA1" type="Sprite2D" parent="menu_hud/Choose_Your_Vehicle"]
+position = Vector2(131, 90)
+scale = Vector2(0.64, 0.64)
+texture = ExtResource("7_6h8il")
+region_enabled = true
+region_rect = Rect2(0, 300, 200, 100)
+
+[node name="Davisor2" type="Button" parent="menu_hud/Choose_Your_Vehicle"]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 122.0
+offset_right = 195.0
+offset_bottom = 152.0
+theme = ExtResource("8_aaf8e")
+text = "BA1 Davisor"
+
+[node name="M1" type="Sprite2D" parent="menu_hud/Choose_Your_Vehicle"]
+position = Vector2(131, 216)
+scale = Vector2(1.28, 0.64)
+texture = ExtResource("7_6h8il")
+region_enabled = true
+region_rect = Rect2(300, 300, 100, 100)
+
+[node name="Thawaht" type="Button" parent="menu_hud/Choose_Your_Vehicle"]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 248.0
+offset_right = 195.0
+offset_bottom = 278.0
+theme = ExtResource("8_aaf8e")
+disabled = true
+text = "M1 Thaw"
+
+[node name="MiG" type="Sprite2D" parent="menu_hud/Choose_Your_Vehicle"]
+position = Vector2(131, 344)
+scale = Vector2(1.28, 0.64)
+texture = ExtResource("7_6h8il")
+region_enabled = true
+region_rect = Rect2(300, 300, 100, 100)
+
+[node name="La11" type="Button" parent="menu_hud/Choose_Your_Vehicle"]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 376.0
+offset_right = 195.0
+offset_bottom = 406.0
+theme = ExtResource("8_aaf8e")
+disabled = true
+text = "MiG La11"
+
+[node name="LockIcon" type="Sprite2D" parent="menu_hud/Choose_Your_Vehicle"]
+position = Vector2(128, 217)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("9_7ohkm")
+
+[node name="LockIcon2" type="Sprite2D" parent="menu_hud/Choose_Your_Vehicle"]
+position = Vector2(128, 345)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("9_7ohkm")
+
+[node name="btnbg" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 496.0
+offset_top = 472.0
+offset_right = -496.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.470588)
+
+[node name="workshop_btn" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -112.0
+offset_right = 64.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("8_aaf8e")
+toggle_mode = true
+text = "Workshop"
+
+[node name="quit" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -66.0
+offset_right = 64.0
+offset_bottom = -34.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("8_aaf8e")
+toggle_mode = true
+text = "Quit"
+
+[node name="play" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -160.0
+offset_right = 64.0
+offset_bottom = -128.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Play"
+
+[node name="titlebg" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 448.0
+offset_top = 64.0
+offset_right = -448.0
+offset_bottom = -520.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.470588)
+
+[node name="title" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -102.0
+offset_top = 73.0
+offset_right = 102.0
+offset_bottom = 118.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "The Kollectors"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Floor" type="CharacterBody3D" parent="."]
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(0.926739, -0.375707, 0, 0.375707, 0.926739, 0, 0, 0, 1, -61.2935, -11.947, 0)
+shape = SubResource("1")
+
+[node name="CollisionShape3" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(0.90837, 0.418168, 0, -0.418168, 0.90837, 0, 0, 0, 1, 60.5839, -13.2533, -0.0143603)
+shape = SubResource("1")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("1")
+
+[node name="CollisionShape4" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 34.9197, 26.0719)
+shape = SubResource("1")
+
+[node name="CollisionShape5" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 34.9197, -23.7287)
+shape = SubResource("1")
+
+[node name="events" type="Node3D" parent="Floor"]
+
+[node name="platform" type="Area3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14053, 0)
+collision_layer = 2
+collision_mask = 29
+script = ExtResource("9_uwbb8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/platform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.05225, 0)
+shape = SubResource("BoxShape3D_ym5gy")
+
+[connection signal="pressed" from="menu_hud/Global_Upgrades/hp" to="." method="_on_hp_pressed"]
+[connection signal="pressed" from="menu_hud/Global_Upgrades/sp" to="." method="_on_sp_pressed"]
+[connection signal="pressed" from="menu_hud/Global_Upgrades/ksp" to="." method="_on_ksp_pressed"]
+[connection signal="toggled" from="workshop_btn" to="." method="_on_workshop_btn_toggled"]
+[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="play" to="." method="_on_button_pressed"]
+
+[editable path="fcc"]

@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://f85ylb1qf07b"]
+[gd_scene load_steps=6 format=3 uid="uid://f85ylb1qf07b"]
 
 [ext_resource type="Script" path="res://mobs/ehd/ehd_gdscripts/ehd_damagergiver.gd" id="1_xjj76"]
+[ext_resource type="PackedScene" uid="uid://jojvugp382bu" path="res://misc/VFXs/dirll_damage.tscn" id="2_hjp76"]
+[ext_resource type="AudioStream" uid="uid://btg14bs2gu4vj" path="res://mobs/ehd/ehd_assets/ehd_SFXs/lassen-35052.mp3" id="3_t75wv"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2cx6m"]
 radius = 1.11954
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0fppo"]
 
 [node name="DamagerGiver" type="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.78263, 0.82847, 0)
@@ -22,5 +26,21 @@ wait_time = 0.1
 one_shot = true
 autostart = true
 
+[node name="drill_damage" parent="." instance=ExtResource("2_hjp76")]
+
+[node name="vfx" type="Area3D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="vfx"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00263596, 0, 0)
+shape = SubResource("SphereShape3D_0fppo")
+
+[node name="drs" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_t75wv")
+volume_db = 13.0
+max_db = 6.0
+
 [connection signal="timeout" from="dps_timer2" to="." method="_on_dps_timer_2_timeout"]
 [connection signal="timeout" from="dps_timer" to="." method="_on_dps_timer_timeout"]
+[connection signal="area_entered" from="vfx" to="." method="_on_vfx_area_entered"]
+[connection signal="area_exited" from="vfx" to="." method="_on_vfx_area_exited"]

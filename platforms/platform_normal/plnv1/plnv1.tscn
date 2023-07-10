@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcwgqtm2eqjf4"]
+
+[ext_resource type="PackedScene" uid="uid://dfl35bwvxxox" path="res://platforms/platform_normal/plnv1/plnv1.fbx" id="1_olc2s"]
+[ext_resource type="Script" path="res://platforms/platform_normal/plnv1/plnv1.gd" id="1_tmbgc"]
+[ext_resource type="PackedScene" uid="uid://i7f33cl8oxse" path="res://misc/VFXs/basic_fire.tscn" id="3_e4234"]
+
+[node name="plnv1" type="Node3D"]
+script = ExtResource("1_tmbgc")
+
+[node name="plnv1" type="Node3D" parent="."]
+
+[node name="plnv2" parent="plnv1" instance=ExtResource("1_olc2s")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="l1" type="SpotLight3D" parent="plnv1"]
+transform = Transform3D(1, 0, 0, 0, 0.276711, 0.960953, 0, -0.960953, 0.276711, -15.0197, 63.1866, 17.0269)
+light_energy = 5.0
+shadow_enabled = true
+spot_range = 97.1155
+spot_angle = 40.6795
+
+[node name="l2" type="SpotLight3D" parent="plnv1"]
+transform = Transform3D(1, 0, 0, 0, 0.276711, 0.960953, 0, -0.960953, 0.276711, 15.2117, 63.1866, 17.0269)
+light_energy = 5.0
+shadow_enabled = true
+spot_range = 98.8792
+spot_angle = 41.8223
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="BasicFire" parent="." instance=ExtResource("3_e4234")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.2763, 17.1167, -28.9414)
+
+[node name="BasicFire2" parent="." instance=ExtResource("3_e4234")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6509, 7.54204, -32.4332)
+
+[node name="BasicFire3" parent="." instance=ExtResource("3_e4234")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.3755, 10.9826, -30.6161)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

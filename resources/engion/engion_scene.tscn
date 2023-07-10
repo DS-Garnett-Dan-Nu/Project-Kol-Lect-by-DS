@@ -1,34 +1,55 @@
-[gd_scene load_steps=6 format=3 uid="uid://1shx04eesc8t"]
+[gd_scene load_steps=9 format=3 uid="uid://1shx04eesc8t"]
 
 [ext_resource type="Script" path="res://resources/engion/engion_gdscript.gd" id="1_ve6wg"]
+[ext_resource type="AudioStream" uid="uid://c55iscxt8kmtr" path="res://resources/engion/collected.mp3" id="2_nw08p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_llcwp"]
+albedo_color = Color(0, 1, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.917647, 1, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_pj7gq"]
+size = Vector3(0.25, 1, 0.25)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_n04k3"]
+radius = 0.2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qlb2p"]
-albedo_color = Color(0, 0.94902, 1, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3c7tc"]
+albedo_color = Color(0, 0.337255, 0.337255, 1)
 emission_enabled = true
 emission = Color(0, 0.94902, 1, 1)
-emission_energy_multiplier = 6.0
+emission_energy_multiplier = 5.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_di3k2"]
-material = SubResource("StandardMaterial3D_qlb2p")
+radius = 0.4
+height = 0.8
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5ndjj"]
 
 [node name="Engion" type="CharacterBody3D"]
 collision_layer = 128
-collision_mask = 34
+collision_mask = 546
 script = ExtResource("1_ve6wg")
+
+[node name="look" type="Node3D" parent="."]
+
+[node name="point" type="MeshInstance3D" parent="look"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 0, 0.846918)
+material_override = SubResource("StandardMaterial3D_llcwp")
+mesh = SubResource("PrismMesh_pj7gq")
+skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_n04k3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="ball" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_3c7tc")
 mesh = SubResource("SphereMesh_di3k2")
 
 [node name="collected" type="Area3D" parent="."]
 collision_layer = 128
-collision_mask = 32
+collision_mask = 544
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="collected"]
 shape = SubResource("SphereShape3D_5ndjj")
@@ -42,6 +63,15 @@ light_color = Color(0.0470588, 1, 1, 1)
 shadow_enabled = true
 omni_range = 3.0
 
+[node name="sfx" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_nw08p")
+
+[node name="decay" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
 [connection signal="area_entered" from="collected" to="." method="_on_collected_area_entered"]
 [connection signal="area_exited" from="collected" to="." method="_on_collected_area_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="finished" from="sfx" to="." method="_on_sfx_finished"]
+[connection signal="timeout" from="decay" to="." method="_on_decay_timeout"]

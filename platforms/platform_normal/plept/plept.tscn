@@ -1,0 +1,114 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbyvqk1hrb65u"]
+
+[ext_resource type="PackedScene" uid="uid://cv45h0rhcw0s" path="res://platforms/platform_normal/plspw/plspw.fbx" id="1_4m7i2"]
+[ext_resource type="Script" path="res://platforms/platform_normal/plept/plept.gd" id="1_85syv"]
+[ext_resource type="PackedScene" uid="uid://i7f33cl8oxse" path="res://misc/VFXs/basic_fire.tscn" id="3_bnhmi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t7adv"]
+size = Vector3(5, 37.5379, 92.8091)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5qdfb"]
+size = Vector3(10, 19.4497, 27.3054)
+
+[node name="plept" type="Node3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+script = ExtResource("1_85syv")
+
+[node name="plept" parent="." instance=ExtResource("1_4m7i2")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="l1" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.269895, 0.96289, 0, -0.96289, -0.269895, -15.5491, 65.8066, -16.0168)
+light_energy = 5.0
+shadow_enabled = true
+spot_range = 97.1155
+spot_angle = 40.6795
+
+[node name="l2" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.241549, 0.970389, 0, -0.970389, 0.241549, -15.5491, 65.8066, 14.217)
+light_energy = 5.0
+shadow_enabled = true
+spot_range = 98.8792
+spot_angle = 41.8223
+
+[node name="BasicFire" parent="." instance=ExtResource("3_bnhmi")]
+transform = Transform3D(0.690201, 0.723618, -2.70835e-08, -0.723618, 0.690201, -6.32607e-08, -2.70835e-08, 6.32607e-08, 1, 1.629, 13.303, -14.906)
+
+[node name="BasicFire2" parent="." instance=ExtResource("3_bnhmi")]
+transform = Transform3D(0.965926, -0.258819, 0, 0.25, 0.933013, -0.258819, 0.0669873, 0.25, 0.965926, -18.816, 4.91, -11.872)
+
+[node name="BasicFire3" parent="." instance=ExtResource("3_bnhmi")]
+transform = Transform3D(0.901737, -0.321716, -0.288739, 0.25, 0.933013, -0.258819, 0.352663, 0.161202, 0.921761, -1.99663, 4.49265, 16.124)
+
+[node name="BasicFire4" parent="." instance=ExtResource("3_bnhmi")]
+transform = Transform3D(0.5, -0.612373, 0.612372, 0.866026, 0.353553, -0.353553, -1.81059e-08, 0.707107, 0.707107, -18.1126, 4.77523, 14.1731)
+
+[node name="BasicFire5" parent="." instance=ExtResource("3_bnhmi")]
+transform = Transform3D(0.5, -0.612373, 0.612372, 0.866026, 0.353553, -0.353553, -1.81059e-08, 0.707107, 0.707107, -26.0867, 1.85785, 22.5968)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.7604, 15.2847, 0)
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_t7adv")
+
+[node name="end" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="end"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.40656, 0, -6.47503e-07)
+shape = SubResource("BoxShape3D_5qdfb")
+
+[node name="sure" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="sure"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 192.0
+offset_right = 960.0
+offset_bottom = 384.0
+color = Color(0, 0, 0, 0.356863)
+
+[node name="Label" type="Label" parent="sure"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -348.5
+offset_top = -108.0
+offset_right = 348.5
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 25
+text = "Warning: All your upgrades made in the VOID will be reset.
+Only Engion in the storage will persist."
+horizontal_alignment = 1
+
+[node name="button" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -88.5
+offset_top = -336.0
+offset_right = 88.5
+offset_bottom = -293.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 25
+text = "Exist The Void"
+
+[connection signal="area_entered" from="end" to="." method="_on_end_area_entered"]
+[connection signal="area_exited" from="end" to="." method="_on_end_area_exited"]
+[connection signal="pressed" from="button" to="." method="_on_button_pressed"]

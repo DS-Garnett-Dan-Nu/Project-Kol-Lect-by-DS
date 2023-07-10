@@ -1,10 +1,6 @@
+res://misc/mainmenu/mainmenu.tscn
+res://units/fcc/fcc_assets/fcc_buttons.tres
 res://units/fcc/fcc_scenes/fcc_scene.tscn
-res://global/global_scenes/player_global.tscn
 res://units/fcc/fcc_scenes/fcc_hud.tscn
-res://mobs/spawners/spawnert1/spwnt_1_bullet.tscn
-res://mobs/spawners/spawnert1/spawnert1.tscn
-res://units/fcc/fcc_scenes/autocannon_bullet.tscn
-res://units/fcc/fcc_scenes/flak_bullet.tscn
-res://test/test_scenes/world_environment_test.tscn
-res://test/test_scenes/test_world.tscn
+res://misc/VFXs/basic_fire.tscn
 res://resources/engion/engion_scene.tscn
