@@ -80,20 +80,20 @@ func upgrade_time(cost,btn,stat):
 	
 	#Checking Which to Upgrade
 	if stat == 1:
-		AutoLoad.fcc_auto_damage += AutoLoad.fcc_auto_damage_up
-		AutoLoad.fcc_auto_damage_up += 2
+		AutoLoad.fcc_stats['auto_damage'] += AutoLoad.fcc_stats['auto_damage_up']
+		AutoLoad.fcc_stats['auto_damage_up'] += 2
 	elif stat == 2:
-		AutoLoad.fcc_flak_damage += AutoLoad.fcc_flak_damage_up
-		AutoLoad.fcc_flak_damage_up += 4
+		AutoLoad.fcc_stats['flak_damage'] += AutoLoad.fcc_stats['flak_damage_up']
+		AutoLoad.fcc_stats['flak_damage_up'] += 4
 	elif stat == 3:
-		AutoLoad.fcc_health += AutoLoad.fcc_health_up
-		AutoLoad.fcc_health_up += 10
+		AutoLoad.fcc_stats['health'] += AutoLoad.fcc_stats['health_up']
+		AutoLoad.fcc_stats['health_up'] += 10
 	elif stat == 4:
-		AutoLoad.fcc_base_speed += 2
-		AutoLoad.fcc_base_speed_up += 1
+		AutoLoad.fcc_stats['speed'] += 2
+		AutoLoad.fcc_stats['speed_up'] += 1
 	elif stat == 5:
-		AutoLoad.fcc_kollecter_speed += 1
-		AutoLoad.fcc_kollecter_speed_up += 1
+		AutoLoad.fcc_stats['k_speed'] += 1
+		AutoLoad.fcc_stats['k_speed_up'] += 1
 	
 	#SFX
 	btn_sfx.play(0.1)

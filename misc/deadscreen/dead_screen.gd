@@ -13,23 +13,31 @@ var mainmenu = load("res://misc/mainmenu/mainmenu.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	visible = false
+	hide()
 
 
 
 func _on_exit_pressed():
 	
+	
+	
 	get_tree().paused = false
+	hide()
 	AutoLoad.player_is_dead = false
 	AutoLoad.in_menu = true
+	AutoLoad.final_boss = false
 	AutoLoad.service_station_appear = 0
+	
+	
 	get_tree().change_scene_to_packed(mainmenu)
 	
 func _process(delta):
 	
 	if AutoLoad.player_is_dead:
-		visible = true
+		show()
 		get_tree().paused = true
+	else:
+		hide()
 
 	
 	#Show Engion in Storage and High Score 

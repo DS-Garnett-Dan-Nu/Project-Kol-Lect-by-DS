@@ -62,26 +62,36 @@ var final_boos_spt = 39
 ###########
 
 #FCC - First Controlable Character #For Character Specific Upgrades
-#FCC Stats
-var fcc_health = global_player_health + 150.0
-var fcc_base_speed = global_player_speed + 15.0
-var fcc_jump_velocity = global_player_jump_velocity + 17.0
-var fcc_kollecter_speed = global_kollecter_speed + 10
-var fcc_force_repair = false
-var fcc_healthbar
 
+#FCC Base Stats
+var fcc_base_stats = {
+	
+	#Defensive
+	health = global_player_health + 150.0, #health
+	speed = global_player_speed + 15.0, #speed
+	k_speed = global_kollecter_speed + 10, #Kollector collection Speed
+	
+	#Offensive
+	auto_damage = 15.0, #Maak damage
+	flak_damage = 50.0, #HMC damage
+	can_fire = true, #if FCC can fire condition
+	deploy = false, #if FCC is deploy or not condition
+	force_repair = false, #Ability Force Repair
+	
+	#Upgrades
+	auto_damage_up = 5, #Maak upgrade damage
+	flak_damage_up = 15, #HMC upgrade damage
+	health_up = 20, #health upgrade damage
+	speed_up = 2, #speed upgrade damage
+	k_speed_up = 1, #kollecter collection upgrade damage
+	
+	#HUD
+	healthbar = 0
+	}
 
-#FCC gun control
-var fcc_auto_damage = 15.0
-var fcc_flak_damage = 50.0
-var fcc_can_fire = true
-var fcc_deploy = false
+#FCC Dynamic Stats
+var fcc_stats = fcc_base_stats.duplicate(true)
 
-var fcc_auto_damage_up = 5
-var fcc_flak_damage_up = 15
-var fcc_health_up = 20
-var fcc_base_speed_up = 2
-var fcc_kollecter_speed_up = 1
 ############
 
 #Mobs aka Enemies
@@ -129,7 +139,7 @@ func _ready():
 		var file_save = FileAccess.open("user://SaveFiles.txt", FileAccess.WRITE)
 	
 	#To set the healthbar of fcc
-	fcc_healthbar = fcc_health
+	fcc_stats['healthbar'] = fcc_stats['health']
 	
 	pass # Replace with function body.
 

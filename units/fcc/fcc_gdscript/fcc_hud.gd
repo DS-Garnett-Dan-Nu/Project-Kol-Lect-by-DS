@@ -60,8 +60,8 @@ func _process(delta):
 	#For info hud
 	infohud(AutoLoad.primary_weapon,ab)
 	infohud(AutoLoad.secondary_weapon,fb)
-	infohud(AutoLoad.fcc_deploy,dp)
-	infohud(AutoLoad.fcc_force_repair,fr)
+	infohud(AutoLoad.fcc_stats['deploy'],dp)
+	infohud(AutoLoad.fcc_stats['force_repair'],fr)
 	
 	if Input.is_action_pressed("Go_Right"):
 		infohud(true,fw)
@@ -105,11 +105,11 @@ func _process(delta):
 		
 	
 	#Input stats' data
-	audam.text = "Current: %s\nNext: %s" % [AutoLoad.fcc_auto_damage,AutoLoad.fcc_auto_damage_up+AutoLoad.fcc_auto_damage]
-	fkdam.text = "Current: %s\nNext: %s" % [AutoLoad.fcc_flak_damage,AutoLoad.fcc_flak_damage_up+AutoLoad.fcc_flak_damage]
-	maxhealth.text = "Current: %s\nNext: %s" % [AutoLoad.fcc_health,AutoLoad.fcc_health_up+AutoLoad.fcc_health]
-	maxspeed.text = "Current: %s\nNext: %s" % [AutoLoad.fcc_base_speed,AutoLoad.fcc_base_speed_up+AutoLoad.fcc_base_speed]
-	kollector_speed.text = "Current: %s\nNext: %s" % [AutoLoad.fcc_kollecter_speed,AutoLoad.fcc_kollecter_speed_up+AutoLoad.fcc_kollecter_speed]
+	audam.text = "Current: %s\nNext: %s" % [AutoLoad.fcc_stats['auto_damage'],AutoLoad.fcc_stats['auto_damage_up']+AutoLoad.fcc_stats['auto_damage']]
+	fkdam.text = "Current: %s\nNext: %s" % [AutoLoad.fcc_stats['flak_damage'],AutoLoad.fcc_stats['flak_damage_up']+AutoLoad.fcc_stats['flak_damage']]
+	maxhealth.text = "Current: %s\nNext: %s" % [AutoLoad.fcc_stats['health'],AutoLoad.fcc_stats['health_up']+AutoLoad.fcc_stats['health']]
+	maxspeed.text = "Current: %s\nNext: %s" % [AutoLoad.fcc_stats['speed'],AutoLoad.fcc_stats['speed_up']+AutoLoad.fcc_stats['speed']]
+	kollector_speed.text = "Current: %s\nNext: %s" % [AutoLoad.fcc_stats['k_speed'],AutoLoad.fcc_stats['k_speed_up']+AutoLoad.fcc_stats['k_speed']]
 	
 	#Show Controls
 	if ctrl and controls.position.y < 281:
@@ -146,14 +146,14 @@ func _process(delta):
 		ammonoti.text = ""
 	
 	#For deploy indicator
-	if AutoLoad.fcc_deploy:
+	if AutoLoad.fcc_stats['deploy']:
 		deployindie.show()
 	else:
 		deployindie.hide()
 	
 	#For Health Bar
-	healthbar.max_value = AutoLoad.fcc_health
-	healthbar.value = AutoLoad.fcc_healthbar
+	healthbar.max_value = AutoLoad.fcc_stats['health']
+	healthbar.value = AutoLoad.fcc_stats['healthbar']
 	
 	if healthbar.value <= 100 and healthbar.value > 75:
 		healthbar.modulate =  Color("2bff00")
@@ -168,7 +168,7 @@ func _process(delta):
 	EngionT.text = "Engion: %s g" % AutoLoad.global_engion
 	
 	#Gun Controls n Stuffs
-	var fcc_can_fire = AutoLoad.fcc_can_fire
+	var fcc_can_fire = AutoLoad.fcc_stats['can_fire']
 	var fcc_primary_weapon = AutoLoad.primary_weapon
 	var fcc_secondary_weapon = AutoLoad.secondary_weapon
 	
@@ -207,7 +207,6 @@ func infohud(condition,type):
 
 
 func _on_noti_timer_timeout():
-	print("hide")
 	Noti.hide()
 
 

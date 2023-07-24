@@ -59,8 +59,7 @@ func _process(delta):
 		backward.stop()
 		$bbb.global_position.y -= 0.05
 		$bbb.global_position.z -= 0.025
-		$bbb.rotation_degrees += Vector3(randi_range(-0.05,0.05),randi_range(-0.05,0.05),randi_range(-0.05,0.05))
-		
+		$bbb.rotation_degrees += Vector3(-0.025,0.025,0.025)
 		if $bbb.global_position.y <= 0:
 			AutoLoad.final_boss = false
 	

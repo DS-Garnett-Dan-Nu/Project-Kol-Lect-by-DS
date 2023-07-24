@@ -2075,7 +2075,6 @@ emission = Color(0, 1, 0.938934, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8vbfx"]
 resource_name = "Light"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 metallic = 0.4
 roughness = 0.242536
 emission_enabled = true

@@ -41,7 +41,11 @@ func _process(delta):
 	
 	#Go to be collected
 	if collected:
-		speed = AutoLoad.fcc_kollecter_speed
+		
+		#***
+		speed = AutoLoad.fcc_stats['k_speed'] #This needs to be changed when multiple characters are added
+		#***
+		
 		velocity = global_position.direction_to(AutoLoad.kollector_location) * speed
 		
 		#Look at the Kollector

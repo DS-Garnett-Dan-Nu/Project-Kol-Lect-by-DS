@@ -23,14 +23,17 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("3_xnu0e")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 464.0
+offset_top = 408.0
+offset_right = -464.0
+offset_bottom = -96.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.345098)
+color = Color(0, 0, 0, 0.47451)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -86,11 +89,11 @@ anchor_bottom = 0.5
 offset_left = -96.0
 offset_top = 100.0
 offset_right = 96.0
-offset_bottom = 146.0
+offset_bottom = 148.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_1qy8j")
-text = "Contninue Playing"
+text = "Continue Playing"
 
 [node name="quit" type="Button" parent="."]
 layout_mode = 1

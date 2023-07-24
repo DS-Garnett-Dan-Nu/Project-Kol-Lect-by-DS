@@ -29,17 +29,23 @@ func _on_area_entered(area):
 		hit_effect()
 
 func hit_effect():
+	
+	#Move all the lights to one place when hit
 	$a.global_position = $c.global_position
 	$b.global_position = $c.global_position
 	$hit.global_position = $c.global_position
 	$d.global_position = $c.global_position
 	
 	
-	
+	#Usual Condidtions and Stuffs
 	$hitbox.set_deferred("disabled",true)
 	$body.hide()
 	$Timer.start()
+	
+	#Emit the Particles
 	hit.emitting = true
+	
+	#Stop Moving!
 	speed = 0
 
 

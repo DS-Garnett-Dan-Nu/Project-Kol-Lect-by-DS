@@ -6,8 +6,6 @@ class_name player
 
 ##These varibles are needed to be left empty if another controlable character is added
 var speed = 0
-var jump_boost = AutoLoad.fcc_base_speed * 3
-var jump_strength = AutoLoad.fcc_jump_velocity
 var move_direction := Vector3.ZERO
 ##The Selected controlable character stats are to be declared in the _ready() function
 ###########
@@ -52,12 +50,12 @@ func _physics_process(delta: float) -> void:
 		elif Input.is_action_pressed("Go_Left") and move_direction.x > 0:
 			speed = 0
 		
-		elif speed < AutoLoad.fcc_base_speed and AutoLoad.fcc_deploy == false:
+		elif speed < AutoLoad.fcc_stats['speed'] and AutoLoad.fcc_stats['deploy'] == false:
 			speed += 0.2
 			
 		move_direction.x = Input.get_action_strength("Go_Right") - Input.get_action_strength("Go_Left")
 		
-	elif speed >= 0 and AutoLoad.fcc_deploy == false:
+	elif speed >= 0 and AutoLoad.fcc_stats['deploy'] == false:
 		
 		if Input.is_action_just_released("Go_Right"):
 			move_direction.x = 1
@@ -97,7 +95,7 @@ func _physics_process(delta: float) -> void:
 #		#_snap_vector = Vector3.DOWN
 		
 	#No Move Move when delpoyed
-	if AutoLoad.fcc_deploy:
+	if AutoLoad.fcc_stats['deploy']:
 		speed = 0
 #		jump_boost = 0
 #		jump_strength = 0

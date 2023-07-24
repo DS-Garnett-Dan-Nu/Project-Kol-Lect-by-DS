@@ -34,12 +34,10 @@ func _on_end_area_exited(area):
 func _on_button_pressed():
 	sure.show()
 	btn.text = "Confirm Evacuation"
-	if exist and AutoLoad.high_score > 0:
-		get_tree().change_scene_to_file("res://misc/mainmenu/mainmenu.tscn")
+	if exist:
+		get_tree().change_scene_to_file("res://misc/thank_you_demo/thank_you.tscn")
 		AutoLoad.in_menu = true
 		AutoLoad.service_station_appear = 0
-	elif exist:
-		get_tree().change_scene_to_file("res://misc/thank_you_demo/thank_you.tscn")
 	exist = true
 	
 	

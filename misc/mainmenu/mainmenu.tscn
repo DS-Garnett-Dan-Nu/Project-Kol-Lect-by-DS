@@ -423,6 +423,20 @@ script = ExtResource("9_uwbb8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.05225, 0)
 shape = SubResource("BoxShape3D_ym5gy")
 
+[node name="version" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 508.0
+offset_top = 630.0
+offset_right = 572.0
+offset_bottom = 644.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 7
+text = "Alpha Protoype 1.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="menu_hud/Global_Upgrades/hp" to="." method="_on_hp_pressed"]
 [connection signal="pressed" from="menu_hud/Global_Upgrades/sp" to="." method="_on_sp_pressed"]
 [connection signal="pressed" from="menu_hud/Global_Upgrades/ksp" to="." method="_on_ksp_pressed"]

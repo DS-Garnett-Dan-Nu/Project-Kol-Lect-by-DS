@@ -36,7 +36,7 @@ var gun_rotation_speed = 0
 ############
 
 #Stats
-var health = AutoLoad.fcc_health
+var health = AutoLoad.fcc_stats['health']
 
 #HUD
 @onready var hud = $fcc_hud
@@ -66,9 +66,9 @@ func _physics_process(delta):
 	if Input.is_action_pressed("force_repair") and health <= AutoLoad.fcc_health:
 		health += 0.5
 		AutoLoad.global_engion -= 1
-		AutoLoad.fcc_force_repair = true
+		AutoLoad.fcc_stats['force_repair'] = true
 	elif Input.is_action_just_released("force_repair"):
-		AutoLoad.fcc_force_repair = false
+		AutoLoad.fcc_stats['force_repair'] = false
 	
 	#Send FCC Kollector Location to Kollect Resources
 	AutoLoad.kollector_location = fcc_kollector.global_position
@@ -86,7 +86,7 @@ func _physics_process(delta):
 	
 	
 	#For Health Bar
-	AutoLoad.fcc_healthbar = health
+	AutoLoad.fcc_stats['healthbar'] = health
 	
 	#Die!
 	if health <= 0:
@@ -108,11 +108,11 @@ func deploy():
 	#Catch the Deploy Command
 	if Input.is_action_just_pressed("ability") and AutoLoad.fcc_deploy == false:
 		animations.play("deploy")
-		AutoLoad.fcc_deploy = true
+		AutoLoad.fcc_stats['deploy'] = true
 
 	elif Input.is_action_just_pressed("ability") and AutoLoad.fcc_deploy == true:
 		animations.play("undeploy")
-		AutoLoad.fcc_deploy = false
+		AutoLoad.fcc_stats['deploy'] = false
 
 	
 
@@ -195,7 +195,7 @@ func _on_auto_cannon_shot_interval_timeout():
 				reduce_engion(5)
 				
 				#To notify the player
-				AutoLoad.fcc_can_fire = true
+				AutoLoad.fcc_stats['can_fire'] = true
 				
 				#fire the flakcannon!  
 				var left_bullet1 = flak_bullet.instantiate()
@@ -210,7 +210,7 @@ func _on_auto_cannon_shot_interval_timeout():
 				
 			else:
 				#To notify the player
-				AutoLoad.fcc_can_fire = false
+				AutoLoad.fcc_stats['can_fire'] = false
 			
 			#change side!
 			one_side_of_the_gun = false
@@ -235,7 +235,7 @@ func _on_auto_cannon_shot_interval_timeout():
 				reduce_engion(5)
 				
 				#To notify the player
-				AutoLoad.fcc_can_fire = true
+				AutoLoad.fcc_stats['can_fire'] = true
 				
 				#fire the flakcannon!
 				var right_bullet1 = flak_bullet.instantiate()
@@ -250,7 +250,7 @@ func _on_auto_cannon_shot_interval_timeout():
 				
 			else:
 				#To notify the player
-				AutoLoad.fcc_can_fire = false
+				AutoLoad.fcc_stats['can_fire'] = false
 			
 			#change side!
 			one_side_of_the_gun = true
@@ -282,7 +282,7 @@ func _on_health_area_entered(area):
 	var damage_resistance = 1
 	
 	#Check if FCC is deployed
-	if AutoLoad.fcc_deploy:
+	if AutoLoad.fcc_stats['deploy']:
 		damage_resistance = 2.5
 	else:
 		damage_resistance = 1		
@@ -304,7 +304,7 @@ func _on_health_area_exited(area):
 	
 
 func _on_auto_repair_timeout():
-	if health < AutoLoad.fcc_health and AutoLoad.global_engion >= 0:
+	if health < AutoLoad.fcc_stats['health'] and AutoLoad.global_engion >= 0:
 		health += 0.05
 
 
