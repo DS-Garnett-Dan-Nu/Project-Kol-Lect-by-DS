@@ -36,7 +36,7 @@ var gun_rotation_speed = 0
 ############
 
 #Stats
-var health = AutoLoad.fcc_stats['health']
+var health
 
 #HUD
 @onready var hud = $fcc_hud
@@ -53,7 +53,9 @@ func _ready():
 	
 	#Reload Flak
 	flak_reload.start()
-
+	
+	#Set the health
+	health = AutoLoad.fcc_stats['health']
 
 
 #Physics Processes eh?
@@ -63,7 +65,7 @@ func _physics_process(delta):
 	$fcc_hud/flakreload.value = reload_time
 	
 	#Force Repair
-	if Input.is_action_pressed("force_repair") and health <= AutoLoad.fcc_health:
+	if Input.is_action_pressed("force_repair") and health <= AutoLoad.fcc_stats['health']:
 		health += 0.5
 		AutoLoad.global_engion -= 1
 		AutoLoad.fcc_stats['force_repair'] = true
@@ -86,7 +88,7 @@ func _physics_process(delta):
 	
 	
 	#For Health Bar
-	AutoLoad.fcc_stats['healthbar'] = health
+	AutoLoad.fcc_stats['realtime_health'] = health
 	
 	#Die!
 	if health <= 0:
@@ -106,11 +108,11 @@ func _physics_process(delta):
 func deploy():
 	
 	#Catch the Deploy Command
-	if Input.is_action_just_pressed("ability") and AutoLoad.fcc_deploy == false:
+	if Input.is_action_just_pressed("ability") and AutoLoad.fcc_stats['deploy'] == false:
 		animations.play("deploy")
 		AutoLoad.fcc_stats['deploy'] = true
 
-	elif Input.is_action_just_pressed("ability") and AutoLoad.fcc_deploy == true:
+	elif Input.is_action_just_pressed("ability") and AutoLoad.fcc_stats['deploy'] == true:
 		animations.play("undeploy")
 		AutoLoad.fcc_stats['deploy'] = false
 
@@ -189,7 +191,7 @@ func _on_auto_cannon_shot_interval_timeout():
 				Auto_muzzle_Left.add_child(left_bullet)
 				
 			
-			elif AutoLoad.secondary_weapon and flak_ammo > 0 and AutoLoad.fcc_deploy == true:
+			elif AutoLoad.secondary_weapon and flak_ammo > 0 and AutoLoad.fcc_stats['deploy'] == true:
 				
 				#Reduce Ammo!
 				reduce_engion(5)
@@ -229,7 +231,7 @@ func _on_auto_cannon_shot_interval_timeout():
 				right_bullet.rotation_degrees = Auto_muzzle_Right.global_transform.basis.get_euler()
 				Auto_muzzle_Right.add_child(right_bullet)
 			
-			elif AutoLoad.secondary_weapon and flak_ammo > 0 and AutoLoad.fcc_deploy == true:
+			elif AutoLoad.secondary_weapon and flak_ammo > 0 and AutoLoad.fcc_stats['deploy'] == true:
 				
 				#Reduce Ammo!
 				reduce_engion(5)

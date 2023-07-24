@@ -8,8 +8,15 @@ func _ready():
 	#Player Stats
 	#FCC
 	
+	#Reset all the stats of FCC
 	for stats in AutoLoad.fcc_stats:
 		AutoLoad.fcc_stats[stats] = AutoLoad.fcc_base_stats[stats]
+		
+	#This is the set the real time health of FCC
+	AutoLoad.fcc_stats['realtime_health'] = AutoLoad.fcc_stats['health']
+	
+	
+	
 	
 #	AutoLoad.fcc_health = AutoLoad.global_player_health + 150.0
 #	AutoLoad.fcc_base_speed = AutoLoad.global_player_speed + 150.0

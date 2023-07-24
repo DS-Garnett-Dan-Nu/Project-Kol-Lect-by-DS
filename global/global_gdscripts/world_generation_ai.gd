@@ -115,7 +115,7 @@ func _on_timer_timeout():
 	#Control the Amount of platform to spawn
 	if AutoLoad.service_station_appear <= max_platform_length:
 		
-		print(AutoLoad.service_station_appear)
+		#print(AutoLoad.service_station_appear)
 		
 		
 		

@@ -20,6 +20,21 @@ var primary_weapon = true
 var secondary_weapon = false
 
 #Global Player Stats #For Global Upgrades
+var global_player_stats = {
+	
+	#Stats
+	health = 0,
+	speed = 0,
+	k_speed = 0,
+	
+	#Upgrades
+	health_up = 10,
+	speed_up = 25,
+	k_speed_up = 20
+	
+	
+}
+
 var global_player_health = 0
 var global_player_speed = 0
 var global_kollecter_speed = 0
@@ -27,8 +42,6 @@ var global_kollecter_speed = 0
 var global_player_health_up = 10
 var global_player_speed_up = 25
 var global_kollecter_speed_up = 20
-
-var global_player_jump_velocity = 0
 
 
 #Global Mob Stats #For Global Difficulty
@@ -64,33 +77,10 @@ var final_boos_spt = 39
 #FCC - First Controlable Character #For Character Specific Upgrades
 
 #FCC Base Stats
-var fcc_base_stats = {
-	
-	#Defensive
-	health = global_player_health + 150.0, #health
-	speed = global_player_speed + 15.0, #speed
-	k_speed = global_kollecter_speed + 10, #Kollector collection Speed
-	
-	#Offensive
-	auto_damage = 15.0, #Maak damage
-	flak_damage = 50.0, #HMC damage
-	can_fire = true, #if FCC can fire condition
-	deploy = false, #if FCC is deploy or not condition
-	force_repair = false, #Ability Force Repair
-	
-	#Upgrades
-	auto_damage_up = 5, #Maak upgrade damage
-	flak_damage_up = 15, #HMC upgrade damage
-	health_up = 20, #health upgrade damage
-	speed_up = 2, #speed upgrade damage
-	k_speed_up = 1, #kollecter collection upgrade damage
-	
-	#HUD
-	healthbar = 0
-	}
+var fcc_base_stats
 
 #FCC Dynamic Stats
-var fcc_stats = fcc_base_stats.duplicate(true)
+var fcc_stats
 
 ############
 
@@ -137,11 +127,15 @@ func _ready():
 		
 		#Create a file in disk
 		var file_save = FileAccess.open("user://SaveFiles.txt", FileAccess.WRITE)
+	#############################################################################
 	
-	#To set the healthbar of fcc
-	fcc_stats['healthbar'] = fcc_stats['health']
 	
-	pass # Replace with function body.
+	#Set FCC's Stats
+	set_fcc_stats()
+	
+	
+	
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -195,23 +189,72 @@ func load_game():
 	#To prevent null index error
 	if temp_saves.size() == 9:
 		global_engion = temp_saves[0]
-		global_player_health = temp_saves[1]
-		global_player_speed = temp_saves[2]
-		global_kollecter_speed = temp_saves[3]
+		global_player_stats['health'] = temp_saves[1]
+		global_player_stats['speed'] = temp_saves[2]
+		global_player_stats['k_speed'] = temp_saves[3]
 		high_score = temp_saves[4]
-		global_player_health_up = temp_saves[5]
-		global_player_speed_up = temp_saves[6]
-		global_kollecter_speed_up = temp_saves[7]
+		global_player_stats['health_up'] = temp_saves[5]
+		global_player_stats['speed_up'] = temp_saves[6]
+		global_player_stats['k_speed_up'] = temp_saves[7]
 
 	temp_saves.clear()
 
 func save_game():
 	
 	#Save Method: Engion , Health , Speed , K-speed, Hi-score, global health up, global speed up, global k-speed up
-	var values_to_save = [global_engion,global_player_health,global_player_speed,global_kollecter_speed,high_score,global_player_health_up,global_player_speed_up,global_kollecter_speed_up]
+	var values_to_save = [
+		global_engion,
+		global_player_stats['health'],
+		global_player_stats['speed'],
+		global_player_stats['k_speed'],
+		high_score,
+		global_player_stats['health_up'],
+		global_player_stats['speed_up'],
+		global_player_stats['k_speed_up']
+		]
+		
 	
 	
 	#Save to disk
 	var file_save = FileAccess.open("user://SaveFiles.txt", FileAccess.WRITE)
 	for i in values_to_save:
 		file_save.store_string("%s\n" % i)
+		
+		
+		
+
+func set_fcc_stats():
+	
+	fcc_base_stats = {
+	
+	#Defensive
+	health = global_player_stats['health'] + 150.0, #health
+	speed = global_player_stats['speed'] + 15.0, #speed
+	k_speed = global_player_stats['k_speed'] + 10, #Kollector collection Speed
+	
+	#Offensive
+	auto_damage = 15.0, #Maak damage
+	flak_damage = 50.0, #HMC damage
+	can_fire = true, #if FCC can fire condition
+	deploy = false, #if FCC is deploy or not condition
+	force_repair = false, #Ability Force Repair
+	
+	#Upgrades
+	auto_damage_up = 5, #Maak upgrade damage
+	flak_damage_up = 15, #HMC upgrade damage
+	health_up = 20, #health upgrade damage
+	speed_up = 2, #speed upgrade damage
+	k_speed_up = 1, #kollecter collection upgrade damage
+	
+	#HUD
+	realtime_health = 0
+	
+	}
+	
+	fcc_stats = fcc_base_stats.duplicate(true)
+	
+	#To set the healthbar of fcc
+	fcc_stats['realtime_health'] = fcc_stats['health']
+	
+	print(fcc_stats['realtime_health'])
+	

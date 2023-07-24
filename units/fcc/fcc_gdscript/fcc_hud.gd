@@ -153,7 +153,7 @@ func _process(delta):
 	
 	#For Health Bar
 	healthbar.max_value = AutoLoad.fcc_stats['health']
-	healthbar.value = AutoLoad.fcc_stats['healthbar']
+	healthbar.value = AutoLoad.fcc_stats['realtime_health']
 	
 	if healthbar.value <= 100 and healthbar.value > 75:
 		healthbar.modulate =  Color("2bff00")

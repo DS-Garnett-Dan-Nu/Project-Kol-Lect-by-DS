@@ -25,18 +25,18 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	#Check stuffs...
-	if AutoLoad.global_engion <= 50 or AutoLoad.global_engion < AutoLoad.global_player_health_up:
+	#Disable the upgrade buttons of Engion in storage goes less then 50
+	if AutoLoad.global_engion <= 50 or AutoLoad.global_engion < AutoLoad.global_player_stats['health_up']:
 		$menu_hud/Global_Upgrades/hp.set_deferred("disabled",true)
 	else:
 		$menu_hud/Global_Upgrades/hp.set_deferred("disabled",false)
 	
-	if AutoLoad.global_engion <= 50 or AutoLoad.global_engion < AutoLoad.global_player_speed_up:
+	if AutoLoad.global_engion <= 50 or AutoLoad.global_engion < AutoLoad.global_player_stats['speed_up']:
 		$menu_hud/Global_Upgrades/sp.set_deferred("disabled",true)
 	else:
 		$menu_hud/Global_Upgrades/sp.set_deferred("disabled",false)
 		
-	if AutoLoad.global_engion <= 50 or AutoLoad.global_engion < AutoLoad.global_kollecter_speed_up:
+	if AutoLoad.global_engion <= 50 or AutoLoad.global_engion < AutoLoad.global_player_stats['k_speed_up']:
 		$menu_hud/Global_Upgrades/ksp.set_deferred("disabled",true)
 	else:
 		$menu_hud/Global_Upgrades/ksp.set_deferred("disabled",false)
@@ -64,38 +64,38 @@ func global_upgrades_info():
 	
 	
 	#Btn Cost
-	$menu_hud/Global_Upgrades/hp.text = "-%sg" % round(AutoLoad.global_player_health_up)
-	$menu_hud/Global_Upgrades/sp.text = "-%sg" % round(AutoLoad.global_player_speed_up)
-	$menu_hud/Global_Upgrades/ksp.text = "-%sg" % round(AutoLoad.global_kollecter_speed_up)
+	$menu_hud/Global_Upgrades/hp.text = "-%sg" % round(AutoLoad.global_player_stats['health_up'])
+	$menu_hud/Global_Upgrades/sp.text = "-%sg" % round(AutoLoad.global_player_stats['speed_up'])
+	$menu_hud/Global_Upgrades/ksp.text = "-%sg" % round(AutoLoad.global_player_stats['k_speed_up'])
 	
 	#Health Cost
-	$menu_hud/Global_Upgrades/hpa.text = "Current: %s" % AutoLoad.global_player_health
-	$menu_hud/Global_Upgrades/hpb.text = "Next: %s" % [AutoLoad.global_player_health + round(AutoLoad.global_player_health_up/3)]
+	$menu_hud/Global_Upgrades/hpa.text = "Current: %s" % AutoLoad.global_player_stats['health']
+	$menu_hud/Global_Upgrades/hpb.text = "Next: %s" % [AutoLoad.global_player_stats['health'] + round(AutoLoad.global_player_stats['health_up']/3)]
 	
 	#Health Cost
-	$menu_hud/Global_Upgrades/spa.text = "Current: %s" % AutoLoad.global_player_speed
-	$menu_hud/Global_Upgrades/spb.text = "Next: %s" % [AutoLoad.global_player_speed + 1]
+	$menu_hud/Global_Upgrades/spa.text = "Current: %s" % AutoLoad.global_player_stats['speed']
+	$menu_hud/Global_Upgrades/spb.text = "Next: %s" % [AutoLoad.global_player_stats['speed'] + 1]
 	
 	#Health Cost
-	$menu_hud/Global_Upgrades/kspa.text = "Current: %s" % AutoLoad.global_kollecter_speed
-	$menu_hud/Global_Upgrades/kspb.text = "Next: %s" % [AutoLoad.global_kollecter_speed + 1]
+	$menu_hud/Global_Upgrades/kspa.text = "Current: %s" % AutoLoad.global_player_stats['k_speed']
+	$menu_hud/Global_Upgrades/kspb.text = "Next: %s" % [AutoLoad.global_player_stats['k_speed'] + 1]
 
 func _on_hp_pressed():
-	AutoLoad.global_player_health += round(AutoLoad.global_player_health_up/3)
-	AutoLoad.global_engion -= AutoLoad.global_player_health_up
-	AutoLoad.global_player_health_up += (AutoLoad.global_player_health * 1.4) + 15
+	AutoLoad.global_player_stats['health'] += round(AutoLoad.global_player_stats['health_up']/3)
+	AutoLoad.global_engion -= AutoLoad.global_player_stats['health_up']
+	AutoLoad.global_player_stats['health_up'] += (AutoLoad.global_player_stats['health'] * 1.4) + 15
 
 
 func _on_sp_pressed():
-	AutoLoad.global_player_speed += 1
-	AutoLoad.global_engion -= AutoLoad.global_player_speed_up
-	AutoLoad.global_player_speed_up += (AutoLoad.global_player_speed * 1.5) + 40
+	AutoLoad.global_player_stats['speed'] += 1
+	AutoLoad.global_engion -= AutoLoad.global_player_stats['speed_up']
+	AutoLoad.global_player_stats['speed_up'] += (AutoLoad.global_player_stats['speed'] * 1.5) + 40
 
 
 func _on_ksp_pressed():
-	AutoLoad.global_kollecter_speed += 1
-	AutoLoad.global_engion -= AutoLoad.global_kollecter_speed_up
-	AutoLoad.global_kollecter_speed_up += (AutoLoad.global_kollecter_speed * 1.1) + 35
+	AutoLoad.global_player_stats['k_speed'] += 1
+	AutoLoad.global_engion -= AutoLoad.global_player_stats['k_speed_up']
+	AutoLoad.global_player_stats['k_speed_up'] += (AutoLoad.global_player_stats['k_speed'] * 1.1) + 35
 
 
 
