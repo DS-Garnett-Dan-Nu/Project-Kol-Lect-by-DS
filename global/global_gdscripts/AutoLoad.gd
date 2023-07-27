@@ -35,15 +35,6 @@ var global_player_stats = {
 	
 }
 
-var global_player_health = 0
-var global_player_speed = 0
-var global_kollecter_speed = 0
-
-var global_player_health_up = 10
-var global_player_speed_up = 25
-var global_kollecter_speed_up = 20
-
-
 #Global Mob Stats #For Global Difficulty
 var global_mob_health = 0.0
 var global_mob_speed = 0.0
@@ -256,5 +247,4 @@ func set_fcc_stats():
 	#To set the healthbar of fcc
 	fcc_stats['realtime_health'] = fcc_stats['health']
 	
-	print(fcc_stats['realtime_health'])
 	

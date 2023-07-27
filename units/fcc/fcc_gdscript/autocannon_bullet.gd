@@ -51,3 +51,7 @@ func hit_effect():
 
 func _on_timer_timeout():
 	queue_free()
+
+
+func _on_decay_timeout():
+	queue_free()

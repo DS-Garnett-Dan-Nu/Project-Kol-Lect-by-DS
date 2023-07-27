@@ -183,7 +183,7 @@ func _on_auto_cannon_shot_interval_timeout():
 			if AutoLoad.primary_weapon:
 				
 				#Reduce Ammo!
-				reduce_engion(1)
+				#reduce_engion(1)
 				
 				#fire the autocannon!  
 				var left_bullet = bullet.instantiate()
@@ -194,7 +194,7 @@ func _on_auto_cannon_shot_interval_timeout():
 			elif AutoLoad.secondary_weapon and flak_ammo > 0 and AutoLoad.fcc_stats['deploy'] == true:
 				
 				#Reduce Ammo!
-				reduce_engion(5)
+				reduce_engion(10)
 				
 				#To notify the player
 				AutoLoad.fcc_stats['can_fire'] = true
@@ -224,7 +224,7 @@ func _on_auto_cannon_shot_interval_timeout():
 			if AutoLoad.primary_weapon:
 				
 				#Reduce Ammo!
-				reduce_engion(1)
+				#reduce_engion(1)
 				
 				#fire the autocannon!
 				var right_bullet = bullet.instantiate()
@@ -234,7 +234,7 @@ func _on_auto_cannon_shot_interval_timeout():
 			elif AutoLoad.secondary_weapon and flak_ammo > 0 and AutoLoad.fcc_stats['deploy'] == true:
 				
 				#Reduce Ammo!
-				reduce_engion(5)
+				reduce_engion(10)
 				
 				#To notify the player
 				AutoLoad.fcc_stats['can_fire'] = true

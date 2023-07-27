@@ -117,12 +117,12 @@ func _on_damage_dectector_area_entered(area):
 		
 		
 		#Reduce Health
-		health -= AutoLoad.fcc_auto_damage
+		health -= AutoLoad.fcc_stats['auto_damage']
 		
 		#Drop style
 		if x == 0 and max_resource > 0:
-			drop_engion(round(AutoLoad.fcc_auto_damage/4))
-			max_resource -= round(AutoLoad.fcc_auto_damage/4)
+			drop_engion(round(AutoLoad.fcc_stats['auto_damage']/4))
+			max_resource -= round(AutoLoad.fcc_stats['auto_damage']/4)
 			
 	if area is flak_cannon:
 		
@@ -131,13 +131,13 @@ func _on_damage_dectector_area_entered(area):
 		
 		#Drop style Single
 		if x == 0 and max_resource > 0:
-			drop_engion(round(AutoLoad.fcc_flak_damage/7))
-			max_resource -= round(AutoLoad.fcc_flak_damage/7)
+			drop_engion(round(AutoLoad.fcc_stats['flak_damage']/7))
+			max_resource -= round(AutoLoad.fcc_stats['flak_damage']/7)
 			
 		#Drop style Triple
 		elif x == 1 and max_resource > 0:
-			drop_engion(round(AutoLoad.fcc_flak_damage/5))
-			max_resource -= round(AutoLoad.fcc_flak_damage/5)
+			drop_engion(round(AutoLoad.fcc_stats['flak_damage']/5))
+			max_resource -= round(AutoLoad.fcc_stats['flak_damage']/5)
 				
 				
 		

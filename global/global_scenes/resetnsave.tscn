@@ -4,3 +4,7 @@
 
 [node name="Reset_and_Save" type="Node3D"]
 script = ExtResource("1_gcdjp")
+
+[node name="difficulty" type="Timer" parent="."]
+
+[connection signal="timeout" from="difficulty" to="." method="_on_difficulty_timeout"]

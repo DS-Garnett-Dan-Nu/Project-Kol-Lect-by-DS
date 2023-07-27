@@ -142,13 +142,3 @@ func _physics_process(delta: float) -> void:
 
 
 
-func _on_enemy_harder_timeout():
-	
-	AutoLoad.diffbar += 0.1
-	AutoLoad.global_mob_dps += 0.01
-	AutoLoad.global_mob_health += 0.02
-	AutoLoad.global_mob_speed += 0.01
-	AutoLoad.global_mob_spawner_dps += 0.01
-	
-	if AutoLoad.diffbar == 100:
-		AutoLoad.player_is_dead = true

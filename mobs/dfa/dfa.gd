@@ -43,13 +43,13 @@ func _process(delta):
 func _on_hitbox_area_entered(area):
 	#Define the bullet type
 	if area is autocannon:
-		health -= AutoLoad.fcc_auto_damage
+		health -= AutoLoad.fcc_stats['auto_damage']
 		
 		#Score Time!
 		AutoLoad.score += round((randi_range(20,30)))
 		
 	if area is flak_cannon:
-		health -= AutoLoad.fcc_flak_damage
+		health -= AutoLoad.fcc_stats['flak_damage']
 		
 		#Score Time!
 		AutoLoad.score += round((randi_range(20,30)))

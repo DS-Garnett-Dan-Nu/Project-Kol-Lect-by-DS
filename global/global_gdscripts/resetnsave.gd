@@ -1,5 +1,10 @@
 extends Node3D
 
+#nodes
+@onready var difficulty = $difficulty
+
+#Variables
+var enemy_stats_additions = 0.1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,25 +20,7 @@ func _ready():
 	#This is the set the real time health of FCC
 	AutoLoad.fcc_stats['realtime_health'] = AutoLoad.fcc_stats['health']
 	
-	
-	
-	
-#	AutoLoad.fcc_health = AutoLoad.global_player_health + 150.0
-#	AutoLoad.fcc_base_speed = AutoLoad.global_player_speed + 150.0
-#	AutoLoad.fcc_kollecter_speed = AutoLoad.global_kollecter_speed + 10
-#	AutoLoad.fcc_force_repair = false
-#
-#	AutoLoad.fcc_auto_damage = 150.0
-#	AutoLoad.fcc_flak_damage = 50.0
-#	AutoLoad.fcc_can_fire = true
-#	AutoLoad.fcc_deploy = false
-#
-#	AutoLoad.fcc_auto_damage_up = 5
-#	AutoLoad.fcc_flak_damage_up = 15
-#	AutoLoad.fcc_health_up = 20
-#	AutoLoad.fcc_base_speed_up = 2
-#	AutoLoad.fcc_kollecter_speed_up =1
-	
+	####################################################################
 
 	#Mobs & Spawners
 	AutoLoad.diffbar = 0
@@ -44,10 +31,26 @@ func _ready():
 	AutoLoad.global_mob_spawner_health = 0
 	AutoLoad.final_boss = false
 	
+	
+	
 	#Did player beat the high score? and reset the score
 	if AutoLoad.score > AutoLoad.high_score:
 		AutoLoad.high_score = AutoLoad.score
 	AutoLoad.score = 0
+	
+	
+	
+	
+	#Set the increasing difficulty according to the highscore
+	difficulty.stop() #Stop the timer
+	if AutoLoad.high_score >= 19990: #Timier's wait time cannot be zero
+		difficulty.wait_time = 0.055
+	else:
+		difficulty.wait_time = 1 - AutoLoad.high_score/20000 #Calculate the difficulty level
+	enemy_stats_additions += AutoLoad.high_score/10000
+	if AutoLoad.in_menu == false : difficulty.start() #Start the timer
+	
+	
 	
 	
 	#To the Save and Load Function!
@@ -77,3 +80,15 @@ func save_n_load():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+func _on_difficulty_timeout():
+	
+	AutoLoad.diffbar += 0.1
+	AutoLoad.global_mob_dps += enemy_stats_additions/10 - enemy_stats_additions/80
+	AutoLoad.global_mob_health += enemy_stats_additions*0.2
+	AutoLoad.global_mob_speed += enemy_stats_additions/10
+	AutoLoad.global_mob_spawner_dps += enemy_stats_additions/10 - enemy_stats_additions/80
+	
+	if AutoLoad.diffbar == 100:
+		AutoLoad.player_is_dead = true

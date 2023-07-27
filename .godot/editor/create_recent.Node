@@ -1,3 +1,4 @@
+Timer
 OmniLight3D
 MeshInstance3D
 Node3D
@@ -15,7 +16,6 @@ Control
 CollisionShape3D
 Area3D
 Marker3D
-Timer
 Node
 AudioStreamPlayer3D
 ProgressBar

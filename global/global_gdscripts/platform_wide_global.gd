@@ -23,8 +23,8 @@ func _ready():
 		$s.add_child(b)
 		
 	else:
-#		var spnt1 = spawnert1.instantiate()
-#		$s.add_child(spnt1)
+		var spnt1 = spawnert1.instantiate()
+		$s.add_child(spnt1)
 		
 		pass
 
