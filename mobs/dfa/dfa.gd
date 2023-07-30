@@ -69,7 +69,7 @@ func die():
 	$flying.stop()
 	
 	#drop engion
-	var range = round(randi_range(10,20))
+	var range = round(randi_range(5,10))
 	drop_engion(range)
 	
 	#add explosion

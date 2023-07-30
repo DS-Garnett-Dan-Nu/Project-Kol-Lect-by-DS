@@ -3,7 +3,7 @@ class_name fcc
 
 
 #Node Variables
-@onready var gun_control = $"fcc/Upper Base/Gun" #Gun's Base Elevation Control
+@onready var gun_control = $"FCC_main/Upper_Base/Gun" #Gun's Base Elevation Control
 @onready var animations = $"Ani" #Animation Controls
 @onready var fcc_kollector = $fcc_kollector
 
@@ -14,12 +14,12 @@ class_name fcc
 
 #Gun
 #Auto-cannon
-@onready var Auto_muzzle_Left = $"fcc/Upper Base/Gun/AimLeft"
-@onready var Auto_muzzle_Right = $"fcc/Upper Base/Gun/AimRight"  
+@onready var Auto_muzzle_Left = $"FCC_main/Upper_Base/Gun/AimLeft"
+@onready var Auto_muzzle_Right = $"FCC_main/Upper_Base/Gun/AimRight"  
 
 #Flak-cannon
-@onready var Flak_muzzle_Left = $"fcc/Upper Base/Gun/AimLeftF"
-@onready var Flak_muzzle_Right = $"fcc/Upper Base/Gun/AimRightF"  
+@onready var Flak_muzzle_Left = $"FCC_main/Upper_Base/Gun/AimLeftF"
+@onready var Flak_muzzle_Right = $"FCC_main/Upper_Base/Gun/AimRightF"  
 var reload_time = 0
 
 #Autocannon staggering shot
@@ -60,6 +60,8 @@ func _ready():
 
 #Physics Processes eh?
 func _physics_process(delta):
+	
+	
 	
 	#for reloading hud
 	$fcc_hud/flakreload.value = reload_time

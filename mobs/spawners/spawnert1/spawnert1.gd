@@ -4,7 +4,7 @@ extends Node3D
 #Load da resources
 @onready var engion = preload("res://resources/engion/engion_scene.tscn")
 @onready var resource_spwnpt = $spawnpt
-var max_resource = 100
+var max_resource = 50
 
 #Load the t1 mob senes
 var ehd_v1 = preload("res://mobs/ehd/ehd_scenes/ehd_scene.tscn")
@@ -131,8 +131,8 @@ func _on_hurt_box_area_entered(area):
 		
 		#Drop style
 		if x == 0 and max_resource > 0:
-			drop_engion(round(AutoLoad.fcc_stats['auto_damage']/2))
-			max_resource -= round(AutoLoad.fcc_stats['auto_damage']/2)
+			drop_engion(round(AutoLoad.fcc_stats['auto_damage']/3))
+			max_resource -= round(AutoLoad.fcc_stats['auto_damage']/3)
 			
 		
 	if area is flak_cannon:
@@ -140,13 +140,13 @@ func _on_hurt_box_area_entered(area):
 		
 		#Drop style Single
 		if x == 0 and max_resource > 0:
-			drop_engion(round(AutoLoad.fcc_stats['flak_damage']/5))
-			max_resource -= round(AutoLoad.fcc_stats['flak_damage']/5)
+			drop_engion(round(AutoLoad.fcc_stats['flak_damage']/6))
+			max_resource -= round(AutoLoad.fcc_stats['flak_damage']/6)
 			
 		#Drop style Triple
 		elif x == 1 and max_resource > 0:
-			drop_engion(round(AutoLoad.fcc_stats['flak_damage']/4))
-			max_resource -= round(AutoLoad.fcc_stats['flak_damage']/4)
+			drop_engion(round(AutoLoad.fcc_stats['flak_damage']/5))
+			max_resource -= round(AutoLoad.fcc_stats['flak_damage']/5)
 
 func drop_engion(range):
 	for i in range(range):

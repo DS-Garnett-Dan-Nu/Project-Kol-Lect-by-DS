@@ -6,7 +6,7 @@ var health = AutoLoad.ehd_health
 var speed = AutoLoad.ehd_speed
 var jump_velocity = 15
 var jump_boost = 2
-var max_resource = 36
+var max_resource = 18
 var resource_freed = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -121,23 +121,23 @@ func _on_damage_dectector_area_entered(area):
 		
 		#Drop style
 		if x == 0 and max_resource > 0:
-			drop_engion(round(AutoLoad.fcc_stats['auto_damage']/4))
-			max_resource -= round(AutoLoad.fcc_stats['auto_damage']/4)
+			drop_engion(round(AutoLoad.fcc_stats['auto_damage']/5))
+			max_resource -= round(AutoLoad.fcc_stats['auto_damage']/5)
 			
 	if area is flak_cannon:
 		
 		#Reduce Health
-		health -= AutoLoad.fcc_flak_damage
+		health -= AutoLoad.fcc_stats['flak_damage']
 		
 		#Drop style Single
 		if x == 0 and max_resource > 0:
-			drop_engion(round(AutoLoad.fcc_stats['flak_damage']/7))
-			max_resource -= round(AutoLoad.fcc_stats['flak_damage']/7)
+			drop_engion(round(AutoLoad.fcc_stats['flak_damage']/8))
+			max_resource -= round(AutoLoad.fcc_stats['flak_damage']/8)
 			
 		#Drop style Triple
 		elif x == 1 and max_resource > 0:
-			drop_engion(round(AutoLoad.fcc_stats['flak_damage']/5))
-			max_resource -= round(AutoLoad.fcc_stats['flak_damage']/5)
+			drop_engion(round(AutoLoad.fcc_stats['flak_damage']/6))
+			max_resource -= round(AutoLoad.fcc_stats['flak_damage']/6)
 				
 				
 		

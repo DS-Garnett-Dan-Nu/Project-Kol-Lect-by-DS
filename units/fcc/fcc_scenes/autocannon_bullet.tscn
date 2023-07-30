@@ -99,6 +99,7 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.58693, 0, 0)
 light_color = Color(1, 0.784314, 0, 1)
 shadow_enabled = true
+omni_range = 10.0
 
 [node name="c" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00223863, 0, 0)
@@ -119,7 +120,7 @@ wait_time = 0.5
 one_shot = true
 
 [node name="decay" type="Timer" parent="."]
-wait_time = 0.45
+wait_time = 0.55
 autostart = true
 
 [node name="hit" type="GPUParticles3D" parent="."]

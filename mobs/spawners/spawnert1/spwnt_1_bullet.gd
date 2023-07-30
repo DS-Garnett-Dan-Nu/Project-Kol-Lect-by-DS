@@ -61,8 +61,16 @@ func _on_area_entered(area):
 	#Define the bullet type
 	if area is autocannon:
 		health -= AutoLoad.fcc_stats['auto_damage']
+		
+		#Only Score Time if shot down!
+		AutoLoad.score += 1
+		
 	if area is flak_cannon:
 		health -= AutoLoad.fcc_stats['flak_damage']
+		
+		#Only Score Time if shot down!
+		AutoLoad.score += 2
+		
 	if area is platform:
 		die()
 	if area.is_in_group("player_hit"):
@@ -72,8 +80,7 @@ func _on_area_entered(area):
 func die():
 	explodeSFX.play()
 	
-	#Score Time!
-	AutoLoad.score += 1
+	
 	
 	#add explosion
 	var ex = basic_explosion.instantiate()

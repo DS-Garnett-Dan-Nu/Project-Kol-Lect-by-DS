@@ -89,7 +89,7 @@ shape = SubResource("BoxShape3D_5btal")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.32979, 0, 0)
 light_color = Color(1, 0.882353, 0, 1)
 shadow_enabled = true
-omni_range = 7.0
+omni_range = 10.0
 
 [node name="b" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0042727, 0, 0)
