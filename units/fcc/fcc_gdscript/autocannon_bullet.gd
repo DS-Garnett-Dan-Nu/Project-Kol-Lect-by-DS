@@ -12,6 +12,7 @@ var dir = Vector3()
 func _ready():
 	set_as_top_level(true)
 	
+	
 func _process(delta): 
 	
 	#To make the bullet go to it's direction
@@ -30,9 +31,11 @@ func _on_area_entered(area):
 
 func hit_effect():
 	
+	
+	
 	#Move all the lights to one place when hit
 	$a.global_position = $c.global_position
-	$b.global_position = $c.global_position
+	
 	$hit.global_position = $c.global_position
 	$d.global_position = $c.global_position
 	
@@ -50,8 +53,15 @@ func hit_effect():
 
 
 func _on_timer_timeout():
+
 	queue_free()
 
 
 func _on_decay_timeout():
+
 	queue_free()
+
+
+func _on_flash_timeout():
+	#Hide the brightest one / Muzzle Flash
+	$b.hide()

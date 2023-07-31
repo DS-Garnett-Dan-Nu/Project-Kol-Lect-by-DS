@@ -20,4 +20,10 @@
 - Engion drop rate reworked.
 - Some major bugs fixed. <br>
 
+<h5>Update Log 4 : 31.7.2023 :</h5>
+- Code Refining. <br>
+- FCC Projectiles Remodel and Animations. <br>
+- FCC Leaning VFXs and Hover Engine SFX while moving. (Incomplete) <br>
+- A bunch of new SFXs added to FCC. <br>
+
 

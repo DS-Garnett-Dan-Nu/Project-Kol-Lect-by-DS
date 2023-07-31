@@ -1,26 +1,26 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1690725922
+::res://::1690821406
 default_env.tres::Environment::-1::1678626750::0::1::::<><>::
-export_presets.cfg::TextFile::-1::1688660426::0::1::::<><>::
+export_presets.cfg::TextFile::-1::1690788389::0::1::::<><>::
 icon.png::CompressedTexture2D::2721039976926847582::1676179678::1678630477::1::::<><>::
-README.md::TextFile::-1::1690725913::0::1::::<><>::
+README.md::TextFile::-1::1690798195::0::1::::<><>::
 VERSION.md::TextFile::-1::1676179678::0::1::::<><>::
 ::res://global/::1690217012
-::res://global/global_gdscripts/::1690725687
+::res://global/global_gdscripts/::1690795318
 AutoLoad.gd::GDScript::-1::1690302421::0::1::::<>Node<>::
 mob_spawner.gd::GDScript::-1::1680784877::0::1::::<>Node3D<>::
 platform_detector.gd::GDScript::-1::1685683029::0::1::::platform<>Area3D<>::
 platform_normal_global.gd::GDScript::-1::1687370435::0::1::::<>Node3D<>::
-platform_wide_global.gd::GDScript::-1::1690725687::0::1::::<>Node3D<>::
+platform_wide_global.gd::GDScript::-1::1690795318::0::1::::<>Node3D<>::
 player_camera.gd::GDScript::-1::1678630670::0::1::::<>SpringArm3D<>::
 player_global.gd::GDScript::-1::1690470442::0::1::::player<>CharacterBody3D<>::
 resetnsave.gd::GDScript::-1::1690475441::0::1::::<>Node3D<>::
 world_generation_ai.gd::GDScript::-1::1690220529::0::1::::<>Node3D<>::
-::res://global/global_scenes/::1690725362
+::res://global/global_scenes/::1690795354
 mob_spawner.tscn::PackedScene::2682065028591353612::1680785028::0::1::::<><>::res://global/global_gdscripts/mob_spawner.gd
-platform_normal_global.tscn::PackedScene::8545298156827098664::1687881044::0::1::::<><>::res://global/global_gdscripts/platform_normal_global.gd<>uid://bcwgqtm2eqjf4<>res://global/global_gdscripts/platform_detector.gd
+platform_normal_global.tscn::PackedScene::8545298156827098664::1690795354::0::1::::<><>::res://global/global_gdscripts/platform_normal_global.gd<>uid://bcwgqtm2eqjf4::::res://platforms/platform_normal/plnv1/plnv1.tscn<>res://global/global_gdscripts/platform_detector.gd
 platform_wide_global.tscn::PackedScene::8568161369241174967::1687438021::0::1::::<><>::res://global/global_gdscripts/platform_wide_global.gd<>uid://bcwgqtm2eqjf4<>res://global/global_gdscripts/platform_detector.gd
-player_global.tscn::PackedScene::7774284785927469943::1690725362::0::1::::<><>::res://global/global_gdscripts/player_global.gd<>uid://bk8i1bu0r5gsg::::res://misc/pausemenu/pause_menu.tscn<>uid://pruhyasmyp04::::res://units/fcc/fcc_scenes/fcc_scene.tscn<>uid://85y3el742fao::::res://misc/deadscreen/dead_screen.tscn
+player_global.tscn::PackedScene::7774284785927469943::1690795354::0::1::::<><>::res://global/global_gdscripts/player_global.gd<>uid://bk8i1bu0r5gsg::::res://misc/pausemenu/pause_menu.tscn<>uid://pruhyasmyp04::::res://units/fcc/fcc_scenes/fcc_scene.tscn<>uid://85y3el742fao::::res://misc/deadscreen/dead_screen.tscn
 resetnsave.tscn::PackedScene::8101452759033386759::1690476302::0::1::::<><>::res://global/global_gdscripts/resetnsave.gd
 world_generation_ai.tscn::PackedScene::575174172175894397::1686417196::0::1::::<><>::res://global/global_gdscripts/world_generation_ai.gd
 ::res://misc/::1690217012
@@ -81,7 +81,7 @@ ehd_gdscript.gd::GDScript::-1::1690724785::0::1::::<>CharacterBody3D<>::
 ehd_damager_giver.tscn::PackedScene::420933633415430861::1687524387::0::1::::<><>::res://mobs/ehd/ehd_gdscripts/ehd_damagergiver.gd<>uid://jojvugp382bu<>uid://btg14bs2gu4vj
 ehd_scene.tscn::PackedScene::6611303081524501060::1687605434::0::1::::<><>::res://mobs/ehd/ehd_gdscripts/ehd_gdscript.gd<>uid://f85ylb1qf07b<>uid://i7f33cl8oxse
 ::res://mobs/spawners/::1690217012
-::res://mobs/spawners/spawnert1/::1690725687
+::res://mobs/spawners/spawnert1/::1690795354
 Spawnert1 rocket.gltf::PackedScene::1428671974345238494::1684468587::1684468631::1::::<><>::
 spawnert1.fbx::PackedScene::7676219098257811725::1686417871::1686417934::1::::<><>::
 spawnert1.gd::GDScript::-1::1690724879::0::1::::<>Node3D<>::
@@ -89,7 +89,7 @@ Spawnert1.gltf::PackedScene::8266330920966694681::1680369044::1680369173::1::::<
 spawnert1.tscn::PackedScene::361285381756720759::1687881043::0::1::::<><>::res://mobs/spawners/spawnert1/spawnert1.gd<>uid://dhmohblphktkn<>res://mobs/spawners/spawnert1/spnrt1_hurt_box.gd
 spnrt1_hurt_box.gd::GDScript::-1::1687718794::0::1::::spnrt1<>Area3D<>::
 spwnt_1_bullet.gd::GDScript::-1::1690725191::0::1::::spwnr_t1<>Area3D<>::
-spwnt_1_bullet.tscn::PackedScene::7083925456379238603::1690725687::0::1::::<><>::res://mobs/spawners/spawnert1/spwnt_1_bullet.gd<>uid://4rdqalu83wwe::::res://mobs/spawners/spawnert1/sfx/missileexplode.mp3<>uid://cubit64xqfms5::::res://mobs/spawners/spawnert1/sfx/missilelaunch.mp3<>uid://bpv7w2metoyrq::::res://mobs/spawners/spawnert1/sfx/missleflying.mp3
+spwnt_1_bullet.tscn::PackedScene::7083925456379238603::1690795354::0::1::::<><>::res://mobs/spawners/spawnert1/spwnt_1_bullet.gd<>uid://4rdqalu83wwe::::res://mobs/spawners/spawnert1/sfx/missileexplode.mp3<>uid://cubit64xqfms5::::res://mobs/spawners/spawnert1/sfx/missilelaunch.mp3<>uid://bpv7w2metoyrq::::res://mobs/spawners/spawnert1/sfx/missleflying.mp3
 ::res://mobs/spawners/spawnert1/sfx/::1690217012
 missileexplode.mp3::AudioStreamMP3::2070781628949515896::1686421883::1686421916::1::::<><>::
 missilelaunch.mp3::AudioStreamMP3::6179203958017023994::1686420661::1686420700::1::::<><>::
@@ -165,27 +165,30 @@ test_world.tscn::PackedScene::8379841594493693520::1690476302::0::1::::<><>::uid
 world_environment_test.tscn::PackedScene::514073141164724689::1685353387::0::1::::<><>::
 ::res://units/::1690217012
 ::res://units/fcc/::1690217012
-::res://units/fcc/fcc_assets/::1690717980
+::res://units/fcc/fcc_assets/::1690785665
 FCC hover.fbx::PackedScene::5289278372714115358::1685806592::1685806603::1::::<><>::
 FCC Hover.gltf::PackedScene::4468058602637086782::1684337699::1684338118::1::::<><>::
 FCC New.fbx::PackedScene::342927661371875900::1690717969::1690717980::1::::<><>::
+FCC Projectiles.fbx::PackedScene::4704734574146565053::1690738617::1690738642::1::::<><>::
 fcc.gltf::PackedScene::5167696021050616519::1677936628::1678809516::1::::<><>::
-fcc_buttons.tres::Theme::2209926235139648287::1690717570::0::1::::<><>::
+fcc_buttons.tres::Theme::2209926235139648287::1690785665::0::1::::<><>::
 fcc_icons.png::CompressedTexture2D::3864111925536565483::1688657218::1688657278::1::::<><>::
 Western Allience Logo.fbx::PackedScene::6679116095711524885::1688660772::1688660796::1::::<><>::
-::res://units/fcc/fcc_assets/fccSFXs/::1690217012
+::res://units/fcc/fcc_assets/fccSFXs/::1690794028
 fcc_auto_cannon.mp3::AudioStreamMP3::349473002644918961::1685871584::1685871655::1::::<><>::
 fcc_flak_cannon.mp3::AudioStreamMP3::2900118588893281740::1685871634::1685871655::1::::<><>::
+fcc_flak_reload.mp3::AudioStreamMP3::5855464163870177637::1690793620::1690793649::1::::<><>::
+fcc_hover_engine.mp3::AudioStreamMP3::1516273612826784825::1690791589::1690794028::1::::<><>::
 fcc_upgrade.mp3::AudioStreamMP3::2696315864800960154::1686163443::1686169250::1::::<><>::
-::res://units/fcc/fcc_gdscript/::1690720817
-autocannon_bullet.gd::GDScript::-1::1690476476::0::1::::autocannon<>Area3D<>::
-fcc_gdscript.gd::GDScript::-1::1690720817::0::1::::fcc<>Node3D<>::
+::res://units/fcc/fcc_gdscript/::1690794938
+autocannon_bullet.gd::GDScript::-1::1690737297::0::1::::autocannon<>Area3D<>::
+fcc_gdscript.gd::GDScript::-1::1690794938::0::1::::fcc<>Node3D<>::
 fcc_hud.gd::GDScript::-1::1690221106::0::1::::<>Control<>::
 fcc_trigger.gd::GDScript::-1::1680785965::0::1::::player_trigger<>Area3D<>::
-flak_bullet.gd::GDScript::-1::1687718813::0::1::::flak_cannon<>Area3D<>::
+flak_bullet.gd::GDScript::-1::1690788453::0::1::::flak_cannon<>Area3D<>::
 ss_hud_fcc.gd::GDScript::-1::1690191654::0::1::::<>Control<>::
-::res://units/fcc/fcc_scenes/::1690725819
-autocannon_bullet.tscn::PackedScene::3420815675559679294::1690725362::0::1::::<><>::res://units/fcc/fcc_gdscript/autocannon_bullet.gd<>uid://e8j1fkmq0gnx::::res://units/fcc/fcc_assets/fccSFXs/fcc_auto_cannon.mp3
-fcc_hud.tscn::PackedScene::8622025805526376991::1690725360::0::1::::<><>::res://units/fcc/fcc_gdscript/fcc_hud.gd<>res://units/fcc/fcc_gdscript/ss_hud_fcc.gd<>uid://beod6tgelp2d7::::res://units/fcc/fcc_assets/fccSFXs/fcc_upgrade.mp3<>uid://bvb2mg3vh1xbn::::res://units/fcc/fcc_assets/fcc_icons.png<>uid://6qrfrr3nx70f::::res://units/fcc/fcc_assets/fcc_buttons.tres
-fcc_scene.tscn::PackedScene::1089155178197404139::1690725819::0::1::::<><>::res://units/fcc/fcc_gdscript/fcc_gdscript.gd<>uid://du3trgfhxw5kt::::res://units/fcc/fcc_scenes/fcc_hud.tscn
-flak_bullet.tscn::PackedScene::1261334367562995031::1690725362::0::1::::<><>::res://units/fcc/fcc_gdscript/flak_bullet.gd<>uid://bhk3sabmlwlpc::::res://units/fcc/fcc_assets/fccSFXs/fcc_flak_cannon.mp3
+::res://units/fcc/fcc_scenes/::1690798084
+autocannon_bullet.tscn::PackedScene::3420815675559679294::1690795354::0::1::::<><>::res://units/fcc/fcc_gdscript/autocannon_bullet.gd<>uid://e8j1fkmq0gnx::::res://units/fcc/fcc_assets/fccSFXs/fcc_auto_cannon.mp3
+fcc_hud.tscn::PackedScene::8622025805526376991::1690795353::0::1::::<><>::res://units/fcc/fcc_gdscript/fcc_hud.gd<>res://units/fcc/fcc_gdscript/ss_hud_fcc.gd<>uid://beod6tgelp2d7::::res://units/fcc/fcc_assets/fccSFXs/fcc_upgrade.mp3<>uid://bvb2mg3vh1xbn::::res://units/fcc/fcc_assets/fcc_icons.png<>uid://6qrfrr3nx70f::::res://units/fcc/fcc_assets/fcc_buttons.tres
+fcc_scene.tscn::PackedScene::1089155178197404139::1690798084::0::1::::<><>::res://units/fcc/fcc_gdscript/fcc_gdscript.gd<>uid://du3trgfhxw5kt::::res://units/fcc/fcc_scenes/fcc_hud.tscn<>uid://cpoov0apppaa4::::res://units/fcc/fcc_assets/fccSFXs/fcc_flak_reload.mp3<>uid://vuq2moyv6p6x::::res://units/fcc/fcc_assets/fccSFXs/fcc_hover_engine.mp3
+flak_bullet.tscn::PackedScene::1261334367562995031::1690795354::0::1::::<><>::res://units/fcc/fcc_gdscript/flak_bullet.gd<>uid://bhk3sabmlwlpc::::res://units/fcc/fcc_assets/fccSFXs/fcc_flak_cannon.mp3

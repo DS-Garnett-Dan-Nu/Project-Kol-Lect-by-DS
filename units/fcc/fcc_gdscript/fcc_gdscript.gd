@@ -6,6 +6,7 @@ class_name fcc
 @onready var gun_control = $"FCC_main/Upper_Base/Gun" #Gun's Base Elevation Control
 @onready var animations = $"Ani" #Animation Controls
 @onready var fcc_kollector = $fcc_kollector
+@onready var main_body = $FCC_main
 
 #Projectile
 @onready var bullet = preload("res://units/fcc/fcc_scenes/autocannon_bullet.tscn")
@@ -61,7 +62,8 @@ func _ready():
 #Physics Processes eh?
 func _physics_process(delta):
 	
-	
+	#Fopr leaning effect while moving
+	leaning()
 	
 	#for reloading hud
 	$fcc_hud/flakreload.value = reload_time
@@ -248,6 +250,9 @@ func _on_auto_cannon_shot_interval_timeout():
 				
 				#Flak Ammo
 				flak_ammo -= 1
+				
+				#Play the reloading SFX
+				$flakreload.play()
 			
 			elif flak_ammo <= 0:
 				print("Flak is Reloading!")
@@ -313,3 +318,39 @@ func _on_auto_repair_timeout():
 
 
 
+#This Function is incompleted. Still need to polish a bit.
+func leaning():
+	
+	var hover_engine_sfx = $hover_engine
+	
+
+	if Input.is_action_pressed("Go_Left") and main_body.rotation_degrees.x < 5 and AutoLoad.fcc_stats['deploy'] == false:
+		main_body.rotation_degrees.x += 0.05
+			
+	elif Input.is_action_pressed("Go_Right") and main_body.rotation_degrees.x > -5 and AutoLoad.fcc_stats['deploy'] == false:
+		main_body.rotation_degrees.x -= 0.05
+		
+	elif main_body.rotation_degrees.x > 0:
+		main_body.rotation_degrees.x -= 0.1
+		
+	elif main_body.rotation_degrees.x < 0:
+		main_body.rotation_degrees.x += 0.1
+	
+	elif main_body.rotation_degrees.x == 0:
+		pass
+		
+	if AutoLoad.fcc_stats['deploy'] == false:
+		
+		if Input.is_action_just_pressed("Go_Right"):
+			hover_engine_sfx.play(0.7)
+		
+		elif Input.is_action_just_pressed("Go_Left"):
+			hover_engine_sfx.play(0.7)
+		
+		elif Input.is_action_just_released("Go_Right"):
+			hover_engine_sfx.play(44)
+		
+		elif Input.is_action_just_released("Go_Left"):
+			hover_engine_sfx.play(44)
+	else:
+		hover_engine_sfx.stop()
